@@ -95,6 +95,7 @@ sudo pacman -S --noconfirm arandr lxappearance
 # themes #
 sudo pacman -S --noconfirm papirus-icon-theme arc-gtk-theme
 cp -r Pictures ~
+mkdir ~/Pictures/Screenshot
 
 
 # browser and discord #
