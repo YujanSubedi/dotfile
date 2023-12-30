@@ -1,0 +1,44 @@
+set previewer ctpv
+set cleaner ctpvclear
+&ctpv -s $id
+&ctpvquit $id
+
+
+# Basic Settings
+set hidden false
+set ignorecase true
+set number true
+set relativenumber true
+set icons true
+set ratios 1:2:3
+
+
+# Remove the move and delete function
+map d
+map m
+map x
+map w
+
+
+# Basic Functions
+map . set hidden!
+map = $sxiv -t .
+map f $fzf
+map <c-s> $ncdu
+map <c-w> quit
+map <c-d> quit
+map <enter> open
+map r reload
+map R rename
+map <c-c> clear
+
+# Movement
+map <a-q> quit
+map gy cd ~/Yujan
+map gd cd ~/Downloads
+map gp cd ~/Pictures
+map gs cd ~/Pictures/Screenshot
+map gc cd ~/.config
+
+# :q to quit same as vim
+cmd q quit

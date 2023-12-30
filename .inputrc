@@ -1,0 +1,24 @@
+# Color
+set colored-stats On
+set colored-completion-prefix On
+
+# single tab to search and smartcase
+set show-all-if-ambiguous on
+set completion-ignore-case on
+
+# search in history by up and down key
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+# Bash Keybindings
+# make <C-l> behave as clear x
+# make <C-w> give exit command
+# bind '"\C-l":"\e\C-l"'
+# bind '"\C-w":"\e\C-d"'
+
+# other shortcuts
+# bind '"\C-e":"source ~/py_env/bin/activate \n"'
+# bind '"\C-e":"source ~/miniconda3/etc/profile.d/conda.sh; conda activate py_env\n"'
+# bind '"\C-f":"pacman -Ss "'
+# bind '"\C-n":"nvim . \n"'
+# bind '"\C-b":"fg \n"'
