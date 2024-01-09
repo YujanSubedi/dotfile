@@ -49,7 +49,8 @@ sudo pacman -S --noconfirm dosfstools
 
 
 # GUI for linux, X server #
-sudo pacman -S --noconfirm xorg xorg-server
+sudo pacman -S --noconfirm xorg xorg-server 
+sudo pacman -S --noconfirm xorg-xinit
 
 
 # qtile and dependency #
@@ -119,7 +120,7 @@ sudo pacman -S --noconfirm qt5-graphicaleffects qt5-quickcontrols2
 sudo cp -r sddm_theme/Anime /usr/share/sddm/themes
 sudo cp sddm_theme/sddm.conf /etc/
 sudo cp sddm_theme/.face.icon /usr/share/sddm/faces
-sudo systemctl enable sddm
+# sudo systemctl enable sddm
 
 
 # grub #

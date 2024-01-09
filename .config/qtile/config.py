@@ -45,8 +45,12 @@ keys = [
     Key(['mod1'], "Return", lazy.group['scratchpad'].dropdown_toggle('term')),
 
     # Run rofi to run program #
-    Key([mod], "r", lazy.spawn("rofi -show drun"), desc="Spawn a cmd menu"),
-    Key(["mod1"], "r", lazy.spawn("rofi -show window"), desc="Show all tabs"),
+    Key([mod], "r",
+        lazy.spawn("rofi -show drun -theme ~/.config/rofi/config.rasi"),
+        desc="Spawn a cmd menu"),
+    Key([mod], "0",
+        lazy.spawn("rofi -show window -theme ~/.config/rofi/config.rasi"),
+        desc="Show all tabs"),
 
     # Navigate Window #
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
@@ -64,10 +68,14 @@ keys = [
         desc="Move window focus to next"),
 
     # Change size of window #
-    Key(["mod1"], "Down", lazy.layout.shrink(), lazy.layout.decrease_nmaster(),
+    Key([mod], "Minus", lazy.layout.shrink(), lazy.layout.decrease_nmaster(),
         desc='Shrink window'),
-    Key(["mod1"], "Up", lazy.layout.grow(), lazy.layout.increase_nmaster(),
+    Key([mod], "Equal", lazy.layout.grow(), lazy.layout.increase_nmaster(),
         desc='Expand window'),
+    # Key(["mod1"], "Down", lazy.layout.shrink(),
+    #     lazy.layout.decrease_nmaster(), desc='Shrink window'),
+    # Key(["mod1"], "Up", lazy.layout.grow(),
+    #     lazy.layout.increase_nmaster(), desc='Expand window'),
 
     # Reset the size of window #
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
@@ -186,7 +194,10 @@ for i in ['1', '2', '3', '4', '5', '6', '7', '8', '9']:
 layouts = [
     layout.MonadTall(border_focus='#881111', border_normal='#1D2330',
                      margin=2, border_width=1),
-    layout.MonadWide(border_focus='#881111', border_normal='#1D2330',
+    layout.MonadThreeCol(border_focus='#118888', border_normal='#1D2330',
+                         new_client_position='bottom', ratio=0.33,
+                         margin=2, border_width=1),
+    layout.MonadWide(border_focus='#111188', border_normal='#1D2330',
                      margin=2, border_width=1),
     layout.Max(border_focus='#1D2330', border_normal='#1D2330',
                margin=2, border_width=1),
@@ -294,7 +305,7 @@ screens = [
 
                 # CPU Monitor #
                 widget.TextBox(
-                    text=' ',
+                    text='  ',
                     fontsize=18,
                     background='#353446',
                     foreground='#CAA9E0',
@@ -433,7 +444,7 @@ bring_front_click = False
 cursor_warp = False
 
 floating_layout = layout.Floating(
-    border_focus='#5c0404',
+    border_focus='881188',
     border_normal='#1F1D2E',
     border_width=1,
     float_rules=[
