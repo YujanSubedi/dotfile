@@ -1,0 +1,112 @@
+/* Rofi Configuration */
+
+configuration {
+	font:							"Fira Code 10";
+    show-icons:                     true;
+	icon-theme: 					"Papirus";
+    display-drun: 					" ";
+    display-window: 				"󰍹 ";
+    drun-display-format:            "{name}";
+    disable-history:                false;
+    fullscreen:                     false;
+	hide-scrollbar: 				true;
+	sidebar-mode: 					false;
+}
+
+window {
+    transparency:                   "real";
+    background-color:               #212B30FF;
+    text-color:                     #C4C7C5FF;
+	border:							0px 0px 0px 0px;
+	border-color:					#EC407AFF;
+    border-radius:                  0px;
+	width:							620px;
+	height:							460px;
+    location:                       center;
+    x-offset:                       0;
+    y-offset:                       0;
+}
+
+prompt {
+    enabled: 						true;
+	padding: 						0px;
+	background-color: 				#263035FF;
+	text-color: 					#EC407AFF;
+	font:							"feather 12";
+}
+
+entry {
+    background-color:               #00000000;
+    text-color:                     #C4C7C5FF;
+    placeholder-color:              #C4C7C5FF;
+    expand:                         true;
+    horizontal-align:               0;
+    placeholder:                    "Search...";
+	padding: 						0px 0px 0px 5px;
+    blink:                          true;
+}
+
+inputbar {
+	children: 						[ prompt, entry ];
+    background-color:               #263035FF;
+    text-color:                     #C4C7C5FF;
+    expand:                         false;
+	border:							0px 0px 1px 0px;
+    border-radius:                  0px;
+	border-color:					#4DD0E1FF;
+    margin:                         0px;
+    padding:                        10px;
+}
+
+listview {
+    background-color:               #00000000;
+    padding:                        0px;
+    columns:                        1;
+    lines:                          6;
+    spacing:                        5px;
+    cycle:                          true;
+    dynamic:                        true;
+    layout:                         vertical;
+}
+
+mainbox {
+    background-color:               #00000000;
+	border:							0px;
+    border-radius:                  0px;
+	border-color:					#EC407AFF;
+    children:                       [ inputbar, listview ];
+    spacing:                       	5px;
+    padding:                        5px;
+}
+
+element {
+    background-color:               #00000000;
+    text-color:                     #C4C7C5FF;
+    orientation:                    horizontal;
+    border-radius:                  0px;
+	padding: 						8px;
+}
+
+element-icon {
+    background-color:               transparent;
+    text-color:               		inherit;
+    size:                           24px;
+    border:                         0px;
+}
+
+element-text {
+    background-color:               transparent;
+    text-color:               		inherit;
+    expand:                         true;
+    horizontal-align:               0;
+    vertical-align:                 0.5;
+    margin:                         0px 2.5px 0px 2.5px;
+}
+
+element selected {
+    background-color:               #4DD0E1FF;
+    text-color:                     #212B30FF;
+	border:							0px 0px 0px 0px;
+    border-radius:                  0px;
+    border-color:                  	#EC407AFF;
+}
