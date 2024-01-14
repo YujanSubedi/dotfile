@@ -63,7 +63,7 @@ sudo pacman -S --noconfirm nitrogen python-psutil picom python-iwlib
 sudo pacman -S --noconfirm noto-fonts ttf-noto-nerd ttf-fira-code
 
 # xmonad and polybar
-sudo pacman -S --noconfirm xmonad xmoand-contrib polybar
+sudo pacman -S --noconfirm xmonad xmonad-contrib polybar
 
 # copy the config files of alacritty, nvim, qtile, picom, rofi, lf #
 cp -r .config ~
