@@ -7,6 +7,7 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 -- Hooks
+import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageHelpers (isFullscreen, doFullFloat)
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
@@ -65,6 +66,10 @@ myNormalBorderColor  = "#1d2330"
 myFocusedBorderColor = "#118888"
 
 ------------------------------------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+--
 -- Key bindings. Add, modify or remove key bindings here.
 --
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
@@ -83,9 +88,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Rotate through the available layout algorithms
     , ((modm,               xK_Tab     ), sendMessage NextLayout)
+    --, ((modm,               xK_Tab	), sendMessage NextLayout)
 
     --  Reset the layouts on the current workspace to default
     , ((modm .|. shiftMask, xK_Tab     ), setLayout $ XMonad.layoutHook conf)
+    -- ((modm .|. shiftMask, xK_Tab	), setLayout $ XMonad.layoutHook conf)
 
     -- Resize viewed windows to the correct size
     , ((modm,               xK_n     ), refresh)
@@ -105,11 +112,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Swap the focused window with the next window
     , ((modm .|. shiftMask, xK_j     ), windows W.swapDown  )
-    , ((modm .|. shiftMask, xK_l     ), windows W.swapDown  )
 
     -- Swap the focused window with the previous window
     , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
-    , ((modm .|. shiftMask, xK_h     ), windows W.swapUp    )
 
     -- Shrink the master area
     , ((modm,               xK_minus     ), sendMessage Shrink)
@@ -125,7 +130,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Use this binding with avoidStruts from Hooks.ManageDocks.
     -- See also the statusBar function from Hooks.DynamicLog.
     --
-    , ((modm              , xK_space     ), spawn "polybar-msg cmd toggle")
+    -- , ((modm              , xK_space     ), sendMessage ToggleStruts)
 
 	-- ScreenShot
     , ((modm,               xK_Print     ), spawn "scrot -z -q 100 -e 'mv $f ~/Pictures/Screenshot/'")
@@ -175,6 +180,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
 
 ------------------------------------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
+
 -- Mouse bindings: default actions bound to mouse events
 --
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
@@ -193,7 +202,11 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
     ]
 
+
 ------------------------------------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
 
 -- Layouts:
 
@@ -205,14 +218,16 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- The available layouts.  Note that each layout is separated by |||,
 -- which denotes layout choice.
 --
-myLayout =mkToggle (NOBORDERS ?? NBFULL ?? EOT) (bargap $ spacing gap $ (monadtall ||| monadthreecol ||| monadwide ||| Full))
+myLayout =mkToggle (NOBORDERS ?? NBFULL ?? EOT) (monadtall ||| monadthreecol ||| monadwide ||| qtilemax)
   where
      -- default tiling algorithm partitions the screen into two panes
-     monadtall   = Tall nmaster delta ratio
+     monadtall   = gaps [(U,0), (D,5), (L,5), (R,5)] $ spacing gap $ Tall nmaster delta ratio
 
-     monadthreecol   = ThreeColMid nmaster delta tclratio
+     monadthreecol   = gaps [(U,0), (D,5), (L,5), (R,5)] $ spacing gap $ ThreeColMid nmaster delta tclratio
 
-     monadwide   = Mirror (Tall nmaster delta ratio)
+     monadwide   = gaps [(U,0), (D,5), (L,5), (R,5)] $ spacing gap $ Mirror (Tall nmaster delta ratio)
+
+     qtilemax   = gaps [(U,0), (D,5), (L,5), (R,5)] $ spacing gap $ Full
 
      -- The default number of windows in the master pane
      nmaster = 1
@@ -226,9 +241,12 @@ myLayout =mkToggle (NOBORDERS ?? NBFULL ?? EOT) (bargap $ spacing gap $ (monadta
 
      -- Define the size of the gaps between windows
      gap     = 5
-     bargap	 = gaps [(U,33), (D,0), (L,0), (R,0)]
+
 
 ------------------------------------------------------------------------
+------------------------------------------------------------------------
+------------------------------------------------------------------------
+
 -- Window rules:
 
 -- Execute arbitrary actions and WindowSet manipulations when managing
@@ -294,7 +312,7 @@ myStartupHook = do
         -- spawnOnce "~/.fehbg"
         spawnOnce "nitrogen --restore"
         spawnOnce "picom -f"
-        spawnOnce "polybar"
+        -- spawnOnce "polybar"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
@@ -315,9 +333,32 @@ myScratchPads = [ NS "terminal" spawnTerm findTerm manageTerm]
 --
 
 --
+-- Command to launch the bar.
+myBar = "xmobar -x 0"
+
+-- Custom PP, configure it as you like. It determines what is being written to the bar.
+myPP = xmobarPP { 
+	ppCurrent = xmobarColor "#009999" "" . wrap "[" "]"
+	, ppVisible = xmobarColor "#007777" ""
+	, ppHidden = xmobarColor "#b998d0" "" . wrap "" ""
+	, ppHiddenNoWindows = xmobarColor "#282738" ""
+	, ppTitle = xmobarColor "#99aaaa" "" . shorten 70
+	, ppSep =  "<fc=#2b3338> | </fc>"
+	, ppLayout = xmobarColor "#99aaaa" "" 
+	, ppUrgent = xmobarColor "#262626" "" . wrap "!" "!"
+	, ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
+}
+
+-- Key binding to toggle the gap for the bar.
+toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_space)
+
+------------------------------------------------------------------------
+-- Now run xmonad with all the defaults we set up.
+
 -- Run xmonad with the settings you specify. No need to modify this.
 --
-main = defaults
+main = xmonad =<< statusBar myBar myPP toggleStrutsKey defaults
+
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
@@ -325,8 +366,7 @@ main = defaults
 --
 -- No need to modify this.
 --
-defaults = do
-        xmonad $ ewmh $ def {
+defaults = def {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,

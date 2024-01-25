@@ -56,14 +56,25 @@ sudo pacman -S --noconfirm xorg xorg-server
 sudo pacman -S --noconfirm xorg-xinit
 cp .xintrc ~
 
-# qtile and dependency #
-sudo pacman -S --noconfirm qtile
-sudo pacman -S --noconfirm scrot brightnessctl rofi i3lock
-sudo pacman -S --noconfirm nitrogen python-psutil picom python-iwlib
-sudo pacman -S --noconfirm noto-fonts ttf-noto-nerd ttf-fira-code
 
-# xmonad and polybar
-sudo pacman -S --noconfirm xmonad xmonad-contrib polybar
+# Fonts #
+sudo pacman -S --noconfirm noto-fonts
+sudo pacman -S --noconfirm ttf-fira-code
+sudo pacman -S --noconfirm ttf-jetbrains-mono ttf-jetbrains-mono-nerd
+# Window Manager Dependency #
+sudo pacman -S --noconfirm scrot brightnessctl rofi i3lock
+sudo pacman -S --noconfirm nitrogen picom
+
+# qtile #
+sudo pacman -S --noconfirm qtile python-psutil python-iwlib
+
+# xmonad #
+sudo pacman -S --noconfirm xmonad xmonad-contrib 
+# xmobar #
+sudo pacman -S --noconfirm xmobar haskell-iwlib
+# polybar #
+sudo pacman -S --noconfirm polybar
+
 
 # copy the config files of alacritty, nvim, qtile, picom, rofi, lf #
 cp -r .config ~
