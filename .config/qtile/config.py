@@ -20,8 +20,8 @@ import subprocess
 
 @hook.subscribe.startup_once
 def start_once():
-    home = os.path.expanduser('~')
-    subprocess.call([home + '/.config/qtile/autostart.sh'])
+    startup_script = os.path.expanduser('~/.config/qtile/autostart.sh')
+    subprocess.run([startup_script])
     qtile.cmd_hide_show_bar('all')
 
 # # # Defaults: # # #
@@ -234,6 +234,8 @@ extension_defaults = [widget_defaults.copy()]
 def search():
     qtile.cmd_spawn("rofi -show drun -theme ~/.config/rofi/config.rasi")
 
+def view_window():
+    qtile.cmd_spawn("rofi -show window -theme ~/.config/rofi/config.rasi")
 
 def powermenu():
     qtile.cmd_spawn("sh ./.config/rofi/powermenu.sh")
@@ -252,7 +254,8 @@ screens = [
                 widget.TextBox(fmt=' ', background='#282738',
                                font="JetBrains Mono Bold",
                                fontsize=18, foreground='#4dd0e1',
-                               mouse_callbacks={"Button1": search}
+                               mouse_callbacks={"Button1": search, 
+                                                "Button3": view_window}
                                ),
 
                 widget.Image(filename='~/.config/qtile/Assets/6.png'),
@@ -375,7 +378,7 @@ screens = [
 
                 widget.Wlan(
                         font='JetBrains Mono Bold', fontsize='14',
-                        background='#353446', interface='wlp4s0',
+                        background='#353446', interface='wlan0',
                         foreground='#CAA9E0', update_interval=3,
                         disconnected_message='󰯡 ',
                         format='󰀂  {percent:2.0%} {essid}'
@@ -440,11 +443,11 @@ screens = [
 
                 widget.TextBox(fmt='⏻ ', background='#282738',
                                font="JetBrains Mono Bold",
-                               fontsize=18, foreground='#4dd0e1',
+                               fontsize=23, foreground='#4dd0e1',
                                mouse_callbacks={"Button1": powermenu}
                                ),
 
-                widget.Spacer(length=15, background='#282738'),
+                widget.Spacer(length=3, background='#282738'),
             ],
             30,
             margin=[8, 30, 6, 30],

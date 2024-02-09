@@ -1,37 +1,40 @@
 # [colors]
-# author = ""
-# name = ""
-
-[colors.bright]
-black = "#5c5855"
-blue = "#01a0e4"
-cyan = "#b5e4f4"
-green = "#01a252"
-magenta = "#a16a94"
-red = "#db2d20"
-white = "#f7f7f7"
-yellow = "#fded02"
-
-[colors.cursor]
-cursor = "#a5a2a2"
-text = "#090300"
-
-[colors.normal]
-black = "#090300"
-blue = "#01a0e4"
-cyan = "#b5e4f4"
-green = "#01a252"
-magenta = "#a16a94"
-red = "#db2d20"
-white = "#a5a2a2"
-yellow = "#fded02"
+# author = "Yujan Subedi"
+# name = "Modified Gnome theme"
 
 [colors.primary]
 background = "#090300"
 foreground = "#a5a2a2"
 
+[colors.bright]
+black = "#4e4c54"
+blue = "#2a7bde"
+cyan = "#33c7de"
+green = "#33d17a"
+magenta = "#c061cb"
+red = "#f66151"
+white = "#e2e2e2"
+yellow = "#fded02"
+
+[colors.normal]
+black = "#090300"
+blue = "#12488b"
+cyan = "#2991b3"
+green = "#01a252"
+magenta = "#933799"
+red = "#db2d20"
+white = "#a5a2a2"
+yellow = "#c98d0c"
+
+[colors.cursor]
+cursor = "#a5a2a2"
+text = "#090300"
+
 [cursor.style]
 shape = "Underline"
+
+[cursor.vi_mode_style]
+shape = "Block"
 
 [font]
 size = 9.0
