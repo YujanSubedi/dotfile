@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # exec qtile start
-# exec xmonad
+exec xmonad

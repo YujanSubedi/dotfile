@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/sh
 
 # update #
 sudo pacman -Syu --noconfirm
@@ -140,7 +140,7 @@ sudo pacman -S --noconfirm qt5-graphicaleffects qt5-quickcontrols2
 sudo cp -r sddm_theme/Anime /usr/share/sddm/themes
 sudo cp sddm_theme/sddm.conf /etc/
 sudo cp sddm_theme/.face.icon /usr/share/sddm/faces
-# sudo systemctl enable sddm
+sudo systemctl enable sddm
 
 
 # grub #

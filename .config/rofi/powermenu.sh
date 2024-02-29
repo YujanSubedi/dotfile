@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 options=" Lock\n Reboot\n Shutdown"
 

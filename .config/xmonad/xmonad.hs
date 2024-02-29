@@ -295,6 +295,7 @@ myStartupHook = do
         spawnOnce "nitrogen --restore"
         spawnOnce "picom -f"
         spawnOnce "polybar"
+        spawnOnce "brightness set 90"
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.

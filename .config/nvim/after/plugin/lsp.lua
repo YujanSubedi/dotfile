@@ -4,7 +4,7 @@ lsp.preset("recommended")
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = {'lua_ls', 'clangd', 'cmake', 'bashls', 'dockerls', 'pylsp', 'tsserver', 'cssls', 'html', 'rust_analyzer'},
+  ensure_installed = {'lua_ls', 'clangd', 'cmake', 'bashls', 'dockerls', 'pyright', 'tsserver', 'cssls', 'html', 'rust_analyzer'},
   handlers = {
     lsp.default_setup,
   }

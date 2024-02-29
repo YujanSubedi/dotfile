@@ -5,7 +5,7 @@ Config of Qtile and Xmonad window manager with :
 - Nitrogen (Wallpaper Manager)
 - Rofi (Window Switcher/Launcher)
 - Picom (Compositor)
-- Lf (File Manager)
+- Lf / Rofi (File Manager)
 - Neovim (Text Editor)
 
 Qtile and Xmonad(polybar) are customized to behave analogously.
@@ -26,6 +26,15 @@ cd dotfile
 ./install.sh
 ```
 Grub theme can be changed from grub-customizer or by changing /etc/default/grub.
+
+#### Setup on NixOS
+On Nixos run install_on_nixos.sh bash program to run install the required nixos packages, copy the config of the applications and rebuild the nixos.
+```bash
+git clone https://github.com/YujanSubedi/dotfile
+cd dotfile
+./install_on_nixos.sh
+```
+The LSP on neovim, and Lf file manager image preview doesn't work as intended.
 
 ### Startx
 To run the from startx xorg-xinit package is needed
@@ -68,4 +77,3 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim\
 ```
 Open Neovim on ~/.config/nvim/lua/nvimprof and run :so to source and then :PackerSync to install package.
 LSP requires unzip, tar and npm.
-
