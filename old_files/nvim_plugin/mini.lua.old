@@ -1,0 +1,20 @@
+-- Collection of various small independent plugins/modules
+return {
+	'echasnovski/mini.nvim',
+	config = function()
+		require('mini.ai').setup { n_lines = 25 } -- Better Around/Inside textobjects
+		require('mini.surround').setup { n_lines = 25 } -- Add/delete/replace surroundings (brackets, quotes, etc.)
+		local statusline = require 'mini.statusline' -- Simple and easy statusline.
+		statusline.setup {
+			content = {
+				active = nil,
+				inactive = nil,
+			},
+			use_icons = true,
+			set_vim_settings = true,
+		}
+		statusline.section_location = function()
+			return '%2l:%-2v'
+		end
+	end,
+}
