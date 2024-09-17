@@ -35,31 +35,31 @@ Contains configs of:
 #+BEGIN_SRC bash
 sudo pacman -S --nonconfirm hyprland wofi waybar swww
 #+END_SRC
-[[file:./Screenshots/Hyprland.png]]
+[[file:./Screenshots/Hyprland.jpg]]
 
 *** Qtile
 #+BEGIN_SRC bash
 sudo pacman -S --nonconfirm qtile python-psutil python-iwlib nitrogen picom rofi
 #+END_SRC
-[[file:./Screenshots/Qtile.png]]
+[[file:./Screenshots/Qtile.jpg]]
 
 *** Xmonad
 #+BEGIN_SRC bash
 sudo pacman -S --nonconfirm xmonad xmonad-contrib polybar picom nitrogen rofi
 #+END_SRC
-[[file:./Screenshots/Xmonad.png]]
+[[file:./Screenshots/Xmonad.jpg]]
 
 *** Sddm
 #+BEGIN_SRC bash
 sudo pacman -S --nonconfirm sddm
 #+END_SRC
-[[file:./Screenshots/Sddm.png]]
+[[file:./Screenshots/Sddm.jpg]]
 
 *** Grub
 #+BEGIN_SRC bash
 sudo pacman -S --nonconfirm grub efibootmgr os-oprober
 #+END_SRC
-[[file:./Screenshots/Grub.png]]
+[[file:./Screenshots/Grub.jpg]]
 
 *** Setup on Arch
 #+begin_src bash
