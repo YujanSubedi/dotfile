@@ -493,6 +493,7 @@ case $display_protocol in # XWayland Wayland Xorg NONE
         sudo pacman -S --noconfirm --needed wlroots xdg-desktop-portal-wlr
         sudo pacman -S --noconfirm --needed qt6-wayland wl-clipboard
         sudo pacman -S --noconfirm --needed wofi waybar swww
+        sudo pacman -S --noconfirm --needed grim hyprlock
         sudo pacman -S --noconfirm --needed nwg-look
         ;;
     Wayland)
@@ -500,6 +501,7 @@ case $display_protocol in # XWayland Wayland Xorg NONE
         sudo pacman -S --noconfirm --needed wlroots xdg-desktop-portal-wlr
         sudo pacman -S --noconfirm --needed qt6-wayland wl-clipboard
         sudo pacman -S --noconfirm --needed wofi waybar swww
+        sudo pacman -S --noconfirm --needed grim hyprlock
         sudo pacman -S --noconfirm --needed nwg-look
         ;;
     Xorg)
@@ -518,7 +520,6 @@ case $window_manager in # Hyprland Xmonad Qtile NONE
     Hyprland)
         sudo pacman -S --noconfirm --needed hyprland
         sudo pacman -S --noconfirm --needed xdg-desktop-portal-hyprland
-        $aur_helper -S --noconfirm --needed hyprshot hyprlock
         ;;
     Xmonad)
         sudo pacman -S --noconfirm --needed xmonad xmonad-contrib
