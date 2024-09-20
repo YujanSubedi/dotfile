@@ -30,6 +30,9 @@ Contains configs of:
     Terminal Tools:
     - Tmux
     - Fastfetch
+    Shell:
+    - Bash
+    - Zsh
 
 *** Hyprland
 #+BEGIN_SRC bash

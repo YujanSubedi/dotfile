@@ -43,7 +43,7 @@ map <a-q> quit
 map gy cd ~/Yujan
 map gd cd ~/Downloads
 map gp cd ~/Pictures
-map gs cd ~/Pictures/Screenshot
+map gs cd ~/Pictures/Screenshots
 map gc cd ~/.config
 map gm cd ~/Class_materials/7th_Sem_bct/
 

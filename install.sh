@@ -389,8 +389,8 @@ sudo pacman -S --noconfirm --needed noto-fonts
 
 # Terminals tools
 sudo pacman -S --noconfirm --needed man-db
-sudo pacman -S --noconfirm --needed  man-pages opengl-man-pages
-sudo pacman -S --noconfirm --needed bash-completion
+sudo pacman -S --noconfirm --needed man-pages opengl-man-pages
+sudo pacman -S --noconfirm --needed bash-completion zsh-completions
 sudo pacman -S --noconfirm --needed fastfetch btop nvtop ncdu
 sudo pacman -S --noconfirm --needed brightnessctl
 sudo pacman -S --noconfirm --needed ripgrep-all fd
@@ -550,7 +550,7 @@ case $Copy_themes in # Yes No
 
         # Wallpapers
         cp -r Pictures ~
-        [ -d "~/Pictures/Screenshot/"] || mkdir ~/Pictures/Screenshot/
+        [ -d "~/Pictures/Screenshots/"] || mkdir ~/Pictures/Screenshots/
 
         # Display Manager Theme
         case $display_manager in
@@ -576,10 +576,11 @@ esac
 case $Copy_configs in # Yes No
     Yes)
         cp ./env_variable/bashrc ~/.bashrc
-        cp ./env_variable/inputrc ~/.inputrc
+        cp ./env_variable/zprofile ~/.zprofile
         cp ./env_variable/bash_profile ~/.bash_profile
         [ -d "~/.config/" ] || mkdir ~/.config/
-        cp -r ./config/* ~/.config/
+        cp -r ./configs/* ~/.config/
+        [ -d "~/.config/shell/history/" ] || mkdir ~/.config/shell/history/
 
         # Bat and Tmux
         bat cache --build

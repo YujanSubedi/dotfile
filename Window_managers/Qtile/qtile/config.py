@@ -32,9 +32,9 @@ terminal = "alacritty"
 # browser = "firefox"
 
 # Screenshots Commands #
-full_screen_ss = "scrot -z -q 100 -e 'xclip -selection clipboard -target image/png $f && mv $f ~/Pictures/Screenshot/'"
-window_ss = "scrot -z -u -b -q 100 -e 'xclip -selection clipboard -target image/png $f && mv $f ~/Pictures/Screenshot/'"
-select_ss = "scrot -z -q 100 -s -l mode=edge -e 'xclip -selection clipboard -target image/png $f && mv $f ~/Pictures/Screenshot/'"
+full_screen_ss = "scrot -z -q 100 -e 'xclip -selection clipboard -target image/png $f && mv $f ~/Pictures/Screenshots/'"
+window_ss = "scrot -z -u -b -q 100 -e 'xclip -selection clipboard -target image/png $f && mv $f ~/Pictures/Screenshots/'"
+select_ss = "scrot -z -q 100 -s -l mode=edge -e 'xclip -selection clipboard -target image/png $f && mv $f ~/Pictures/Screenshots/'"
 
 # # # KeyBindings: # # #
 

@@ -1,3 +1,8 @@
+#!/bin/sh
+
+# Disable bell
+set bell-style none
+
 # Color
 set colored-stats on
 set colored-completion-prefix on
@@ -11,6 +16,3 @@ set visible-stats on
 # search in history by up and down key
 "\e[A": history-search-backward
 "\e[B": history-search-forward
-
-# disable bell-sound
-set bell-style none

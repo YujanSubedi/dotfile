@@ -131,11 +131,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm              , xK_space     ), spawn "polybar-msg cmd toggle")
 
 	-- ScreenShot
-    , ((modm,               xK_Print     ), spawn "scrot -z -q 100 -e 'xclip -selection clipboard -target image/png $f && mv $f ~/Pictures/Screenshot/'")
+    , ((modm,               xK_Print     ), spawn "scrot -z -q 100 -e 'xclip -selection clipboard -target image/png $f && mv $f ~/Pictures/Screenshots/'")
 
-    , ((mod1Mask,               xK_Print     ), spawn "scrot -z -u -b -q 100 -e 'xclip -selection clipboard -target image/png $f && mv $f ~/Pictures/Screenshot/'")
+    , ((mod1Mask,               xK_Print     ), spawn "scrot -z -u -b -q 100 -e 'xclip -selection clipboard -target image/png $f && mv $f ~/Pictures/Screenshots/'")
 
-    , ((0,               xK_Print     ), spawn "scrot -z -q 100 -s -l mode=edge -e 'xclip -selection clipboard -target image/png $f && mv $f ~/Pictures/Screenshot/'")
+    , ((0,               xK_Print     ), spawn "scrot -z -q 100 -s -l mode=edge -e 'xclip -selection clipboard -target image/png $f && mv $f ~/Pictures/Screenshots/'")
 
 	-- XF86 keyboards
     , ((0,               xF86XK_AudioRaiseVolume     ), spawn "pactl set-sink-volume 0 +5%")

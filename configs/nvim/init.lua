@@ -1,10 +1,10 @@
--- NOTE: Include nvim variables and keybindings
+-- Include nvim variables and keybindings
 require("autocmd_bindings")
 require("settings")
 require("keybindings")
 require("statusline")
 
--- NOTE: Bootstrap lazy.nvim
+-- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -21,5 +21,5 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- NOTE: Setup lazy.nvim
+-- Setup lazy.nvim
 require("lazy").setup("plugin")

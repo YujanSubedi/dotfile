@@ -1,4 +1,4 @@
--- NOTE: Gobal Settings:
+-- Gobal Settings:
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.opt.number = true

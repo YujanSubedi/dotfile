@@ -1,4 +1,4 @@
--- NOTE: Keybindings:
+-- Keybindings:
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Stop highlighting" })
 vim.keymap.set({"v", "n"}, "Y", '"+y', { desc = "Copy to clipboard" })
 vim.keymap.set("n", "<A-q>", vim.cmd.Ex, { desc = "Go to previous [D]iagnostic message" })

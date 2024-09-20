@@ -1,21 +1,23 @@
-#!/bin/sh
+#!/bin/zsh
 
-# Bash profile: ~/.bash_profile default to .profile
+# Zsh Profile: ~/.zprofile
+# Disable bell
+# set bell-style none
+# set -o vi # set vi mode
 
-# history size and ignore duplicates
-export HISTSIZE=-1
-export HISTFILESIZE=-1
-export HISTCONTROL="erasedups:ignorespace"
+# history size
+export HISTSIZE=100000
+export SAVEHIST=100000
 
-# Inputrc and Histroy file location
-export HISTFILE="$HOME/.config/shell/history/bash_history"
+# Zsh config directory
+export HISTFILE="$HOME/.config/shell/history/zsh_history"
 
 # XDG Based directories
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_RUNTIME_DIR="/run/user/$UID"
-export XDG_DATA_HOME="$HOME/.local/.share/"
-export XDG_STATE_HOME="$HOME/.local/state/"
+export XDG_DATA_HOME="$HOME/.local/.share"
+export XDG_STATE_HOME="$HOME/.local/state"
 
 # Home directories cleanup
 export EMACSDIR="$HOME/.config/emacs"

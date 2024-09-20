@@ -1,3 +1,5 @@
+-- Status Line
+
 -- Display only one statusline
 vim.opt.laststatus = 3
 

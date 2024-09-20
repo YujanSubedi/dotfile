@@ -1,4 +1,4 @@
--- NOTE: File specific config
+-- File specific config
 
 -- Set keybindings for C and C++ files
 vim.api.nvim_create_autocmd("FileType", {
