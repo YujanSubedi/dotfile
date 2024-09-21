@@ -36,7 +36,7 @@ return {
 					"clangd", -- c/c++
 					"pyright", -- python
 					"rust_analyzer", --rust
-					"tsserver", -- javascript/typescript
+					"ts_ls", -- javascript/typescript
 					"texlab", -- latex
 					"gopls", -- golang
 					-- "bashls", -- bash

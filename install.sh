@@ -493,7 +493,7 @@ case $display_protocol in # XWayland Wayland Xorg NONE
         sudo pacman -S --noconfirm --needed wlroots xdg-desktop-portal-wlr
         sudo pacman -S --noconfirm --needed qt6-wayland wl-clipboard
         sudo pacman -S --noconfirm --needed wofi waybar swww
-        sudo pacman -S --noconfirm --needed grim hyprlock
+        sudo pacman -S --noconfirm --needed grim slurp hyprlock
         sudo pacman -S --noconfirm --needed nwg-look
         ;;
     Wayland)
@@ -501,7 +501,7 @@ case $display_protocol in # XWayland Wayland Xorg NONE
         sudo pacman -S --noconfirm --needed wlroots xdg-desktop-portal-wlr
         sudo pacman -S --noconfirm --needed qt6-wayland wl-clipboard
         sudo pacman -S --noconfirm --needed wofi waybar swww
-        sudo pacman -S --noconfirm --needed grim hyprlock
+        sudo pacman -S --noconfirm --needed grim slurp hyprlock
         sudo pacman -S --noconfirm --needed nwg-look
         ;;
     Xorg)
@@ -587,7 +587,7 @@ case $Copy_configs in # Yes No
         [ -d "~/.config/tmux/tpm" ] || git clone https://github.com/tmux-plugins/tpm ~/.config/tux/tpm
 
         case $window_manager in
-            Wayland)
+            Hyprland)
                 cp -r ./Display_protocol/Wayland/* ~/.config/
                 cp -r ./Window_managers/Hyprland/* ~/.config/
                 ;;
@@ -715,6 +715,7 @@ esac
 case $Restart_flag in # Yes No
     Yes)
         echo Restarting
+        reboot
         ;;
     *)
         ;;
