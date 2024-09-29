@@ -3,7 +3,6 @@ set cleaner ctpvclear
 &ctpv -s $id
 &ctpvquit $id
 
-
 # Basic Settings
 set hidden false
 set ignorecase true
@@ -12,7 +11,6 @@ set relativenumber true
 set icons true
 set ratios 1:2:3
 set mouse false
-
 
 # Remove the move and delete function
 map d
@@ -23,7 +21,6 @@ map w
 # Remove Mouse function
 map <m-left>
 map <m-right>
-
 
 # Basic Functions
 map . set hidden!
@@ -37,7 +34,6 @@ map r reload
 map R rename
 map <c-c> clear
 
-
 # Movement
 map <a-q> quit
 map gy cd ~/Yujan
@@ -45,7 +41,7 @@ map gd cd ~/Downloads
 map gp cd ~/Pictures
 map gs cd ~/Pictures/Screenshots
 map gc cd ~/.config
-map gm cd ~/Class_materials/7th_Sem_bct/
+map gm cd ~/Class_materials
 
 # :q to quit same as vim
 cmd q quit

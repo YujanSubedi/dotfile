@@ -3,28 +3,32 @@
 # Aliases:
 
 # Change behaviours of command
-alias grep='grep --color=auto'
-alias diff='diff --color=auto'
-alias ls='ls --color=auto'
-alias ip='ip -color=auto'
-alias less='less -R'
-alias rm='rm -i'
-alias mv='mv -i'
-alias cp='cp -i'
-alias delta='delta --line-numbers'
+alias grep="grep --color=auto"
+alias diff="diff --color=auto"
+alias batt="bat --mouse"
+alias ls="ls --color=auto"
+alias ip="ip -color=auto"
+alias less="less -R"
+alias rm="rm -i"
+alias mv="mv -i"
+alias cp="cp -i"
+alias delta="delta --line-numbers"
 alias fzf="fzf --ansi"
 
 # Add new command
 alias la="ls -a"
 alias ll="ls -lah"
-alias l='ls -CF'
+alias l="ls -CF"
+alias klf="kitty -e 'lf'"
 alias top="btop"
 alias htop="btop"
 alias fz="fzf --height=85% --layout=reverse"
+alias lf="yazi"
 alias batt="cat /sys/class/power_supply/BAT0/capacity"
 alias fzp="fz --preview 'bat --style=numbers --color=always {}'"
 alias fzfp="fzf --preview 'bat --style=numbers --color=always {}'"
-alias his="history | fz"
+alias hisr="history | fz"
+alias his="history | sort -nr | fz"
 alias exa="eza"
 alias tree="eza -la --git --tree"
 alias bman="man -k . | choose 1 0 | fzf | tr -d '()' | xargs man"
@@ -54,4 +58,9 @@ function tma() {
 # Go to the location where tmux server is made
 function tmc() {
     cd $(tmux display-message -p '#{session_name}')
+}
+
+# Go to the location where tmux server is made
+function fcd() {
+    cd $(fd -t d | fz)
 }

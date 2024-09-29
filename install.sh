@@ -11,10 +11,10 @@ default_flag=false
 # Parse the arguments
 while getopts "d" opt; do
     case ${opt} in
-        d )
+        d)
             default_flag=true
             ;;
-        \? )
+        \?)
             usage
             ;;
     esac
@@ -45,9 +45,9 @@ if [[ "$default_flag" == true ]]; then
     Copy_themes=Yes # Yes No
     Copy_configs=No # Yes No
     Virtualization=(Qemu Docker) # Qemu Docker Virt_Manager
-    Network_tools=(Net_tools Inetutils Bind Nmap Tor_Proxy Qbit_Torrent Wireshark Burpsuite) # Net_tools Inetutils Bind Nmap Tor_Proxy Qbit_Torrent Wireshark Burpsuite
-    Browsers=(Zen_Browser Firefox Tor_Browser) # Zen_Browser Firefox Tor_Browser Brave_Browser
-    Extra_applications=(Discord Gimp LibreOffice Texlive) # Discord Gimp LibreOffice Texlive
+    Network_tools=(Net_tools Inetutils Bind Nmap Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark Burpsuite) # Net_tools Inetutils Bind Nmap Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark Burpsuite
+    Browsers=(Zen_Browser Firefox Tor_Browser) # Zen_Browser Firefox Tor_Browser QuteBrowser Brave_Browser Librewolf
+    Extra_applications=(Discord Gimp LibreOffice Texlive Spotify) # Discord Gimp LibreOffice Texlive Spotify
     firewall=Yes # Yes No
     Restart_flag=No # Yes No
 # Let user select
@@ -97,7 +97,7 @@ else
     echo "Display Manager:"
     select display_protocol in XWayland Wayland Xorg NONE; do
         case $REPLY in
-            1 | 2 | 3| 4)
+            0 | 1 | 2| 3)
                 break
                 ;;
             *)
@@ -183,7 +183,7 @@ else
     echo -e "${BLUE}Virtualization: ${YELLOW}${Virtualization[@]}${NONE}"
 
     echo "Network Tools: Multiple options can be selected selperated by space."
-    options=(ALL Net_tools Inetutils Bind Nmap Tor_Proxy Qbit_Torrent Wireshark Burpsuite)
+    options=(ALL Net_tools Inetutils Bind Nmap Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark Burpsuite)
     Network_tools=()
     for i in "${!options[@]}"; do
         echo "$i) ${options[$i]}"
@@ -193,7 +193,7 @@ else
     for choise in "${processed_choices[@]}"; do
         case $choise in
             0)
-                Network_tools=(Net_tools Inetutils Bind Nmap Tor_Proxy Qbit_Torrent Wireshark Burpsuite)
+                Network_tools=(Net_tools Inetutils Bind Nmap Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark Burpsuite)
                 break
                 ;;
             1 | 2 | 3 | 4 | 5 | 6 | 7 | 8)
@@ -206,7 +206,7 @@ else
     echo -e "${BLUE}Network Tools: ${YELLOW}${Network_tools[@]}${NONE}"
 
     echo "Browsers: Multiple options can be selected selperated by space."
-    options=(Zen_and_Firefox Zen_Browser Firefox Tor_Browser Brave_Browser)
+    options=(Zen_and_Firefox Zen_Browser Firefox Tor_Browser QuteBrowser Brave_Browser Librewolf)
     Browsers=()
     for i in "${!options[@]}"; do
         echo "$i) ${options[$i]}"
@@ -229,7 +229,7 @@ else
     echo -e "${BLUE}Browsers: ${YELLOW}${Browsers[@]}${NONE}"
 
     echo "Extra Applications: Multiple options can be selected selperated by space."
-    options=(ALL Discord Gimp LibreOffice Texlive)
+    options=(ALL Discord Gimp LibreOffice Texlive Spotify)
     Extra_applications=()
     for i in "${!options[@]}"; do
         echo "$i) ${options[$i]}"
@@ -239,7 +239,7 @@ else
     for choise in "${processed_choices[@]}"; do
         case $choise in
             0)
-                Extra_applications=(Discord Gimp LibreOffice Texlive)
+                Extra_applications=(Discord Gimp LibreOffice Texlive Spotify)
                 break
                 ;;
             1 | 2 | 3 | 4)
@@ -319,40 +319,20 @@ sudo pacman -Fy --noconfirm
 # Synchronize time by NTP
 sudo timedatectl set-ntp true
 
-# Git
-sudo pacman -S --noconfirm --needed git
-
-# To install Aur Packages
-sudo pacman -S --noconfirm --needed base-devel
-
-# Aur Helper
-case $aur_helper in # paru yay
-    paru)
-        if ! command -v paru &>/dev/null; then
-            git clone https://aur.archlinux.org/paru-bin/ /tmp/paru
-            makepkg -si --noconfirm --needed -D /tmp/paru
-        fi
-        ;;
-    yay)
-        if ! command -v yay &>/dev/null; then
-            git clone https://aur.archlinux.org/yay-bin/ /tmp/yay
-            makepkg -si --noconfirm --needed -D /tmp/yay
-        fi
-        ;;
-    *)
-        ;;
-esac
-
 # Install programming languages
 sudo pacman -S --noconfirm --needed gcc
+# sudo pacman -S --noconfirm --needed llvm clang
+# sudo pacman -S --noconfirm --needed tcc
 # sudo pacman -S --noconfirm --needed ghc
 sudo pacman -S --noconfirm --needed lua
 sudo pacman -S --noconfirm --needed python
 sudo pacman -S --noconfirm --needed npm
 # sudo pacman -S --noconfirm --needed yarn
+# sudo pacman -S --noconfirm --needed emscripten
 sudo pacman -S --noconfirm --needed go
 # sudo pacman -S --noconfirm --needed rust
 sudo pacman -S --noconfirm --needed rustup && rustup default stable
+# sudo pacman -S --noconfirm --needed zig
 # sudo pacman -S --noconfirm --needed php
 # sudo pacman -S --noconfirm --needed perl
 # sudo pacman -S --noconfirm --needed octave
@@ -363,10 +343,44 @@ sudo pacman -S --noconfirm --needed raylib
 sudo pacman -S --noconfirm --needed glew freeglut glu glfw
 # sudo pacman -S --noconfirm --needed cmake
 
-sudo pacman -S --noconfirm --needed gdb ltrace strace
-
 # C/CPP Debuggers
 sudo pacman -S --noconfirm --needed gdb ltrace strace
+
+# Git
+sudo pacman -S --noconfirm --needed git
+
+# To install Aur Packages
+sudo pacman -S --noconfirm --needed base-devel
+
+# Aur Helper
+case $aur_helper in # paru yay
+    paru)
+        if ! command -v paru &>/dev/null; then
+            git clone https://aur.archlinux.org/paru-git/ /tmp/paru
+            makepkg -si --noconfirm --needed -D /tmp/paru
+        fi
+        ;;
+    yay)
+        if ! command -v yay &>/dev/null; then
+            git clone https://aur.archlinux.org/yay-git/ /tmp/yay
+            makepkg -si --noconfirm --needed -D /tmp/yay
+        fi
+        ;;
+    *)
+        ;;
+esac
+
+# Update aur_helper
+$aur_helper -Syu
+
+# Downgrade packages rollback for broken packages
+$aur_helper -S --noconfirm --needed downgrade
+
+# Additional programming languages from aur
+# $aur_helper -S --noconfirm --needed ghdl
+# $aur_helper -S --noconfirm --needed odin
+# $aur_helper -S --noconfirm --needed bun
+# $aur_helper -S --noconfirm --needed mojo
 
 # SQL
 # sudo pacman -S --noconfirm --needed postgresql
@@ -391,20 +405,18 @@ sudo pacman -S --noconfirm --needed noto-fonts
 sudo pacman -S --noconfirm --needed man-db
 sudo pacman -S --noconfirm --needed man-pages opengl-man-pages
 sudo pacman -S --noconfirm --needed bash-completion zsh-completions
-sudo pacman -S --noconfirm --needed fastfetch btop nvtop ncdu
-sudo pacman -S --noconfirm --needed brightnessctl
-sudo pacman -S --noconfirm --needed ripgrep-all fd
+sudo pacman -S --noconfirm --needed usbutils fastfetch ncdu
 sudo pacman -S --noconfirm --needed choose fzf parallel
-sudo pacman -S --noconfirm --needed bat bat-extras
 sudo pacman -S --noconfirm --needed git-delta duf eza
-sudo pacman -S --noconfirm --needed openssl openssh
+sudo pacman -S --noconfirm --needed ripgrep-all fd
+sudo pacman -S --noconfirm --needed bat bat-extras
+sudo pacman -S --noconfirm --needed brightnessctl
+sudo pacman -S --noconfirm --needed btop nvtop
 sudo pacman -S --noconfirm --needed wget xh curlie
+sudo pacman -S --noconfirm --needed openssl openssh
 # sudo pacman -S --noconfirm --needed httpie
 sudo pacman -S --noconfirm --needed whois
 sudo pacman -S --noconfirm --needed tmux
-
-# Terminal Emmulator
-sudo pacman -S --noconfirm --needed alacritty
 
 # Notification
 sudo pacman -S --noconfirm --needed dunst
@@ -429,15 +441,20 @@ sudo pacman -S --noconfirm --needed pipewire-pulse pavucontrol
 # sudo pacman -S --noconfirm --needed udiskie udisk2
 
 # Multimedia
-sudo pacman -S --noconfirm --needed vimiv
-sudo pacman -S --noconfirm --needed mpv
-sudo pacman -S --noconfirm --needed lf chafa ueberzug glow ffmpeg
+sudo pacman -S --noconfirm --needed vimiv imagemagick
+sudo pacman -S --noconfirm --needed mpv ffmpeg ffmpegthumbnailer
 sudo pacman -S --noconfirm --needed zathura zathura-pdf-mupdf
 # sudo pacman -S --noconfirm --needed zathura zathura-pdf-poppler
-$aur_helper -S --noconfirm --needed ctpv
+sudo pacman -S --noconfirm --needed yazi p7zip jq
 
 # Scan for other os Grub
 sudo pacman -S --noconfirm --needed os-prober
+
+# Flatpacks and Snaps suppots
+# sudo pacman -S --noconfirm --needed wlroots xdg-desktop-portal-wlr
+# sudo pacman -S --noconfirm --needed xdg-desktop-portal-gtk
+# sudo pacman -S --noconfirm --needed xdg-desktop-portal
+# sudo pacman -S --noconfirm --needed xdg-desktop-portal-hyprland
 
 # Cpu architecture
 case $cpu_architecture in # AMD Intel NONE
@@ -490,26 +507,26 @@ case $display_protocol in # XWayland Wayland Xorg NONE
     XWayland)
         sudo pacman -S --noconfirm --needed xorg xorg-server xorg-xinit
         sudo pacman -S --noconfirm --needed wayland wayland-protocols xorg-xwayland
-        sudo pacman -S --noconfirm --needed wlroots xdg-desktop-portal-wlr
-        sudo pacman -S --noconfirm --needed qt6-wayland wl-clipboard
-        sudo pacman -S --noconfirm --needed wofi waybar swww
+        sudo pacman -S --noconfirm --needed qt5-wayland qt6-wayland
         sudo pacman -S --noconfirm --needed grim slurp hyprlock
-        sudo pacman -S --noconfirm --needed nwg-look
+        sudo pacman -S --noconfirm --needed nwg-look wl-clipboard
+        sudo pacman -S --noconfirm --needed wofi waybar swww
+        sudo pacman -S --noconfirm --needed foot
         ;;
     Wayland)
         sudo pacman -S --noconfirm --needed wayland wayland-protocols xorg-xwayland
-        sudo pacman -S --noconfirm --needed wlroots xdg-desktop-portal-wlr
-        sudo pacman -S --noconfirm --needed qt6-wayland wl-clipboard
-        sudo pacman -S --noconfirm --needed wofi waybar swww
+        sudo pacman -S --noconfirm --needed qt5-wayland qt6-wayland
         sudo pacman -S --noconfirm --needed grim slurp hyprlock
-        sudo pacman -S --noconfirm --needed nwg-look
+        sudo pacman -S --noconfirm --needed nwg-look wl-clipboard
+        sudo pacman -S --noconfirm --needed wofi waybar swww
+        sudo pacman -S --noconfirm --needed foot
         ;;
     Xorg)
-        sudo pacman -S --noconfirm --needed xorg xorg-server
-        sudo pacman -S --noconfirm --needed xorg-xinit xclip
+        sudo pacman -S --noconfirm --needed xorg xorg-server xorg-xinit
         sudo pacman -S --noconfirm --needed picom nitrogen rofi
-        sudo pacman -S --noconfirm --needed scrot i3lock
+        sudo pacman -S --noconfirm --needed scrot i3lock xclip
         sudo pacman -S --noconfirm --needed lxappearance
+        $aur_helper -S --noconfirm --needed ueberzugpp
         ;;
     *)
         ;;
@@ -519,7 +536,6 @@ esac
 case $window_manager in # Hyprland Xmonad Qtile NONE
     Hyprland)
         sudo pacman -S --noconfirm --needed hyprland
-        sudo pacman -S --noconfirm --needed xdg-desktop-portal-hyprland
         ;;
     Xmonad)
         sudo pacman -S --noconfirm --needed xmonad xmonad-contrib
@@ -537,7 +553,7 @@ esac
 # Copy Themes
 case $Copy_themes in # Yes No
     Yes)
-        sudo pacman -S --noconfirm --needed grub-customizer
+        sudo pacman -S --noconfirm --needed grub-customizer xorg-xhost
         sudo cp -r ./Grub/DanHeng/ /boot/grub/themes/
 
         # Themes, Icons
@@ -575,16 +591,17 @@ esac
 # Copy Configs
 case $Copy_configs in # Yes No
     Yes)
-        cp ./env_variable/bashrc ~/.bashrc
-        cp ./env_variable/zprofile ~/.zprofile
-        cp ./env_variable/bash_profile ~/.bash_profile
         [ -d "~/.config/" ] || mkdir ~/.config/
         cp -r ./configs/* ~/.config/
-        [ -d "~/.config/shell/history/" ] || mkdir ~/.config/shell/history/
+
+        ln -s ~/.config/shell/profile ~/.zprofile
+        ln -s ~/.config/shell/profile ~/.bash_profile
+        ln -s ~/.config/shell/barshrc ~/.bashrc
+
 
         # Bat and Tmux
         bat cache --build
-        [ -d "~/.config/tmux/tpm" ] || git clone https://github.com/tmux-plugins/tpm ~/.config/tux/tpm
+        [ -d "~/.config/tmux/tpm" ] || git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/tpm
 
         case $window_manager in
             Hyprland)
@@ -592,10 +609,12 @@ case $Copy_configs in # Yes No
                 cp -r ./Window_managers/Hyprland/* ~/.config/
                 ;;
             Xmonad)
+                sudo cp ./old_files/suckless/st /bin/
                 cp -r ./Display_protocol/X11/* ~/.config/
                 cp -r ./Window_managers/Xmonad/* ~/.config/
                 ;;
             Qtile)
+                sudo cp ./old_files/suckless/st /bin/
                 cp -r ./Display_protocol/X11/* ~/.config/
                 cp -r ./Window_managers/Qtile/* ~/.config/
                 ;;
@@ -628,7 +647,7 @@ done
 
 # Networking Tools
 for nettool in "${Network_tools[@]}"; do
-    case $nettool in # Net_tools Inetutils Bind Nmap Tor_Proxy Qbit_Torrent Wireshark Burpsuite
+    case $nettool in # Net_tools Inetutils Bind Nmap Tor_Proxy Yt_Dlp Qbit_Torrent Wireshark Burpsuite
         Net_tools)
             sudo pacman -S --noconfirm --needed net-tools
             ;;
@@ -639,11 +658,14 @@ for nettool in "${Network_tools[@]}"; do
             sudo pacman -S --noconfirm --needed bind
             ;;
         Nmap)
-            sudo pacman -S --noconfirm --needed nmap
+            sudo pacman -S --noconfirm --needed nmap gnu-netcat
             ;;
         Tor_Proxy)
             sudo pacman -S --noconfirm --needed tor proxychains-ng
             sudo usermod -aG tor $(whoami)
+            ;;
+        Yt_Dlp)
+            sudo pacman -S --noconfirm --needed yt-dlp
             ;;
         Qbit_Torrent)
             sudo pacman -S --noconfirm --needed qbittorrent
@@ -662,7 +684,7 @@ done
 
 # Browsers
 for browser in "${Browsers[@]}"; do
-    case $browser in # Zen_Browser Firefox Tor_Browser Brave_Browser
+    case $browser in # Zen_Browser Firefox Tor_Browser QuteBrowser Brave_Browser Librewolf
         Zen_Browser)
             $aur_helper -S --noconfirm --needed zen-browser-bin
             ;;
@@ -672,8 +694,14 @@ for browser in "${Browsers[@]}"; do
         Tor_Browser)
             sudo pacman -S --noconfirm --needed torbrowser-launcher
             ;;
+        QuteBrowser)
+            sudo pacman -S --noconfirm --needed qutebrowser python-adblock
+            ;;
         Brave_Browser)
             $aur_helper -S --noconfirm --needed brave-bin
+            ;;
+        Librewolf)
+            $aur_helper -S --noconfirm --needed librewolf-bin
             ;;
         *)
             ;;
@@ -682,7 +710,7 @@ done
 
 # Extra Applications
 for application in "${Extra_applications[@]}"; do
-    case $application in # Discord Gimp LibreOffice Texlive
+    case $application in # Discord Gimp LibreOffice Texlive Spotify
         Discord)
             sudo pacman -S --noconfirm --needed discord
             ;;
@@ -694,6 +722,9 @@ for application in "${Extra_applications[@]}"; do
             ;;
         Texlive)
             sudo pacman -S --noconfirm --needed texlive
+            ;;
+        Texlive)
+            $aur_helper -S --noconfirm --needed spotify-adblock-git
             ;;
         *)
             ;;

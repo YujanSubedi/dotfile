@@ -28,7 +28,7 @@ def start_once():
 # # # Defaults: # # #
 
 mod = "mod4"
-terminal = "alacritty"
+terminal = "~/.config/suckless/st/st"
 # browser = "firefox"
 
 # Screenshots Commands #

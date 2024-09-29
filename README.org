@@ -2,66 +2,103 @@
 #+OPTIONS: toc:nil num:nil html-postamble:nil
 
 ** Dotfiles
-Contains configs of:
-    Window Manager:
-    - Qtile
-    - Xmonad (Polybar)
-    - Hyprland (Waybar)
-    Text Editor:
-    - Neovim
-    - Emacs
-    Menu:
-    - Rofi
-    - Wofi
-    Compositor:
-    - Picom
-    Display_manager:
-    - Sddm
-    - Lightdm
-    - Ly
-    File manager:
-    - Lf
-    Pdf Viewer:
-    - Zathura
-    Image Viewer:
-    - Vimiv
-    Terminal Emmulator:
-    - Alacritty
-    Terminal Tools:
-    - Tmux
-    - Fastfetch
-    Shell:
-    - Bash
-    - Zsh
+
+| Window Manager |  Hyprland        Xmoand          Qtile          |
+
+| Compositor |
+| Hyprland   |
+| Picom      |
+
+| Teminal Emmulator |
+| Foot              |
+| Simple Terminal   |
+| Alacritty         |
+| Kitty             |
+| Wezterm           |
+| Urxvt             |
+| Xterm             |
+
+| Shell |
+| Zsh   |
+| Bash  |
+
+| Text Editor |
+| Neovim      |
+| Emacs       |
+| Zed         |
+
+| Status Bar |
+| Waybar     |
+| Polybar    |
+| Xmobar     |
+| Qtilebar   |
+
+| Launch Menu |
+| Wofi        |
+| Rofi        |
+
+| Display Manager |
+| Lightdm         |
+| Sddm            |
+| Ly              |
+
+| Lock Screen |
+| Hyprlock    |
+| I3lock      |
+
+| Terminal tools |
+| Tmux           |
+| Bat            |
+| Fastfetch      |
+
+| File Manager |
+| Yazi         |
+| Lf           |
+
+| Multimedia   |
+| Zathura      |
+| Vimiv        |
+
+| Browsers    |
+| Firefox     |
+| QuteBrowser |
+| ZenBrowser  |
 
 *** Hyprland
 #+BEGIN_SRC bash
-sudo pacman -S --nonconfirm hyprland wofi waybar swww
+sudo pacman -S --noconfirm --needed hyprland wofi waybar swww
 #+END_SRC
 [[file:./Screenshots/Hyprland.jpg]]
 
 *** Qtile
 #+BEGIN_SRC bash
-sudo pacman -S --nonconfirm qtile python-psutil python-iwlib nitrogen picom rofi
+sudo pacman -S --noconfirm --needed qtile python-psutil python-iwlib nitrogen picom rofi
 #+END_SRC
 [[file:./Screenshots/Qtile.jpg]]
 
 *** Xmonad
 #+BEGIN_SRC bash
-sudo pacman -S --nonconfirm xmonad xmonad-contrib polybar picom nitrogen rofi
+sudo pacman -S --noconfirm --needed xmonad xmonad-contrib polybar picom nitrogen rofi
 #+END_SRC
 [[file:./Screenshots/Xmonad.jpg]]
 
+*** Hyprlock
+#+BEGIN_SRC bash
+sudo pacman -S --noconfirm --needed hyprlock
+#+END_SRC
+[[file:./Screenshots/Hyprlock.jpg]]
+
 *** Sddm
 #+BEGIN_SRC bash
-sudo pacman -S --nonconfirm sddm
+sudo pacman -S --noconfirm --needed sddm
 #+END_SRC
 [[file:./Screenshots/Sddm.jpg]]
 
 *** Grub
 #+BEGIN_SRC bash
-sudo pacman -S --nonconfirm grub efibootmgr os-oprober
+sudo pacman -S --noconfirm --needed grub efibootmgr os-oprober
 #+END_SRC
+Grub Theme is from https://github.com/YujanSubedi/Dota_grub_theme
 [[file:./Screenshots/Grub.jpg]]
 
 *** Setup on Arch
@@ -102,10 +139,6 @@ GRUB_THEME="/boot/grub/themes/DanHeng/theme.txt"
 /etc/modprobe.d/nvidia.conf
 #+begin_src text
 options nvidia_drm modeset=1 fbdev=1
-options nvidia "NVreg_UsePageAttributeTable=1"
-options nvidia "NVreg_PreserveVideoMemoryAllocations=1"
-options nvidia "NVreg_TemporaryFilePath=/var/tmp"
-options nvidia "NVreg_EnableS0ixPowerManagement=1"
 #+end_src
 /etc/mkinitcpio.conf
 #+begin_src text

@@ -52,7 +52,6 @@ setopt hist_verify            # show command with history expansion to user befo
 # completion
 # enable completion features
 autoload -Uz compinit && compinit -d ~/.cache/zcompdump
-compinit -d ~/.cache/zcompdump
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*:*:*:*:*' menu select
@@ -66,4 +65,3 @@ zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p
 zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
-

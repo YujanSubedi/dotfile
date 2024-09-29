@@ -5,13 +5,9 @@
         "position": "top",
         "modules-center": ["hyprland/workspaces"],
         "fixed-center": true,
-        "passthrough": false,
-        "spacing": 0,
         "output": "HDMI-A-1",
-
         "hyprland/workspaces": {
             "disable-scroll": true,
-            "format": "{icon}",
         },
     },
 
@@ -19,29 +15,99 @@
     {
         "layer": "top",
         "position": "top",
-        "modules-left": ["hyprland/workspaces", "cpu", "memory", "disk", "battery"],
-        "modules-center": ["clock"],
-        "modules-right": ["tray", "network", "backlight", "pulseaudio", "pulseaudio#microphone", "clock#date"],
+        "modules-left": ["hyprland/workspaces", "cpu", "memory", "disk", "battery", "backlight", "privacy"],
+        "modules-center": ["mpris"],
+        "modules-right": [ "tray", "bluetooth", "network", "pulseaudio", "clock#date", "clock"],
         "fixed-center": true,
-        "passthrough": false,
-        "spacing": 0,
+        //"output": ["eDP-1", "eDP-2",],
         "output": "eDP-1",
 
         "hyprland/workspaces": {
             "disable-scroll": true,
-            "format": "{icon}",
-            "persistent-workspaces": {
-                "*": [1, 2, 3, 4, 5, 6, 7, 8, 9] },
+            "persistent-workspaces": { "*": [1, 2, 3, 4, 5, 6, 7, 8, 9] },
         },
-
+        "tray": {
+            "spacing": 10
+        },
         "cpu": {
-            "format": " {usage}%"
+            "format": " {usage}%",
+            "tooltip": false
         },
         "memory": {
             "format": " {percentage}%"
         },
         "disk": {
             "format": " {percentage_used}%"
+        },
+        "backlight": {
+            "format": "{icon} {percent}%",
+            "format-icons": ["󰃞", "󰃝", "󰃟", "󰃠"],
+            "on-scroll-up": "",
+            "on-scroll-down": "",
+            "tooltip": false
+        },
+        "mpris": {
+            "format": "{player_icon}{title}  ",
+            "title-len": 15,
+            "format-paused": "{player_icon}{title}  ",
+            "player-icons": {
+                //"mpv": " ",
+                "firefox": " ",
+                "chromium": " ",
+                "spotify": " ",
+                "default": "🎵",
+            },
+            // "ignored-players": ["firefox"]
+        },
+        "privacy": {
+            "icon-spacing": 4,
+            "icon-size": 18,
+            "transition-duration": 250,
+            "modules": [
+                {
+                    "type": "screenshare",
+                    "tooltip": true,
+                    "tooltip-icon-size": 24
+                },
+                {
+                    "type": "audio-in",
+                    "tooltip": true,
+                    "tooltip-icon-size": 24
+                }
+            ]
+        },
+        "pulseaudio": {
+            "format": "{icon} {volume}% {format_source}",
+            "format-bluetooth": "󰗿 {volume}% {format_source}",
+            "format-bluetooth-muted": "󰗾 {volume}% {format_source}",
+            "format-source": "󰍬 {volume}%",
+            "format-source-muted": "󰍭 {volume}%",
+            "format-icons": {
+                "headphone": "󰋋", "headphone-muted": "󰟎",
+                "hands-free": "󰋋", "hands-free-muted": "󰟎",
+                "headset": "󰋋", "headset-muted": "󰟎",
+                "phone": "", "phone-muted": "",
+                "portable": "", "portable-muted": "",
+                "car": "󰄍", "car-muted": "󰸜",
+                "default": ["󰕿", "󰖀", "󰕾"], "default-muted": "󰸈"
+            },
+            "on-scroll-up": "",
+            "on-scroll-down": "",
+            "on-click": "pavucontrol",
+            "tooltip": false
+        },
+        "network": {
+            "format-disconnected": "󰯡 ",
+            "format-wifi": "󰀂 {signalStrength}% {essid}",
+            "format-ethernet": "󰈁 {gwaddr}/{cidr}",
+            //"tooltip": false,
+        },
+        "bluetooth": {
+            "format": "󰂲",
+            "format-off": "󰂲 {status}",
+            "format-on": "󰂯 {status}",
+            "format-connected": "󰂰 {device_alias}",
+            "format-connected-battery": "󰂰 {device_alias} 󰥉 {device_battery_percentage}%"
         },
         "battery": {
             "states": {
@@ -50,59 +116,19 @@
                 "critical": 20
             },
             "format": "{icon} {capacity}%",
-            "format-charging": " {capacity}%",
-            "format-plugged": " {capacity}%",
+            "format-charging": "󰂄 {capacity}%",
+            "format-plugged": "󱐥 {capacity}%",
             "format-alt": "{icon} {time}",
-            "format-icons": ["󱃍", "󱊡", "󱊢", "󱊢", "󱊣"]
-
+            "format-icons": ["󱃍", "󱊡", "󱊢", "󱊢", "󱊣"],
+            "tooltip": false
         },
-        "network": {
-            "format-disconnected": "󰯡 ",
-            "format-wifi": " 󰀂 {signalStrength}% {essid}",
-            "format-ethernet": "󰈁 {ipaddr}/{cidr}",
-        },
-
         "clock": {
-            "format": "{:%I:%M %p}",
+            "format": "󰀠 {:%I:%M %p}",
+            "tooltip": false
         },
         "clock#date": {
-            "format": "  {:%a, %b %d, %Y}",
+            "format": "󰸗 {:%a, %b %d, %Y}",
+            "tooltip": false
         },
-
-
-        "backlight": {
-            "format": "{icon} {percent}%",
-            "format-icons": ["󰃞", "󰃝", "󰃠"],
-            "on-scroll-up": "brightnessctl set 1%+",
-            "on-scroll-down": "brightnessctl set 1%-",
-            "min-length": 6
-        },
-        "pulseaudio": {
-            "format": "{icon} {volume}%",
-            "tooltip": false,
-            "format-muted": "󰟎 Muted",
-            "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-            "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
-            "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5% ",
-            "scroll-step": 5,
-            "format-icons": {
-                "headphone": "󰋋",
-                "hands-free": "󰋋",
-                "headset": "󰋋",
-                "phone": "",
-                "portable": "",
-                "car": "",
-                "default": ["", "", ""]
-            }
-        },
-        "pulseaudio#microphone": {
-            "format": "{format_source}",
-            "format-source": "󰍰 {volume}%",
-            "format-source-muted": "󰍱 Muted",
-            "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
-            "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +5%",
-            "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -5% ",
-            "scroll-step": 5
-        }
-    }
+    },
 ]
