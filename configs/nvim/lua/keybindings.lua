@@ -1,7 +1,7 @@
 -- Keybindings:
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Stop highlighting" })
 vim.keymap.set({"v", "n"}, "Y", '"+y', { desc = "Copy to clipboard" })
-vim.keymap.set("n", "<A-q>", vim.cmd.Ex, { desc = "Go to previous [D]iagnostic message" })
+vim.keymap.set("n", "<A-q>", vim.cmd.Ex, { desc = "Go back to the directory" })
 vim.keymap.set("n", "<C-d>", vim.cmd.q, { desc = "Exit Current buffer" })
 vim.keymap.set("n", "<leader>q", vim.cmd.q, { desc = "Exit Current buffer" })
 vim.keymap.set("n", "<leader>Q", vim.cmd.qa, { desc = "Exit in all the buffers" })
@@ -9,6 +9,7 @@ vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split window Vertical" })
 vim.keymap.set("n", "<leader>wV", "<C-w>s", { desc = "Split window Horizontal" })
 vim.keymap.set("n", "<leader><Tab>", "<C-w>w", { desc = "Move focus in Splitted Windows" })
 vim.keymap.set({ "n", "v", "s", "i" }, "<A-x>", "<Esc>:", { desc = "Change to Command Mode" })
+vim.keymap.set({ "n", "v", "s", "i" }, "<A-e>", "<Esc>i<C-r>=", { desc = "Evaluate and write given expression" })
 
 -- alt arrow move highlighted line to other in visual mode
 vim.keymap.set("v", "<A-Up>", [[:m '<-2<CR>gv=gv]], { desc = "Move Highlighted Text Upwards" })

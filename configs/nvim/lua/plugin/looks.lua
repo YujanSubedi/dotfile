@@ -12,6 +12,7 @@ return {
 	-- { "VonHeikemen/midnight-owl.vim" },
 	-- { "Mofiqul/vscode.nvim" },
 	-- { "Rigellute/rigel" },
+	-- { "NLKNguyen/papercolor-theme" },
 	-- { "catppuccin/nvim", name = "catppuccin"},
 	-- { "bluz71/vim-nightfly-colors", name = "nightfly" },
 	{
@@ -23,6 +24,11 @@ return {
 			vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 		end,
 	},
+	{ "norcalli/nvim-colorizer.lua",
+		config = function()
+			require'colorizer'.setup()
+		end,
+	},
 	-- Treesitter for languages
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -30,7 +36,7 @@ return {
 		opts = {
 			-- ensure_installed = "all",
 			ensure_installed = { "c", "cpp", "lua", "bash", "python" },
-			ignore_install = { "org", "latex" },
+			ignore_install = { "org", "latex", "norg" },
 			auto_install = true,
 			highlight = {
 				enable = true,

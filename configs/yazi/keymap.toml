@@ -1,0 +1,9 @@
+[manager]
+append_keymap  = [
+	# Goto
+	{ on = [ "g", "y" ],       run = "cd ~/Yujan/",                       desc = "Go to the home directory" },
+	{ on = [ "g", "m" ],       run = "cd ~/Class_materials/",             desc = "Go to the home directory" },
+	{ on = [ "g", "p" ],       run = "cd ~/Pictures/",                    desc = "Go to the home directory" },
+	{ on = [ "g", "s" ],       run = "cd ~/Pictures/Screenshots/",        desc = "Go to the home directory" },
+	{ on = [ "g", "w" ],       run = "cd ~/Pictures/Wallpapers/",         desc = "Go to the home directory" },
+]

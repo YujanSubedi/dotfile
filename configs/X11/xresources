@@ -23,7 +23,7 @@ XTerm*highlightSelection: true
 XTerm*trimSelection: true
 
 ! ~~~~~~~~~~~~~~~~~~
-! ## Color Themes ## 
+! ## Color Themes ##
 ! ~~~~~~~~~~~~~~~~~~
 XTerm*background: #252525
 XTerm*foreground: #a5a2a2

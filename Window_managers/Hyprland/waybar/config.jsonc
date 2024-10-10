@@ -21,6 +21,7 @@
         "fixed-center": true,
         //"output": ["eDP-1", "eDP-2",],
         "output": "eDP-1",
+        //"passthrough" : "true",
 
         "hyprland/workspaces": {
             "disable-scroll": true,

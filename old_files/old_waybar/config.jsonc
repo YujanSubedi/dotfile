@@ -1,0 +1,106 @@
+[
+    // Bar to be displayed at the HDMI output
+    {
+        "layer": "top",
+        "position": "top",
+        "modules-center": ["hyprland/workspaces"],
+        "fixed-center": true,
+        "passthrough": false,
+        "spacing": 0,
+        "output": "HDMI-A-1",
+
+        "hyprland/workspaces": {
+            "disable-scroll": true,
+            "format": "{icon}",
+        },
+    },
+
+    // Bar to be displayed at the Laptop Monitor output
+    {
+        "layer": "top",
+        "position": "top",
+        "modules-left": ["hyprland/workspaces", "cpu", "memory", "disk", "battery"],
+        "modules-center": ["clock"],
+        "modules-right": ["tray", "network", "backlight", "pulseaudio", "pulseaudio#microphone", "clock#date"],
+        "fixed-center": true,
+        "passthrough": false,
+        "spacing": 0,
+        "output": "eDP-1",
+
+        "hyprland/workspaces": {
+            "disable-scroll": true,
+            "format": "{icon}",
+            "persistent-workspaces": {
+                "*": [1, 2, 3, 4, 5, 6, 7, 8, 9] },
+        },
+
+        "cpu": {
+            "format": " {usage}%"
+        },
+        "memory": {
+            "format": " {percentage}%"
+        },
+        "disk": {
+            "format": " {percentage_used}%"
+        },
+        "battery": {
+            "states": {
+                "good": 95,
+                "warning": 30,
+                "critical": 20
+            },
+            "format": "{icon} {capacity}%",
+            "format-charging": " {capacity}%",
+            "format-plugged": " {capacity}%",
+            "format-alt": "{icon} {time}",
+            "format-icons": ["󱃍", "󱊡", "󱊢", "󱊢", "󱊣"]
+        },
+        "network": {
+            "format-disconnected": "󰯡 ",
+            "format-wifi": " 󰀂 {signalStrength}% {essid}",
+            "format-ethernet": "󰈁 {ipaddr}/{cidr}",
+        },
+
+        "clock": {
+            "format": "{:%I:%M %p}",
+        },
+        "clock#date": {
+            "format": "  {:%a, %b %d, %Y}",
+        },
+
+        "backlight": {
+            "format": "{icon} {percent}%",
+            "format-icons": ["󰃞", "󰃝", "󰃠"],
+            "on-scroll-up": "brightnessctl set 1%+",
+            "on-scroll-down": "brightnessctl set 1%-",
+            "min-length": 6
+        },
+        "pulseaudio": {
+            "format": "{icon} {volume}%",
+            "tooltip": false,
+            "format-muted": "󰟎 Muted",
+            "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+            "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+            "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5% ",
+            "scroll-step": 5,
+            "format-icons": {
+                "headphone": "󰋋",
+                "hands-free": "󰋋",
+                "headset": "󰋋",
+                "phone": "",
+                "portable": "",
+                "car": "",
+                "default": ["", "", ""]
+            }
+        },
+        "pulseaudio#microphone": {
+            "format": "{format_source}",
+            "format-source": "󰍰 {volume}%",
+            "format-source-muted": "󰍱 Muted",
+            "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+            "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +5%",
+            "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -5% ",
+            "scroll-step": 5
+        }
+    }
+]

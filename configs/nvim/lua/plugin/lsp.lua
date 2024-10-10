@@ -36,12 +36,10 @@ return {
 					"clangd", -- c/c++
 					"pyright", -- python
 					"rust_analyzer", --rust
-					"ts_ls", -- javascript/typescript
-					"texlab", -- latex
 					"gopls", -- golang
-					-- "bashls", -- bash
-					-- "zls", -- zig
-					-- "jdtls", -- java
+					"zls", -- zig
+					"texlab", -- latex
+					"ts_ls", -- javascript/typescript
 				},
 
 				handlers = {

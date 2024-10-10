@@ -39,10 +39,9 @@ if [[ "$default_flag" == true ]]; then
     cpu_architecture=AMD # AMD Intel NONE
     graphic_driver=Nvidia # Nvidia Nvidia_with_Cuda NONE
     display_manager=NONE # NONE Ly Lightdm Sddm Gdm
-    display_protocol=XWayland # XWayland Wayland Xorg NONE
+    display_protocol=Wayland # XWayland Wayland Xorg NONE
     window_manager=Hyprland # Hyprland Xmonad Qtile NONE
     aur_helper=paru # paru yay
-    Copy_themes=Yes # Yes No
     Copy_configs=No # Yes No
     Virtualization=(Qemu Docker) # Qemu Docker Virt_Manager
     Network_tools=(Net_tools Inetutils Bind Nmap Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark Burpsuite) # Net_tools Inetutils Bind Nmap Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark Burpsuite
@@ -132,19 +131,6 @@ else
         esac
     done
     echo -e "${BLUE}Aur Helper: ${YELLOW}$aur_helper${NONE}"
-
-    echo "Copy Themes?"
-    select Copy_themes in Yes No; do
-        case $REPLY in
-            1 | 2)
-                break
-                ;;
-            *)
-                echo "Invalid Selection"
-                ;;
-        esac
-    done
-    echo -e "${RED}Copy Themes: ${YELLOW}$Copy_themes${NONE}"
 
     echo "Copy Configs?"
     select Copy_configs in Yes No; do
@@ -286,7 +272,6 @@ echo -e "${GREEN}Display Manager: ${YELLOW}$display_manager${NONE}"
 echo -e "${GREEN}Display Protocol: ${YELLOW}$display_protocol${NONE}"
 echo -e "${GREEN}Window Manager: ${YELLOW}$window_manager${NONE}"
 echo -e "${BLUE}Aur Helper: ${YELLOW}$aur_helper${NONE}"
-echo -e "${RED}Copy Themes: ${YELLOW}$Copy_themes${NONE}"
 echo -e "${RED}Copy Configs: ${YELLOW}$Copy_configs${NONE}"
 echo -e "${BLUE}Virtualization: ${YELLOW}${Virtualization[@]}${NONE}"
 echo -e "${BLUE}Network Tools: ${YELLOW}${Network_tools[@]}${NONE}"
@@ -332,7 +317,7 @@ sudo pacman -S --noconfirm --needed npm
 sudo pacman -S --noconfirm --needed go
 # sudo pacman -S --noconfirm --needed rust
 sudo pacman -S --noconfirm --needed rustup && rustup default stable
-# sudo pacman -S --noconfirm --needed zig
+sudo pacman -S --noconfirm --needed zig
 # sudo pacman -S --noconfirm --needed php
 # sudo pacman -S --noconfirm --needed perl
 # sudo pacman -S --noconfirm --needed octave
@@ -384,7 +369,7 @@ $aur_helper -S --noconfirm --needed downgrade
 
 # SQL
 # sudo pacman -S --noconfirm --needed postgresql
-# sudo usermod -aG postgres $(whoami)
+# sudo usermod -aG postgres $USER
 
 # Vi, Vim and Neovim
 # sudo pacman -S --noconfirm --needed vi vim
@@ -397,9 +382,10 @@ sudo pacman -S --noconfirm --needed ripgrep tar zip unzip
 sudo pacman -S --noconfirm --needed emacs
 
 # Fonts
-sudo pacman -S --noconfirm --needed ttf-jetbrains-mono ttf-jetbrains-mono-nerd
-sudo pacman -S --noconfirm --needed ttf-fira-code
 sudo pacman -S --noconfirm --needed noto-fonts
+# sudo pacman -S --noconfirm --needed ttf-fira-code
+sudo pacman -S --noconfirm --needed ttf-jetbrains-mono
+sudo pacman -S --noconfirm --needed ttf-jetbrains-mono-nerd
 
 # Terminals tools
 sudo pacman -S --noconfirm --needed man-db
@@ -422,7 +408,7 @@ sudo pacman -S --noconfirm --needed tmux
 sudo pacman -S --noconfirm --needed dunst
 
 # Multiwindow settings
-sudo pacman -S --noconfirm --needed arandr
+# sudo pacman -S --noconfirm --needed arandr
 
 # Enable audio
 sudo pacman -S --noconfirm --needed pipewire wireplumber
@@ -435,7 +421,8 @@ sudo pacman -S --noconfirm --needed pipewire-pulse pavucontrol
 # sudo pacman -S --noconfirm --needed bluez-utils bluez
 
 # ntfs and fat suppots
-# sudo pacman -S --noconfirm --needed ntfs-3g dosfstools
+# sudo pacman -S --noconfirm --needed ntfs-3g
+# sudo pacman -S --noconfirm --needed dosfstools
 
 # usb auto mount
 # sudo pacman -S --noconfirm --needed udiskie udisk2
@@ -447,14 +434,20 @@ sudo pacman -S --noconfirm --needed zathura zathura-pdf-mupdf
 # sudo pacman -S --noconfirm --needed zathura zathura-pdf-poppler
 sudo pacman -S --noconfirm --needed yazi p7zip jq
 
+# Qrcode tools
+sudo pacman -S --noconfirm --needed qrtool
+sudo pacman -S --noconfirm --needed zbar
+
 # Scan for other os Grub
 sudo pacman -S --noconfirm --needed os-prober
 
-# Flatpacks and Snaps suppots
-# sudo pacman -S --noconfirm --needed wlroots xdg-desktop-portal-wlr
-# sudo pacman -S --noconfirm --needed xdg-desktop-portal-gtk
+# Flatpaks and Snaps suppots
 # sudo pacman -S --noconfirm --needed xdg-desktop-portal
+# sudo pacman -S --noconfirm --needed xdg-desktop-portal-gtk
 # sudo pacman -S --noconfirm --needed xdg-desktop-portal-hyprland
+# sudo pacman -S --noconfirm --needed wlroots xdg-desktop-portal-wlr
+# sudo pacman -S --noconfirm --needed flatpak
+# $aur_helper -S --noconfirm --needed snapd
 
 # Cpu architecture
 case $cpu_architecture in # AMD Intel NONE
@@ -550,44 +543,6 @@ case $window_manager in # Hyprland Xmonad Qtile NONE
         ;;
 esac
 
-# Copy Themes
-case $Copy_themes in # Yes No
-    Yes)
-        sudo pacman -S --noconfirm --needed grub-customizer xorg-xhost
-        sudo cp -r ./Grub/DanHeng/ /boot/grub/themes/
-
-        # Themes, Icons
-        sudo cp -r ./Gtk_themes/Kali-Dark/ /usr/share/themes/
-        sudo cp -r ./Icon_themes/candy-icons/ /usr/share/icons/
-        sudo cp -r ./Icon_themes/BeautyLine/ /usr/share/icons/
-        sudo cp -r ./Mouse_themes/volantes_cursors/ /usr/share/themes/
-        sudo cp -r ./Mouse_themes/Bibata-Modern-Classic/ /usr/share/icons/
-        sudo cp ./Mouse_themes/index.theme /usr/share/icons/default/
-
-        # Wallpapers
-        cp -r Pictures ~
-        [ -d "~/Pictures/Screenshots/"] || mkdir ~/Pictures/Screenshots/
-
-        # Display Manager Theme
-        case $display_manager in
-            Lighdm)
-                sudo pacman -S --noconfirm --needed lightdm-gtk-greeter-settings
-                sudo cp ./Display_managers/lightdm/* /etc/lightdm/
-                ;;
-            Sddm)
-                sudo pacman -S --noconfirm --needed gt5-graphicaleffects qt5-quickcontrols2
-                sudo cp -r ./Display_managers/sddm/Anime /usr/share/sddm/themes
-                sudo cp ./Display_managers/sddm/sddm.conf /etc/
-                sudo cp ./Display_managers/sddm/.face.icon /usr/share/sddm/faces
-                ;;
-            *)
-                ;;
-        esac
-        ;;
-    *)
-        ;;
-esac
-
 # Copy Configs
 case $Copy_configs in # Yes No
     Yes)
@@ -634,11 +589,11 @@ for virt_option in "${Virtualization[@]}"; do
             ;;
         Docker)
             sudo pacman -S --noconfirm --needed docker docker-buildx
-            sudo usermod -aG docker $(whoami)
+            sudo usermod -aG docker $USER
             ;;
         Virt_Manager)
             sudo pacman -S --noconfirm --needed qemu-full virt-manager dnsmasq
-            sudo usermod -aG libvirt $(whoami)
+            sudo usermod -aG libvirt $USER
             ;;
         *)
             ;;
@@ -662,7 +617,7 @@ for nettool in "${Network_tools[@]}"; do
             ;;
         Tor_Proxy)
             sudo pacman -S --noconfirm --needed tor proxychains-ng
-            sudo usermod -aG tor $(whoami)
+            sudo usermod -aG tor $USER
             ;;
         Yt_Dlp)
             sudo pacman -S --noconfirm --needed yt-dlp
@@ -672,7 +627,7 @@ for nettool in "${Network_tools[@]}"; do
             ;;
         Wireshark)
             sudo pacman -S --noconfirm --needed wireshark-qt
-            sudo usermod -aG wireshark $(whoami)
+            sudo usermod -aG wireshark $USER
             ;;
         Burpsuite)
             $aur_helper -S --noconfirm --needed burpsuite
@@ -686,7 +641,8 @@ done
 for browser in "${Browsers[@]}"; do
     case $browser in # Zen_Browser Firefox Tor_Browser QuteBrowser Brave_Browser Librewolf
         Zen_Browser)
-            $aur_helper -S --noconfirm --needed zen-browser-bin
+            $aur_helper -S --noconfirm --needed zen-browser-avx2-bin
+            # $aur_helper -S --noconfirm --needed zen-browser-bin
             ;;
         Firefox)
             sudo pacman -S --noconfirm --needed firefox
@@ -723,7 +679,8 @@ for application in "${Extra_applications[@]}"; do
         Texlive)
             sudo pacman -S --noconfirm --needed texlive
             ;;
-        Texlive)
+        Spotify)
+            [ -d ~/.local/share/gnupg ] || mkdir ~/.local/share/gnupg
             $aur_helper -S --noconfirm --needed spotify-adblock-git
             ;;
         *)
