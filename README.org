@@ -61,23 +61,6 @@ Installation:
 #+end_src
 [[file:./Screenshots/Hyprlock.jpg]]
 
-*** Grub
-Installation:
-#+begin_src bash
-  sudo pacman -S --noconfirm --needed grub efibootmgr os-oprober
-  sudo cp -r ./Grub/DanHeng/ /boot/grub/themes/
-#+end_src
-#+begin_src bash
-  sudoedit /etc/default/grub
-  # grub-customizer
-#+end_src
-#+begin_src text
-  GRUB_CMDLINE_LINUX_DEFAULT=""
-  GRUB_THEME="/boot/grub/themes/DanHeng/theme.txt"
-  GRUB_DISABLE_OS_PROBER="false"
-#+end_src
-[[file:./Screenshots/Grub.jpg]]
-
 **** Sudo requires password everytime:
 #+begin_src text
   sudo visudo
