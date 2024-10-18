@@ -1,0 +1,64 @@
+#!/bin/sh
+
+# Aliases:
+
+# Change behaviours of command
+alias grep="grep --color=auto"
+alias diff="diff --color=auto"
+alias batt="bat --mouse"
+alias ls="ls --color=auto"
+alias ip="ip -color=auto"
+alias less="less -R"
+alias rm="rm -i"
+alias mv="mv -i"
+alias cp="cp -i"
+alias delta="delta --line-numbers"
+alias fzf="fzf --ansi"
+
+# Add new command
+alias la="ls -a"
+alias ll="ls -lah"
+alias l="ls -CF"
+alias top="btop"
+alias htop="btop"
+alias fz="fzf --height=85% --layout=reverse"
+alias lf="yazi"
+alias batt="cat /sys/class/power_supply/BAT0/capacity"
+alias fzp="fz --preview 'bat --style=numbers --color=always {}'"
+alias fzfp="fzf --preview 'bat --style=numbers --color=always {}'"
+alias hisr="history | fz"
+alias his="history | fz --tac"
+alias exa="eza"
+alias tree="eza -la --git --tree"
+alias vi="nvim --noplugin"
+alias vim="nvim --noplugin"
+alias neofetch="fastfetch"
+alias tml="tmux ls"
+alias tmd="tmux detach-client"
+alias tmda="tmux kill-server"
+alias tmds="tmux kill-session -t"
+alias tmdo="tmux kill-session -a"
+alias gitlog="git log --parents --graph --decorate"
+
+# Functions
+
+# Function to attach tmux at given directory
+function tma() {
+    [ -z "$1" ] || cd "$1"
+    tmux_id=$(pwd | sed 's/\./_/g')
+    if [[ -n $TMUX ]]; then
+        tmux switch-client -t $tmux_id
+    else
+        tmux new-session -s $tmux_id || tmux attach -t $tmux_id
+    fi
+}
+
+# Go to the location where tmux server is made
+function tmc() {
+    cd $(tmux display-message -p '#{session_name}')
+}
+
+# Go to the location where tmux server is made
+function fcd() {
+    cd $(fd -t d | fz)
+}

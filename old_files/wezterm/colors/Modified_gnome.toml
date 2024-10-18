@@ -1,0 +1,11 @@
+# Modified Gnome Theme
+[colors]
+foreground = "#a5a2a2"
+background = "#151515"
+cursor_bg = "#a5a2a2"
+cursor_border = "#a5a2a2"
+cursor_fg = "#151515"
+selection_bg = "#4e4c54"
+selection_fg = "#151515"
+ansi = [ "#1a1a1a", "#f4463c", "#18b45e", "#e4a10c", "#2060ce", "#a84bbb", "#3a97c5", "#c7c4c4" ]
+brights = [ "#66646d", "#ff776e", "#4bde8c", "#ffee3b", "#3b88f3", "#d472d3", "#4bd8f3", "#ffffff" ]
