@@ -40,6 +40,9 @@ alias tmds="tmux kill-session -t"
 alias tmdo="tmux kill-session -a"
 alias gitlog="git log --parents --graph --decorate"
 
+# Default Qemu command
+alias defqemu="qemu-system-x86_64 --enable-kvm -drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/x64/OVMF_CODE.fd -cpu host -smp 4 -m 2G -display sdl,gl=on -vga virtio"
+
 # Functions
 
 # Function to attach tmux at given directory
@@ -61,4 +64,16 @@ function tmc() {
 # Go to the location where tmux server is made
 function fcd() {
     cd $(fd -t d | fz)
+}
+
+# Record screen
+function scrr() {
+    Output_Video=Recording-$(date +%F_%T).mp4
+    [ -z "$1" ] || Output_Video=$1
+    wf-recorder -g "$(slurp && sleep 1)" -f ~/Pictures/Recordings/$Output_Video
+}
+
+# Record screen withtimeout
+function scrrtm(){
+    [ -z "$1" ] && echo "No time frame Provided" || timeout $1 wf-recorder -g "$(slurp && sleep 2)" -f ~/Pictures/Recordings/Recording-$(date +%F_%T).mp4
 }

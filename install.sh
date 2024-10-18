@@ -547,6 +547,10 @@ esac
 # Copy Configs
 case $Copy_configs in # Yes No
     Yes)
+        cp -r Pictures ~
+        [ -d "~/Pictures/Screenshots" ] || mkdir ~/Pictures/Screenshots/
+        [ -d "~/Pictures/Recordings" ] || mkdir ~/Pictures/Recordings/
+
         [ -d "~/.config/" ] || mkdir ~/.config/
         cp -r ./configs/* ~/.config/
 
