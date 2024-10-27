@@ -10,6 +10,7 @@ vim.keymap.set("n", "<leader>wV", "<C-w>s", { desc = "Split window Horizontal" }
 vim.keymap.set("n", "<leader><Tab>", "<C-w>w", { desc = "Move focus in Splitted Windows" })
 vim.keymap.set({ "n", "v", "s", "i" }, "<A-x>", "<Esc>:", { desc = "Change to Command Mode" })
 vim.keymap.set({ "n", "v", "s", "i" }, "<A-e>", "<Esc>i<C-r>=", { desc = "Evaluate and write given expression" })
+vim.keymap.set({ "n", "v", "s", "i" }, "<A-`>", "<Esc>:!footclient &<CR>", { desc = "Spawn new terminal" })
 
 -- alt arrow move highlighted line to other in visual mode
 vim.keymap.set("v", "<A-Up>", [[:m '<-2<CR>gv=gv]], { desc = "Move Highlighted Text Upwards" })

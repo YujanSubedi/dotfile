@@ -41,7 +41,7 @@ alias tmdo="tmux kill-session -a"
 alias gitlog="git log --parents --graph --decorate"
 
 # Default Qemu command
-alias defqemu="qemu-system-x86_64 --enable-kvm -drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/x64/OVMF_CODE.fd -cpu host -smp 4 -m 2G -display sdl,gl=on -vga virtio"
+alias defqemu="qemu-system-x86_64 --enable-kvm -drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/x64/OVMF_CODE.fd -cpu host -smp 4 -m 4G -display sdl,gl=on -vga virtio"
 
 # Functions
 

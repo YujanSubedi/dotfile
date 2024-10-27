@@ -30,6 +30,8 @@ vim.opt.softtabstop = 2
 -- vim.opt.undofile = true
 -- vim.opt.inccommand = 'split'
 
+vim.g.zig_fmt_autosave = 0 -- Zig fix
+
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),

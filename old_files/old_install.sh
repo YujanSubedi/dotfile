@@ -189,19 +189,6 @@ sudo pacman -S --noconfirm --needed gimp
 # Grub theme
 # sudo pacman -S --noconfirm --needed grub-customizer
 # sudo pacman -S --noconfirm --needed os-prober
-sudo cp -r ./Grub/DanHeng/ /boot/grub/themes/
-sudo cp ./Grub/grub /etc/default/
-sudo grub-mkconfig -o /boot/grub/grub.cfg
-
-# Themes
-sudo cp -r ./Gtk_themes/Kali-Dark/ /usr/share/themes/
-sudo cp -r ./Icon_themes/candy-icons/ /usr/share/icons/
-sudo cp -r ./Icon_themes/BeautyLine/ /usr/share/icons/
-sudo cp -r ./Mouse_themes/volantes_cursors/ /usr/share/themes/
-sudo cp -r ./Mouse_themes/Bibata-Modern-Classic/ /usr/share/icons/
-sudo cp -r ./Mouse_themes/index.theme /usr/share/icons/default/
-cp -r Pictures ~
-mkdir ~/Pictures/Screenshot/
 
 # Copy basic configs
 # cp ./env_variable/.* ~

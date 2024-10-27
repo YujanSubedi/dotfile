@@ -19,6 +19,11 @@ Contains config files of:
 | Notification      | Dunst                                                              |
 | Browsers          | ZenBrowser, Firefox, QuteBrowser                                   |
 
+Used themes:
+Gtk-theme: kali-dark
+icons-theme: candy-icons
+mouse-theme: Bibata-Modern-Classic
+
 *** Setup on Arch
 #+begin_src bash
   git clone https://github.com/YujanSubedi/dotfile

@@ -1,9 +1,12 @@
 [manager]
 append_keymap  = [
 	# Goto
-	{ on = [ "g", "y" ],       run = "cd ~/Yujan/",                       desc = "Go to the home directory" },
-	{ on = [ "g", "m" ],       run = "cd ~/Class_materials/",             desc = "Go to the home directory" },
-	{ on = [ "g", "p" ],       run = "cd ~/Pictures/",                    desc = "Go to the home directory" },
-	{ on = [ "g", "s" ],       run = "cd ~/Pictures/Screenshots/",        desc = "Go to the home directory" },
-	{ on = [ "g", "w" ],       run = "cd ~/Pictures/Wallpapers/",         desc = "Go to the home directory" },
+	{ on = [ "g", "y" ],       run = "cd ~/Yujan/",                       desc = "Go to the ~/Yujan" },
+	{ on = [ "g", "m" ],       run = "cd ~/Class_materials/",             desc = "Go to the ~/Class_materials" },
+	{ on = [ "g", "i" ],       run = "cd ~/Resources/",                   desc = "Go to the ~/Resources" },
+	{ on = [ "g", "p" ],       run = "cd ~/Pictures/",                    desc = "Go to the ~/Pictures" },
+	{ on = [ "g", "s" ],       run = "cd ~/Pictures/Screenshots/",        desc = "Go to the ~/Pictures/Screenshots" },
+	{ on = [ "g", "r" ],       run = "cd ~/Pictures/Recordings/",         desc = "Go to the ~/Pictures/Recordings" },
+	{ on = [ "g", "w" ],       run = "cd ~/Pictures/Wallpapers/",         desc = "Go to the ~/Pictures/Wallpapers" },
+	{ on = [ "g", "t" ],       run = "cd ~/.local/share/Trash/",          desc = "Go to the ~/.local/share/Trash/" },
 ]

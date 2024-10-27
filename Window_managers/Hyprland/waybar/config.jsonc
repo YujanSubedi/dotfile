@@ -19,8 +19,8 @@
         "modules-center": ["mpris"],
         "modules-right": [ "tray", "bluetooth", "network", "pulseaudio", "clock#date", "clock"],
         "fixed-center": true,
-        //"output": ["eDP-1", "eDP-2",],
-        "output": "eDP-1",
+        "output": ["eDP-1", "eDP-2",],
+        //"output": "eDP-1",
         //"passthrough" : "true",
 
         "hyprland/workspaces": {
@@ -79,8 +79,8 @@
         },
         "pulseaudio": {
             "format": "{icon} {volume}% {format_source}",
-            "format-bluetooth": "󰗿 {volume}% {format_source}",
-            "format-bluetooth-muted": "󰗾 {volume}% {format_source}",
+            "format-bluetooth": "󰗾 {volume}% {format_source}",
+            "format-bluetooth-muted": "󰗿 {volume}% {format_source}",
             "format-source": "󰍬 {volume}%",
             "format-source-muted": "󰍭 {volume}%",
             "format-icons": {

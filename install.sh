@@ -326,7 +326,7 @@ sudo pacman -S --noconfirm --needed iverilog gtkwave
 # # C/CPP libraries
 sudo pacman -S --noconfirm --needed raylib
 sudo pacman -S --noconfirm --needed glew freeglut glu glfw
-# sudo pacman -S --noconfirm --needed cmake
+sudo pacman -S --noconfirm --needed cmake
 
 # C/CPP Debuggers
 sudo pacman -S --noconfirm --needed gdb ltrace strace
@@ -418,7 +418,7 @@ sudo pacman -S --noconfirm --needed pipewire-pulse pavucontrol
 # sudo pacman -S --noconfirm --needed cups
 
 # Bluetooth
-# sudo pacman -S --noconfirm --needed bluez-utils bluez
+sudo pacman -S --noconfirm --needed bluez-utils bluez
 
 # ntfs and fat suppots
 # sudo pacman -S --noconfirm --needed ntfs-3g
