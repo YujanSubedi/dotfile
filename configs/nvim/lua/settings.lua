@@ -10,6 +10,7 @@ vim.opt.smartcase = true
 vim.opt.wildignorecase = true
 vim.opt.list = true
 vim.opt.listchars = { tab = "… ", trail = "·", nbsp = "␣" }
+-- vim.opt.fillchars = { eob = "-" }
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 vim.opt.showmatch = true
