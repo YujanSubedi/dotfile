@@ -140,4 +140,11 @@ return {
 			})
 		end
 	},
+	-- Auto complete brackets
+	{
+		'm4xshen/autoclose.nvim',
+		config = function()
+			require("autoclose").setup()
+		end
+	},
 }
