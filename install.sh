@@ -46,7 +46,7 @@ if [[ "$default_flag" == true ]]; then
     Virtualization=(Qemu Docker) # Qemu Docker Virt_Manager
     Network_tools=(Net_tools Inetutils Bind Nmap Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark Burpsuite) # Net_tools Inetutils Bind Nmap Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark Burpsuite
     Browsers=(Zen_Browser Firefox Tor_Browser) # Zen_Browser Firefox Tor_Browser QuteBrowser Brave_Browser Librewolf
-    Extra_applications=(Discord Gimp LibreOffice Texlive Spotify) # Discord Gimp LibreOffice Texlive Spotify
+    Extra_applications=(Discord Gimp LibreOffice Texlive) # Discord Gimp LibreOffice Texlive Spotify
     firewall=Yes # Yes No
     Restart_flag=No # Yes No
 # Let user select
@@ -342,12 +342,14 @@ case $aur_helper in # paru yay
     paru)
         if ! command -v paru &>/dev/null; then
             git clone https://aur.archlinux.org/paru-git/ /tmp/paru
+            # git clone https://aur.archlinux.org/paru-bin/ /tmp/paru
             makepkg -si --noconfirm --needed -D /tmp/paru
         fi
         ;;
     yay)
         if ! command -v yay &>/dev/null; then
             git clone https://aur.archlinux.org/yay-git/ /tmp/yay
+            # git clone https://aur.archlinux.org/yay-bin/ /tmp/yay
             makepkg -si --noconfirm --needed -D /tmp/yay
         fi
         ;;
@@ -440,7 +442,7 @@ sudo pacman -S --noconfirm --needed qrtool
 sudo pacman -S --noconfirm --needed zbar
 
 # Scan for other os Grub
-sudo pacman -S --noconfirm --needed os-prober
+# sudo pacman -S --noconfirm --needed os-prober
 
 # Flatpaks and Snaps suppots
 # sudo pacman -S --noconfirm --needed xdg-desktop-portal
@@ -502,6 +504,7 @@ case $display_protocol in # XWayland Wayland Xorg NONE
         sudo pacman -S --noconfirm --needed xorg xorg-server xorg-xinit
         sudo pacman -S --noconfirm --needed wayland wayland-protocols xorg-xwayland
         sudo pacman -S --noconfirm --needed qt5-wayland qt6-wayland
+        sudo pacman -S --noconfirm --needed xdg-desktop-portal-hyprland
         sudo pacman -S --noconfirm --needed grim slurp hyprlock
         sudo pacman -S --noconfirm --needed nwg-look wl-clipboard
         sudo pacman -S --noconfirm --needed wofi waybar swww
@@ -646,8 +649,8 @@ done
 for browser in "${Browsers[@]}"; do
     case $browser in # Zen_Browser Firefox Tor_Browser QuteBrowser Brave_Browser Librewolf
         Zen_Browser)
-            $aur_helper -S --noconfirm --needed zen-browser-avx2-bin
-            # $aur_helper -S --noconfirm --needed zen-browser-bin
+            # $aur_helper -S --noconfirm --needed zen-browser-avx2-bin
+            $aur_helper -S --noconfirm --needed zen-browser-bin
             ;;
         Firefox)
             sudo pacman -S --noconfirm --needed firefox
