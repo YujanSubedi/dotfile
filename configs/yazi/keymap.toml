@@ -2,6 +2,7 @@
 append_keymap  = [
 	# Goto
 	{ on = [ "g", "y" ],       run = "cd ~/Yujan/",                       desc = "Go to the ~/Yujan" },
+	{ on = [ "g", "n" ],       run = "cd ~/notes/",                       desc = "Go to the ~/notes" },
 	{ on = [ "g", "m" ],       run = "cd ~/Class_materials/",             desc = "Go to the ~/Class_materials" },
 	{ on = [ "g", "i" ],       run = "cd ~/Resources/",                   desc = "Go to the ~/Resources" },
 	{ on = [ "g", "p" ],       run = "cd ~/Pictures/",                    desc = "Go to the ~/Pictures" },

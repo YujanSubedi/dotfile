@@ -3,10 +3,11 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Stop highlighting"
 vim.keymap.set({"v", "n"}, "Y", '"+y', { desc = "Copy to clipboard" })
 vim.keymap.set("n", "<A-q>", vim.cmd.Ex, { desc = "Go back to the directory" })
 vim.keymap.set("n", "<C-d>", vim.cmd.q, { desc = "Exit Current buffer" })
-vim.keymap.set("n", "<leader>q", vim.cmd.q, { desc = "Exit Current buffer" })
-vim.keymap.set("n", "<leader>Q", vim.cmd.qa, { desc = "Exit in all the buffers" })
+vim.keymap.set("n", "<leader>o", "<C-o>", { desc = "Go back to previus buffer" })
+vim.keymap.set("n", "<leader>q", ":q!<Cr>", { desc = "Exit Current buffer" })
+vim.keymap.set("n", "<leader>Q", ":qa!<Cr>", { desc = "Exit in all the buffers" })
 vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split window Vertical" })
-vim.keymap.set("n", "<leader>wV", "<C-w>s", { desc = "Split window Horizontal" })
+vim.keymap.set("n", "<leader>ws", "<C-w>s", { desc = "Split window Horizontal" })
 vim.keymap.set("n", "<leader><Tab>", "<C-w>w", { desc = "Move focus in Splitted Windows" })
 vim.keymap.set({ "n", "v", "s", "i" }, "<A-x>", "<Esc>:", { desc = "Change to Command Mode" })
 vim.keymap.set({ "n", "v", "s", "i" }, "<A-e>", "<Esc>i<C-r>=", { desc = "Evaluate and write given expression" })
@@ -23,7 +24,10 @@ vim.keymap.set("n", "<leader>j", "<C-w>j", { desc = "Move focus to lower Window"
 vim.keymap.set("n", "<leader>k", "<C-w>k", { desc = "Move focus to upper Window" })
 
 -- Run Mason
-vim.keymap.set("n", "<leader>m", "<cmd>Mason<CR>", { desc = "Go to previous [D]iagnostic message" })
+vim.keymap.set("n", "<leader>m", "<cmd>Mason<CR>", { desc = "Go to Mason install" })
+
+-- Neorg index
+vim.keymap.set("n", "<leader>ni", ":Neorg index<CR>", { desc = "Go to notes Index" })
 
 -- kickstart keymap
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })

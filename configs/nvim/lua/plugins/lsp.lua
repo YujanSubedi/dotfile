@@ -1,4 +1,7 @@
 return {
+	-- Auto set indent
+	{ "tpope/vim-sleuth" },
+
 	-- Language Server Protocol
 	{
 		"neovim/nvim-lspconfig",
@@ -22,9 +25,9 @@ return {
 					map("gI", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 					map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
 					map("<leader>ds", require("telescope.builtin").lsp_document_symbols, "[D]ocument [S]ymbols")
-					map( "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
-					map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-					map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+					map( "<leader>dw", require("telescope.builtin").lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
+					-- map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+					-- map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 					map("K", vim.lsp.buf.hover, "Hover Documentation")
 				end,
 			})
@@ -73,6 +76,37 @@ return {
 			})
 		end,
 	},
+
+	-- Snippet Courtesy of @Zeioth, 
+	{
+		"L3MON4D3/LuaSnip",
+		build = vim.fn.has "win32" ~= 0 and "make install_jsregexp" or nil,
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+			"benfowler/telescope-luasnip.nvim",
+		},
+		config = function(_, opts)
+			if opts then require("luasnip").config.setup(opts) end
+			vim.tbl_map(
+				function(type) require("luasnip.loaders.from_" .. type).lazy_load() end,
+				{ "vscode", "snipmate", "lua" }
+			)
+			-- friendly-snippets - enable standardized comments snippets
+			require("luasnip").filetype_extend("typescript", { "tsdoc" })
+			require("luasnip").filetype_extend("javascript", { "jsdoc" })
+			require("luasnip").filetype_extend("lua", { "luadoc" })
+			require("luasnip").filetype_extend("python", { "pydoc" })
+			require("luasnip").filetype_extend("rust", { "rustdoc" })
+			require("luasnip").filetype_extend("cs", { "csharpdoc" })
+			require("luasnip").filetype_extend("java", { "javadoc" })
+			require("luasnip").filetype_extend("c", { "cdoc" })
+			require("luasnip").filetype_extend("cpp", { "cppdoc" })
+			require("luasnip").filetype_extend("php", { "phpdoc" })
+			require("luasnip").filetype_extend("kotlin", { "kdoc" })
+			require("luasnip").filetype_extend("ruby", { "rdoc" })
+			require("luasnip").filetype_extend("sh", { "shelldoc" })
+		end,
+	},
 	-- Autocompletion
 	{
 		"hrsh7th/nvim-cmp",
@@ -82,7 +116,6 @@ return {
 			"hrsh7th/cmp-path", -- source for file system paths in commands
 			"hrsh7th/cmp-nvim-lsp", -- source for file system paths in commands
 			"hrsh7th/cmp-cmdline", -- source for file system paths in commands
-			"L3MON4D3/LuaSnip", -- snippet engine
 			"saadparwaiz1/cmp_luasnip", -- for lua autocompletion
 		},
 		config = function()
@@ -165,6 +198,7 @@ return {
 			})
 		end
 	},
+
 	-- Auto complete brackets
 	{
 		'm4xshen/autoclose.nvim',
@@ -172,4 +206,62 @@ return {
 			require("autoclose").setup()
 		end
 	},
+	{
+		"smjonas/inc-rename.nvim",
+		config = function()
+			require("inc_rename").setup()
+			vim.keymap.set("n", "<leader>rn", ":IncRename ")
+			vim.keymap.set("n", "<leader>rn", ":IncRename ", { desc = "[R]ename selected word" })
+		end,
+	},
+
+	{
+		"folke/trouble.nvim",
+		opts = {}, -- for default options, refer to the configuration section for custom setup.
+		cmd = "Trouble",
+		keys = {
+			{
+				"<leader>xx",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				desc = "Diagnostics (Trouble)",
+			},
+			{
+				"<leader>xX",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				desc = "Buffer Diagnostics (Trouble)",
+			},
+			{
+				"<leader>cs",
+				"<cmd>Trouble symbols toggle focus=false<cr>",
+				desc = "Symbols (Trouble)",
+			},
+			{
+				"<leader>cl",
+				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+				desc = "LSP Definitions / references / ... (Trouble)",
+			},
+			{
+				"<leader>xL",
+				"<cmd>Trouble loclist toggle<cr>",
+				desc = "Location List (Trouble)",
+			},
+			{
+				"<leader>xQ",
+				"<cmd>Trouble qflist toggle<cr>",
+				desc = "Quickfix List (Trouble)",
+			},
+		},
+	}
+	{
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		opts = {
+			library = {
+				-- See the configuration section for more details
+				-- Load luvit types when the `vim.uv` word is found
+				{ path = "luvit-meta/library", words = { "vim%.uv" } },
+			},
+		},
+	},
 }
+

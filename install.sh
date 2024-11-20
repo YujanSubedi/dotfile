@@ -435,7 +435,13 @@ sudo pacman -S --noconfirm --needed mpv ffmpeg ffmpegthumbnailer
 sudo pacman -S --noconfirm --needed zathura zathura-pdf-mupdf
 # sudo pacman -S --noconfirm --needed zathura zathura-pdf-poppler
 sudo pacman -S --noconfirm --needed yazi p7zip jq
+
+# Extra Multimedia
 # sudo pacman -S --noconfirm --needed nemo
+# sudo pacman -S --noconfirm --needed kdenlive
+# sudo pacman -S --noconfirm --needed obs-studio
+# sudo pacman -S --noconfirm --needed shotcuts
+# $aur_helper -S --noconfirm --needed davinci-resolve
 
 # Qrcode tools
 sudo pacman -S --noconfirm --needed qrtool
