@@ -586,10 +586,10 @@ esac
 case $Copy_configs in # Yes No
     Yes)
         cp -r Pictures ~
-        [ -d "~/Pictures/Screenshots" ] || mkdir ~/Pictures/Screenshots/
-        [ -d "~/Pictures/Recordings" ] || mkdir ~/Pictures/Recordings/
+        [ -d "$HOME/Pictures/Screenshots" ] || mkdir ~/Pictures/Screenshots/
+        [ -d "$HOME/Pictures/Recordings" ] || mkdir ~/Pictures/Recordings/
 
-        [ -d "~/.config/" ] || mkdir ~/.config/
+        [ -d "$HOME/.config" ] || mkdir ~/.config/
         cp -r ./configs/* ~/.config/
 
         ln -s ~/.config/shell/profile ~/.zprofile
@@ -599,7 +599,7 @@ case $Copy_configs in # Yes No
 
         # Bat and Tmux
         bat cache --build
-        [ -d "~/.config/tmux/tpm" ] || git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/tpm
+        [ -d "$HOME/config/tmux/tpm" ] || git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/tpm
 
         case $window_manager in
             Hyprland)
@@ -723,7 +723,7 @@ for application in "${Extra_applications[@]}"; do
             sudo pacman -S --noconfirm --needed texlive
             ;;
         Spotify)
-            [ -d ~/.local/share/gnupg ] || mkdir ~/.local/share/gnupg
+            [ -d $HOME/local/share/gnupg ] || mkdir ~/.local/share/gnupg
             $aur_helper -S --noconfirm --needed spotify-adblock-git
             ;;
         *)

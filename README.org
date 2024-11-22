@@ -20,9 +20,9 @@ Contains config files of:
 | Browsers          | ZenBrowser, Firefox, QuteBrowser                                   |
 
 Used themes:
-Gtk-theme: kali-dark
-icons-theme: candy-icons
-mouse-theme: Bibata-Modern-Classic
+| Gtk-theme   | kali-dark             |
+| icons-theme | candy-icons           |
+| mouse-theme | Bibata-Modern-Classic |
 
 *** Setup on Arch
 #+begin_src bash
@@ -35,6 +35,7 @@ mouse-theme: Bibata-Modern-Classic
 Installation:
 #+begin_src bash
   sudo pacman -S --noconfirm --needed hyprland wofi waybar swww
+  [ -d "$HOME/.config" ] || mkdir ~/.config/
   cp -r ./Window_managers/Hyprland/* ~/.config/
 #+end_src
 [[file:./Screenshots/Hyprland.jpg]]
@@ -43,6 +44,7 @@ Installation:
 Installation:
 #+begin_src bash
   sudo pacman -S --noconfirm --needed qtile python-psutil python-iwlib nitrogen picom rofi
+  [ -d "$HOME/.config" ] || mkdir ~/.config/
   cp -r ./Window_managers/Qtile/* ~/.config/
   sudo cp ./old_files/suckless/st /bin/
 #+end_src
@@ -52,6 +54,7 @@ Installation:
 Installation:
 #+begin_src bash
   sudo pacman -S --noconfirm --needed xmonad xmonad-contrib polybar picom nitrogen rofi
+  [ -d "$HOME/.config" ] || mkdir ~/.config/
   cp -r ./Window_managers/Xmonad/* ~/.config/
   sudo cp ./old_files/suckless/st /bin/
 #+end_src
@@ -61,13 +64,15 @@ Installation:
 Installation:
 #+begin_src bash
   sudo pacman -S --noconfirm --needed hyprlock
+  [ -d "$HOME/.config" ] || mkdir ~/.config/
   cp -r ./Window_managers/Hyprland/hypr ~/.config/
-  cp ./Pictures/Lockscreen/lockscreen.jpg ~/Pictures/lockscreen/
+  [ -d "$HOME/Pictures/Lockscreen" ] || mkdir -p ~/Pictures/Lockscreen
+  cp ./Pictures/Lockscreen/Lockscreen.jpg ~/Pictures/Lockscreen/
 #+end_src
 [[file:./Screenshots/Hyprlock.jpg]]
 
 **** Sudo requires password everytime:
-#+begin_src text
+#+begin_src bash
   sudo visudo
   # sudoedit /etc/sudoers
 #+end_src

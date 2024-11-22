@@ -49,7 +49,7 @@ alias defqemu="qemu-system-x86_64 --enable-kvm -drive if=pflash,format=raw,reado
 
 # Functions
 
-functions condaactivate() {
+function condaactivate() {
     conda_env="pytorch"
     [ -z "$1" ] || conda_env=$1
     conda_env="${conda_env}_env"
