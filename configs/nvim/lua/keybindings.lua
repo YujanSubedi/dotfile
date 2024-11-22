@@ -17,17 +17,11 @@ vim.keymap.set({ "n", "v", "s", "i" }, "<A-`>", "<Esc>:!footclient &<CR>", { des
 vim.keymap.set("v", "<A-Up>", [[:m '<-2<CR>gv=gv]], { desc = "Move Highlighted Text Upwards" })
 vim.keymap.set("v", "<A-Down>", [[:m '>+1<CR>gv=gv]], { desc = "Move Highlighted Text Downwards" })
 
--- alt arrow will change focus in normal mode
+-- leader and hjkl will change focus in normal mode
 vim.keymap.set("n", "<leader>h", "<C-w>h", { desc = "Move focus to left Window" })
 vim.keymap.set("n", "<leader>l", "<C-w>l", { desc = "Move focus to right Window" })
 vim.keymap.set("n", "<leader>j", "<C-w>j", { desc = "Move focus to lower Window" })
 vim.keymap.set("n", "<leader>k", "<C-w>k", { desc = "Move focus to upper Window" })
-
--- Run Mason
-vim.keymap.set("n", "<leader>m", "<cmd>Mason<CR>", { desc = "Go to Mason install" })
-
--- Neorg index
-vim.keymap.set("n", "<leader>ni", ":Neorg index<CR>", { desc = "Go to notes Index" })
 
 -- kickstart keymap
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })

@@ -18,6 +18,7 @@
 # 		;;
 # esac
 
-exec dwm
+# exec dwm
 # exec qtile start
 # exec xmonad
+# exec steam -windowed

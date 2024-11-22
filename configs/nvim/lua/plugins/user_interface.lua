@@ -1,25 +1,31 @@
 return{
-	-- Have command line on Center, better highlighting and notification
+	-- Twilight and Zen-mode for better focus
 	{
-		"folke/noice.nvim",
-		event = "VeryLazy",
+		"folke/twilight.nvim",
+		dependencies = { "folke/zen-mode.nvim", },
 		opts = {
-			presets = {
-				-- inc_rename = true, -- enables an input dialog for inc-rename.nvim
-				-- bottom_search = true, -- use a classic bottom cmdline for search
-				-- command_palette = true, -- position the cmdline and popupmenu together
-				-- long_message_to_split = true, -- long messages will be sent to a split
-				-- lsp_doc_border = false, -- add a border to hover docs and signature help
+			dimming = {
+				context = 20, -- amount of lines we will try to show around the current line
 			},
+			exclude = {}, -- exclude these filetypes
 		},
+		config = function()
+			vim.keymap.set("n", "<leader>tm", "<cmd>ZenMode<cr>", { desc = "[T]wilight [Z]en Mode" })
+		end
+	},
+
+	-- Auto resize windows
+	{ "anuvyklack/windows.nvim",
 		dependencies = {
-			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-			"MunifTanjim/nui.nvim",
-			-- OPTIONAL:
-			--   `nvim-notify` is only needed, if you want to use the notification view.
-			--   If not available, we use `mini` as the fallback
-			-- "rcarriga/nvim-notify",
-		}
+			"anuvyklack/middleclass",
+			"anuvyklack/animation.nvim"
+		},
+		config = function()
+			vim.o.winwidth = 10
+			vim.o.winminwidth = 5
+			vim.o.equalalways = false
+			require('windows').setup()
+		end
 	},
 
 	-- Show keybinding complitions
@@ -47,32 +53,26 @@ return{
 		},
 	},
 
-	-- Twilight and Zen-mode for better focus
+	-- Have command line on Center, better highlighting and notification
 	{
-		"folke/twilight.nvim",
-		dependencies = { "folke/zen-mode.nvim", },
+		"folke/noice.nvim",
+		event = "VeryLazy",
 		opts = {
-			dimming = {
-				context = 20, -- amount of lines we will try to show around the current line
+			presets = {
+				-- inc_rename = true, -- enables an input dialog for inc-rename.nvim
+				-- bottom_search = true, -- use a classic bottom cmdline for search
+				-- command_palette = true, -- position the cmdline and popupmenu together
+				-- long_message_to_split = true, -- long messages will be sent to a split
+				-- lsp_doc_border = false, -- add a border to hover docs and signature help
 			},
-			exclude = {}, -- exclude these filetypes
 		},
-		config = function()
-					vim.keymap.set("n", "<leader>tm", "<cmd>ZenMode<cr>", { desc = "[T]wilight [Z]en Mode" })
-	end
-	},
-
-	-- Auto resize windows
-	{ "anuvyklack/windows.nvim",
 		dependencies = {
-			"anuvyklack/middleclass",
-			"anuvyklack/animation.nvim"
-		},
-		config = function()
-			vim.o.winwidth = 10
-			vim.o.winminwidth = 5
-			vim.o.equalalways = false
-			require('windows').setup()
-		end
+			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+			"MunifTanjim/nui.nvim",
+			-- OPTIONAL:
+			--   `nvim-notify` is only needed, if you want to use the notification view.
+			--   If not available, we use `mini` as the fallback
+			-- "rcarriga/nvim-notify",
+		}
 	},
 }

@@ -16,6 +16,7 @@ alias delta="delta --line-numbers"
 alias fzf="fzf --ansi"
 
 # Add new command
+alias py="python"
 alias la="ls -a"
 alias ll="ls -lah"
 alias l="ls -CF"
@@ -43,7 +44,17 @@ alias gitlog="git log --parents --graph --decorate"
 # Default Qemu command
 alias defqemu="qemu-system-x86_64 --enable-kvm -drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/x64/OVMF_CODE.fd -cpu host -smp 4 -m 4G -display sdl,gl=on -vga virtio"
 
+# Reduce img size by conversion by ffmpeg
+# for file in *.{jpg,jpeg,png};do ffmpeg -i $file -y "${file%.*}.jpg" ; done
+
 # Functions
+
+functions condaactivate() {
+    conda_env="pytorch"
+    [ -z "$1" ] || conda_env=$1
+    conda_env="${conda_env}_env"
+    source ~/miniconda3/etc/profile.d/conda.sh && conda activate $conda_env
+}
 
 # Function to attach tmux at given directory
 function tma() {
@@ -61,19 +72,28 @@ function tmc() {
     cd $(tmux display-message -p '#{session_name}')
 }
 
-# Go to the location where tmux server is made
+# Go to the location with fzf
 function fcd() {
     cd $(fd -t d | fz)
 }
 
-# Record screen
-function scrr() {
+# Record screen without audio
+function scrrec() {
     Output_Video=Recording-$(date +%F_%T).mp4
     [ -z "$1" ] || Output_Video=$1
-    wf-recorder -g "$(slurp && sleep 1)" -f ~/Pictures/Recordings/$Output_Video
+    wf-recorder -g "$(slurp)" -f ~/Pictures/Recordings/$Output_Video
 }
 
-# Record screen withtimeout
-function scrrtm(){
-    [ -z "$1" ] && echo "No time frame Provided" || timeout $1 wf-recorder -g "$(slurp && sleep 2)" -f ~/Pictures/Recordings/Recording-$(date +%F_%T).mp4
+# Record screen microphone audio
+function scrrecmicaudio(){
+    Output_Video=Recording-$(date +%F_%T).mp4
+    [ -z "$1" ] || Output_Video=$1
+    wf-recorder -g "$(slurp)" -a -f ~/Pictures/Recordings/$Output_Video
+}
+
+# Record screen output audio
+function scrrecoutaudio(){
+    Output_Video=Recording-$(date +%F_%T).mp4
+    [ -z "$1" ] || Output_Video=$1
+    wf-recorder -g "$(slurp)" --audio=alsa_output.pci-0000_06_00.6.analog-stereo.monitor -f ~/Pictures/Recordings/$Output_Video
 }

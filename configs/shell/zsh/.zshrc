@@ -28,7 +28,7 @@ alias help=run-help
 # # Keybindings in Zsh:
 bindkey '\e[A' history-search-backward
 bindkey '\e[B' history-search-forward
-bindkey -s '^E' 'source ~/miniconda3/etc/profile.d/conda.sh; conda activate\n'
+bindkey -s '^E' 'source ~/miniconda3/etc/profile.d/conda.sh \n'
 bindkey -s '^F' 'pacman -Ss '
 bindkey -s '^[f' 'pacman -F '
 bindkey -s '^N' 'nvim .\n'

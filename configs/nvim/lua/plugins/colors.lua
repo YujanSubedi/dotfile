@@ -1,7 +1,6 @@
 return {
 	-- Color theme
 	-- { "olimorris/onedarkpro.nvim" },
-	-- { "folke/tokyonight.nvim" },
 	-- { "loctvl842/monokai-pro.nvim" },
 	-- { "Mofiqul/dracula.nvim" },
 	-- { "jsit/toast.vim" },
@@ -13,31 +12,45 @@ return {
 	-- { "Mofiqul/vscode.nvim" },
 	-- { "Rigellute/rigel" },
 	-- { "jabuti-theme/jabuti-nvim" },
+	-- { "sainnhe/sonokai" },
+	-- { 'olivercederborg/poimandres.nvim' },
 	-- { "NLKNguyen/papercolor-theme" },
-	-- { "catppuccin/nvim", name = "catppuccin"},
-	-- { "bluz71/vim-nightfly-colors", name = "nightfly" },
-	{
-		"rose-pine/neovim",
-		name = "rose-pine",
-		init = function()
+	-- { "rebelot/kanagawa.nvim" },
+	-- { "catppuccin/nvim",                name = "catppuccin" },
+	-- { "bluz71/vim-nightfly-colors",     name = "nightfly" },
+
+	-- Rose-pine Colortheme
+	{ "rose-pine/neovim", name = "rose-pine",
+		init = function ()
 			vim.cmd.colorscheme("rose-pine")
-			-- Transparency
 			vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 			vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 			vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
-		end,
+		end
 	},
+
+	-- Tokyonight Colortheme
+	{ "folke/tokyonight.nvim",
+	-- 	init = function ()
+	-- 		vim.cmd.colorscheme("tokyonight")
+	-- 	end
+	},
+
+	-- Highlight colors on buffer
 	{
 		"norcalli/nvim-colorizer.lua",
-	config = function()
-		require'colorizer'.setup()
-	end,
-},
-{
-	"max397574/colortils.nvim",
-	cmd = "Colortils",
-	config = function()
-		require("colortils").setup()
-	end,
-}
+		config = function()
+			require 'colorizer'.setup()
+		end,
+	},
+
+	-- Find color coding
+	{
+		"max397574/colortils.nvim",
+		cmd = "Colortils",
+		config = function()
+			require("colortils").setup()
+		end,
+	},
+
 }

@@ -5,7 +5,7 @@
 }
 
 window#waybar {
-    background-color: #111122;
+    background-color: #111516;
     color: #999999;
 }
 
@@ -16,7 +16,7 @@ window#waybar {
 
 #workspaces { padding: 0px 8px; }
 #workspaces button { color: #555555; }
-#workspaces button.empty { color: #111122; }
+#workspaces button.empty { color: #111516; }
 #workspaces button.active { color: #7acaca; }
 
 #workspaces button.urgent {

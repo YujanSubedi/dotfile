@@ -305,23 +305,51 @@ sudo pacman -Fy --noconfirm
 sudo timedatectl set-ntp true
 
 # Install programming languages
+
+# C, Cpp
 sudo pacman -S --noconfirm --needed gcc
 # sudo pacman -S --noconfirm --needed llvm clang
 # sudo pacman -S --noconfirm --needed tcc
-# sudo pacman -S --noconfirm --needed ghc
+
+# Lua
 sudo pacman -S --noconfirm --needed lua
+
+# Python
 sudo pacman -S --noconfirm --needed python
+
+# JavaScript, TypeScript
 sudo pacman -S --noconfirm --needed npm
+sudo pacman -S --noconfirm --needed deno
 # sudo pacman -S --noconfirm --needed yarn
-# sudo pacman -S --noconfirm --needed emscripten
+
+# GoLang
 sudo pacman -S --noconfirm --needed go
+
+# Rust
 # sudo pacman -S --noconfirm --needed rust
 sudo pacman -S --noconfirm --needed rustup && rustup default stable
+
+# Zig
 sudo pacman -S --noconfirm --needed zig
-# sudo pacman -S --noconfirm --needed php
-# sudo pacman -S --noconfirm --needed perl
-# sudo pacman -S --noconfirm --needed octave
+
+# Verilog
 sudo pacman -S --noconfirm --needed iverilog gtkwave
+
+# Haskell
+# sudo pacman -S --noconfirm --needed ghc
+
+# Php
+# sudo pacman -S --noconfirm --needed php
+
+# Perl
+# sudo pacman -S --noconfirm --needed perl
+
+# Matlab
+# sudo pacman -S --noconfirm --needed octave
+
+# Webassembly
+# sudo pacman -S --noconfirm --needed emscripten
+
 
 # # C/CPP libraries
 sudo pacman -S --noconfirm --needed raylib
@@ -438,6 +466,7 @@ sudo pacman -S --noconfirm --needed yazi p7zip jq
 
 # Extra Multimedia
 # sudo pacman -S --noconfirm --needed nemo
+# sudo pacman -S --noconfirm --needed openshot
 # sudo pacman -S --noconfirm --needed kdenlive
 # sudo pacman -S --noconfirm --needed obs-studio
 # sudo pacman -S --noconfirm --needed shotcuts
@@ -510,7 +539,6 @@ case $display_protocol in # XWayland Wayland Xorg NONE
         sudo pacman -S --noconfirm --needed xorg xorg-server xorg-xinit
         sudo pacman -S --noconfirm --needed wayland wayland-protocols xorg-xwayland
         sudo pacman -S --noconfirm --needed qt5-wayland qt6-wayland
-        sudo pacman -S --noconfirm --needed xdg-desktop-portal-hyprland
         sudo pacman -S --noconfirm --needed grim slurp hyprlock
         sudo pacman -S --noconfirm --needed nwg-look wl-clipboard
         sudo pacman -S --noconfirm --needed wofi waybar swww
@@ -539,6 +567,7 @@ esac
 case $window_manager in # Hyprland Xmonad Qtile NONE
     Hyprland)
         sudo pacman -S --noconfirm --needed hyprland
+        sudo pacman -S --noconfirm --needed xdg-desktop-portal-hyprland
         ;;
     Xmonad)
         sudo pacman -S --noconfirm --needed xmonad xmonad-contrib
@@ -655,8 +684,8 @@ done
 for browser in "${Browsers[@]}"; do
     case $browser in # Zen_Browser Firefox Tor_Browser QuteBrowser Brave_Browser Librewolf
         Zen_Browser)
-            # $aur_helper -S --noconfirm --needed zen-browser-avx2-bin
-            $aur_helper -S --noconfirm --needed zen-browser-bin
+            $aur_helper -S --noconfirm --needed zen-browser-avx2-bin
+            # $aur_helper -S --noconfirm --needed zen-browser-bin
             ;;
         Firefox)
             sudo pacman -S --noconfirm --needed firefox

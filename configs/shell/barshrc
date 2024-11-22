@@ -22,7 +22,7 @@ bind '"\C-l":"\e\C-l A"'
 bind '"\C-w":"\e\C-d"'
 
 # other shortcuts
-bind '"\C-e":"source ~/miniconda3/etc/profile.d/conda.sh; conda activate \n"'
+bind '"\C-e":"source ~/miniconda3/etc/profile.d/conda.sh \n"'
 bind '"\C-f":"pacman -Ss "'
 bind '"\ef":"pacman -F "'
 bind '"\C-n":"nvim . \n"'

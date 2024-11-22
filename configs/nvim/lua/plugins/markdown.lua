@@ -1,32 +1,4 @@
 return {
-	-- Markdown
-	{
-		"iamcco/markdown-preview.nvim",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		build = "cd app && npm install",
-		init = function()
-			vim.g.mkdp_filetypes = { "markdown" }
-		end,
-		ft = { "markdown" },
-		config = function()
-			vim.g.mkdp_page_title = "${name}"
-			vim.g.mkdp_theme = "light"
-			vim.g.mkdp_preview_options = {
-				mkit = {},
-				katex = {},
-				uml = {},
-				maid = {},
-				disable_sync_scroll = 0,
-				sync_scroll_type = "middle",
-				hide_yaml_meta = 1,
-				sequence_diagrams = {},
-				flowchart_diagrams = {},
-				content_editable = false,
-				disable_filename = 1,
-				toc = {},
-			}
-		end,
-	},
 	-- Latex
 	{
 		"lervag/vimtex",
@@ -37,29 +9,34 @@ return {
 			vim.g.vimtex_view_method = "zathura"
 		end,
 	},
-	-- Orgmode
-	-- {
-	-- 	"nvim-orgmode/orgmode",
-	-- 	event = "VeryLazy",
-	-- 	ft = { "org" },
-	-- 	config = function()
-	-- 		-- Setup orgmode
-	-- 		require("orgmode").setup({
-	-- 			emacs_config = {
-	-- 				config_path = "~/.config/emacs/init.el",
-	-- 			},
-	-- 			org_agenda_files = "~/orgfiles/**/*",
-	-- 			org_default_notes_file = "~/orgfiles/refile.org",
-	-- 		})
 
-	-- 		-- Note: If you are using nvim-treesitter with ~ensure_installed = "all"~ option
-	-- 		-- add ~org~ to ignore_install
-	-- 		-- require('nvim-treesitter.configs').setup({
-	-- 		--   ensure_installed = 'all',
-	-- 		--   ignore_install = { 'org' },
-	-- 		-- })
-	-- 	end,
-	-- },
+	-- Render markdown
+	{
+		'MeanderingProgrammer/render-markdown.nvim',
+		dependencies = {
+			'SCJangra/table-nvim',
+			ft = 'markdown',
+			opts = {},
+		},
+		opts = {},
+	},
+
+	-- Markdown Preview
+	{
+		"toppair/peek.nvim",
+		event = { "VeryLazy" },
+		build = "deno task --quiet build:fast",
+		config = function()
+			local peek=require("peek")
+			peek.setup({
+				app = "zen-browser",
+				-- theme = "light",
+			})
+			vim.api.nvim_create_user_command("PeekOpen", peek.open, {})
+			vim.api.nvim_create_user_command("PeekClose", peek.close, {})
+		end,
+	},
+
 	-- Neorg
 	{
 		"nvim-neorg/neorg",
@@ -80,8 +57,28 @@ return {
 					},
 				},
 			}
+			vim.keymap.set("n", "<leader>ni", ":Neorg index<CR>", { desc = "Go to notes Index" })
 			vim.wo.foldlevel = 99
 			vim.wo.conceallevel = 2
 		end,
 	},
+
+	-- Orgmode
+	-- {
+	-- 	"nvim-orgmode/orgmode",
+	-- 	dependencies = { "akinsho/org-bullets.nvim" },
+	-- 	event = "VeryLazy",
+	-- 	ft = { "org" },
+	-- 	config = function()
+	-- 		-- Setup orgmode
+	-- 		require("org-bullets").setup()
+	-- 		require("orgmode").setup({
+	-- 			emacs_config = {
+	-- 				config_path = "~/.config/emacs/init.el",
+	-- 			},
+	-- 			-- org_agenda_files = "~/orgfiles/**/*",
+	-- 			-- org_default_notes_file = "~/orgfiles/refile.org",
+	-- 		})
+	-- 	end,
+	-- },
 }
