@@ -2,73 +2,60 @@ return {
 	-- Latex
 	{
 		"lervag/vimtex",
-		lazy = false, -- we don't want to lazy load VimTeX
-		-- tag = "v2.15", -- uncomment to pin to a specific release
+		ft = "tex", -- only load on tex files
 		init = function()
 			-- VimTeX configuration goes here, e.g.
 			vim.g.vimtex_view_method = "zathura"
 		end,
 	},
 
-	-- Render markdown
-	{
-		'MeanderingProgrammer/render-markdown.nvim',
-		dependencies = {
-			'SCJangra/table-nvim',
-			ft = 'markdown',
-			opts = {},
-		},
-		opts = {},
-	},
-
-	-- Markdown Preview
+	--  Markdown Render and Preview
 	{
 		"toppair/peek.nvim",
-		event = { "VeryLazy" },
+		dependencies = {
+			"MeanderingProgrammer/render-markdown.nvim",
+			{ "SCJangra/table-nvim", opts = {} },
+			{ "jghauser/follow-md-links.nvim" },
+		},
+		ft = "markdown", -- only load on markdown files
 		build = "deno task --quiet build:fast",
 		config = function()
-			local peek=require("peek")
+			local peek = require("peek")
 			peek.setup({
 				app = "zen-browser",
 				-- theme = "light",
 			})
 			vim.api.nvim_create_user_command("PeekOpen", peek.open, {})
 			vim.api.nvim_create_user_command("PeekClose", peek.close, {})
+			-- vim.keymap.set("n", "<leader>tm", "<cmd>PeekOpen<cr>", { desc = "Markdown Preview" })
 		end,
 	},
 
 	-- Neorg
 	{
 		"nvim-neorg/neorg",
-		lazy = false,
-		version = "*",
-		config = function()
-			require("neorg").setup {
-				load = {
-					["core.defaults"] = {},
-					["core.concealer"] = {},
-					["core.dirman"] = {
-						config = {
-							workspaces = {
-								notes = "~/notes",
-							},
-							default_workspace = "notes",
-						},
+		ft = "norg", -- only load on norg files
+		cmd = "Neorg",
+		keys = { { "<leader>ni", "<cmd>Neorg index<cr>", desc = "Go to Neorg notes Index" } },
+		opts = {
+			load = {
+				["core.defaults"] = {},
+				["core.concealer"] = {},
+				["core.dirman"] = {
+					config = {
+						workspaces = { notes = "~/notes" },
+						default_workspace = "notes",
 					},
 				},
-			}
-			vim.keymap.set("n", "<leader>ni", ":Neorg index<CR>", { desc = "Go to notes Index" })
-			vim.wo.foldlevel = 99
-			vim.wo.conceallevel = 2
-		end,
+			},
+		},
 	},
 
 	-- Orgmode
 	-- {
 	-- 	"nvim-orgmode/orgmode",
 	-- 	dependencies = { "akinsho/org-bullets.nvim" },
-	-- 	event = "VeryLazy",
-	-- 	ft = { "org" },
+	-- 	ft = "org", -- only load on org files
 	-- 	config = function()
 	-- 		-- Setup orgmode
 	-- 		require("org-bullets").setup()

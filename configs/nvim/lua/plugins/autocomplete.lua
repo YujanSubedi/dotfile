@@ -1,27 +1,24 @@
 return {
 	-- Auto complete brackets
-	{
-		'm4xshen/autoclose.nvim',
-		config = function()
-			require("autoclose").setup()
-		end
-	},
+	{ "m4xshen/autoclose.nvim", event = "VeryLazy", opts = {} },
 
-	-- Snippet Courtesy of @Zeioth, 
+	-- Snippet Courtesy of @Zeioth,
 	{
 		"L3MON4D3/LuaSnip",
-		build = vim.fn.has "win32" ~= 0 and "make install_jsregexp" or nil,
 		dependencies = {
 			"rafamadriz/friendly-snippets",
-			"benfowler/telescope-luasnip.nvim",
+			-- "benfowler/telescope-luasnip.nvim",
 		},
+		event = "VeryLazy",
+		build = vim.fn.has("win32") ~= 0 and "make install_jsregexp" or nil,
 		config = function(_, opts)
-			if opts then require("luasnip").config.setup(opts) end
-			vim.tbl_map(
-				function(type) require("luasnip.loaders.from_" .. type).lazy_load() end,
-				{ "vscode", "snipmate", "lua" }
-			)
 			local Luasnip = require("luasnip")
+			if opts then
+				Luasnip.config.setup(opts)
+			end
+			vim.tbl_map(function(type)
+				require("luasnip.loaders.from_" .. type).lazy_load()
+			end, { "vscode", "snipmate", "lua" })
 			-- friendly-snippets - enable standardized comments snippets
 			Luasnip.filetype_extend("c", { "cdoc" })
 			Luasnip.filetype_extend("sh", { "shelldoc" })
@@ -42,18 +39,18 @@ return {
 	-- Autocompletion
 	{
 		"hrsh7th/nvim-cmp",
-		-- event = "InsertEnter",
 		dependencies = {
 			"hrsh7th/cmp-buffer", -- source for text in buffer
 			"hrsh7th/cmp-path", -- source for file system paths in commands
 			"hrsh7th/cmp-nvim-lsp", -- source for file system paths in commands
 			"hrsh7th/cmp-cmdline", -- source for file system paths in commands
-			"saadparwaiz1/cmp_luasnip", -- for lua autocompletion
+			"saadparwaiz1/cmp_luasnip", -- source for luasnip
 		},
+		event = "VeryLazy",
 		config = function()
 			local cmp = require("cmp")
 			local luasnip = require("luasnip")
-			luasnip.config.setup({})
+			luasnip.config.setup()
 
 			-- Completion within the buffer
 			cmp.setup({
@@ -68,31 +65,32 @@ return {
 					["<A-n>"] = cmp.mapping.select_next_item(), -- next suggestion
 					["<A-w>"] = cmp.mapping.confirm({ select = true }),
 
-					-- Enter and Tab for completion
+					-- Tab for next
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_next_item()
+						elseif luasnip.expand_or_jumpable() then
+							luasnip.expand_or_jump()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+
+					["<S-Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_prev_item()
+						elseif luasnip.jumpable(-1) then
+							luasnip.jump(-1)
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+
+					-- -- Enter for completion
 					-- ["<CR>"] = cmp.mapping.confirm {
 					-- 	behavior = cmp.ConfirmBehavior.Insert,
 					-- 	select = true,
 					-- },
-
-				-- 	["<Tab>"] = cmp.mapping(function(fallback)
-				-- 		if cmp.visible() then
-				-- 			cmp.select_next_item()
-				-- 		elseif require("luasnip").expand_or_jumpable() then
-				-- 			require("luasnip").expand_or_jump()
-				-- 		else
-				-- 			fallback()
-				-- 		end
-				-- 	end, { "i", "s" }),
-				--
-				-- 	["<S-Tab>"] = cmp.mapping(function(fallback)
-				-- 		if cmp.visible() then
-				-- 			cmp.select_prev_item()
-				-- 		elseif require("luasnip").jumpable(-1) then
-				-- 			require("luasnip").jump(-1)
-				-- 		else
-				-- 			fallback()
-				-- 		end
-				-- 	end, { "i", "s" }),
 				}),
 
 				-- sources for autocompletion
@@ -105,21 +103,12 @@ return {
 			})
 
 			-- Completion within the search
-			cmp.setup.cmdline({ '/', '?' }, {
-				sources = {
-					{ name = 'buffer' }
-				}
-			})
+			cmp.setup.cmdline({ "/", "?" }, { sources = { { name = "buffer" } } })
 
 			-- Completion within the commandline
-			cmp.setup.cmdline(':', {
-				sources = cmp.config.sources({
-					{ name = 'path' }
-				}, {
-						{ name = 'cmdline' }
-					}),
+			cmp.setup.cmdline(":", {
+				sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }),
 			})
-		end
+		end,
 	},
-
 }

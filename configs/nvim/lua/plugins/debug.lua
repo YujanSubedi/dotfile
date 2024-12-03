@@ -1,82 +1,78 @@
 return {
-	-- Replace word in the current directory
-	{
-		"smjonas/inc-rename.nvim",
-		config = function()
-			vim.keymap.set("n", "<leader>rn", ":IncRename ", { desc = "[R]ename selected word" })
-		end,
-	},
-
-	-- Show function input type
-	{
-		"ray-x/lsp_signature.nvim",
-		event = "VeryLazy",
-		opts = {},
-		config = function(_, opts) require 'lsp_signature'.setup(opts) end
-	},
-
-	-- Config nvim
+	-- Config nvim with lua
 	{
 		"folke/lazydev.nvim",
 		ft = "lua", -- only load on lua files
-		opts = {
-			library = {
-				-- See the configuration section for more details
-				-- Load luvit types when the `vim.uv` word is found
-				{ path = "luvit-meta/library", words = { "vim%.uv" } },
-			},
-		},
+		opts = { library = { { path = "luvit-meta/library", words = { "vim%.uv" } } } },
 	},
 
 	-- Run code Snip
 	{
 		"michaelb/sniprun",
 		branch = "master",
-		-- build = "sh install.sh",
-		config = function()
-			require("sniprun").setup({})
-			vim.keymap.set("v", "<leader>ss", ":SnipRun<CR>", { desc = "[S]nip [R]un selection" })
-			vim.keymap.set("n", "<leader>ss", ":%SnipRun<CR>", { desc = "[S]nip [R]un buffer" })
-			vim.keymap.set("n", "<leader>sk", ":SnipClose<CR>", { desc = "[S]nip [C]lose" })
-		end,
+		build = "sh install.sh",
+		cmd = "SnipRun",
+		keys = {
+			{ "<leader>ss", "<cmd>SnipRun<CR>", mode = "v", desc = "[S]nip [R]un visual" },
+			{ "<leader>ss", "<cmd>%SnipRun<CR>", desc = "[S]nip [R]un" },
+			{ "<leader>sk", "<cmd>SnipClose<CR>", desc = "[S]nip [K]ill" },
+		},
 	},
 
-	-- Quickfix
+	-- Debug Adapter Protocol
 	{
-		"folke/trouble.nvim",
-		opts = {}, -- for default options, refer to the configuration section for custom setup.
-		cmd = "Trouble",
-		keys = {
-			{
-				"<leader>xx",
-				"<cmd>Trouble diagnostics toggle<cr>",
-				desc = "Diagnostics (Trouble)",
-			},
-			{
-				"<leader>xX",
-				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-				desc = "Buffer Diagnostics (Trouble)",
-			},
-			{
-				"<leader>cs",
-				"<cmd>Trouble symbols toggle focus=false<cr>",
-				desc = "Symbols (Trouble)",
-			},
-			{
-				"<leader>cl",
-				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-				desc = "LSP Definitions / references / ... (Trouble)",
-			},
-			{
-				"<leader>xL",
-				"<cmd>Trouble loclist toggle<cr>",
-				desc = "Location List (Trouble)",
-			},
-			{
-				"<leader>xQ",
-				"<cmd>Trouble qflist toggle<cr>",
-				desc = "Quickfix List (Trouble)",
-			},
+		"mfussenegger/nvim-dap",
+		dependencies = {
+			"rcarriga/nvim-dap-ui",
+			"theHamsta/nvim-dap-virtual-text",
+			{ "jay-babu/mason-nvim-dap.nvim", opts = { handlers = {} } },
 		},
+		keys = {
+			{ "<leader>db", "<cmd>DapToggleBreakpoint<cr>", desc = "Add breakpoint at line" },
+			{ "<leader>dr", "<cmd>DapContinue<cr>", desc = "Start or continue the debugger" },
+			{ "<A-b>", "<cmd>DapToggleBreakpoint<cr>", desc = "Add breakpoint at line" },
+			{ "<A-r>", "<cmd>DapContinue<cr>", desc = "Start or continue the debugger" },
+		},
+
+		config = function()
+			local dap = require("dap")
+			local dapui = require("dapui")
+			dapui.setup()
+
+			-- Terminate dap and dapui
+			vim.keymap.set("n", "<leader>dk", function()
+				dap.terminate()
+				dapui.close()
+			end, { desc = "[D]ebugger [T]erminate" })
+
+			-- Auto start dapui
+			dap.listeners.before.attach.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.launch.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.event_terminated.dapui_config = function()
+				dapui.close()
+			end
+			dap.listeners.before.event_exited.dapui_config = function()
+				dapui.close()
+			end
+
+			-- Hides tokens, secrets, and other sensitive information, From TJ DeVries' config
+			require("nvim-dap-virtual-text").setup({
+				display_callback = function(variable)
+					local name = string.lower(variable.name)
+					local value = string.lower(variable.value)
+					if name:match("secret") or name:match("api") or value:match("secret") or value:match("api") then
+						return "*****"
+					end
+					if #variable.value > 15 then
+						return " " .. string.sub(variable.value, 1, 15) .. "... "
+					end
+					return " " .. variable.value
+				end,
+			})
+		end,
 	},
 }

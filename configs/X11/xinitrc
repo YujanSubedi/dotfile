@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # current_tty=$XDG_VTNR
 # echo "Current tty is $current_tty"

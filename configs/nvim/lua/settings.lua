@@ -6,12 +6,11 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.swapfile = false
 vim.opt.mouse = ""
+-- vim.opt.mouse = "a"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.wildignorecase = true
 vim.opt.list = true
-vim.opt.listchars = { tab = "… ", trail = "·", nbsp = "␣" }
--- vim.opt.fillchars = { eob = "-" }
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
 vim.opt.showmatch = true
@@ -23,7 +22,9 @@ vim.opt.signcolumn = "yes"
 vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.softtabstop = 2
--- vim.opt.mouse = "a"
+vim.wo.foldlevel = 3
+-- vim.wo.conceallevel = 2
+-- vim.opt.colorcolumn = "80"
 -- vim.opt.updatetime = 250
 -- vim.opt.timeoutlen = 300
 -- vim.opt.showmode = false
@@ -34,11 +35,19 @@ vim.opt.softtabstop = 2
 
 vim.g.zig_fmt_autosave = 0 -- Zig fix
 
+-- Tabs and Diagnostic Signs
+vim.opt.listchars = { tab = "… ", trail = "·", nbsp = "␣" }
 -- Define custom diagnostic signs
-vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError", numhl = "DiagnosticSignError" })
-vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn", numhl = "DiagnosticSignWarn" })
-vim.fn.sign_define("DiagnosticSignHint", { text = "󰌸 ", texthl = "DiagnosticSignHint", numhl = "DiagnosticSignHint" })
-vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo", numhl = "DiagnosticSignInfo" })
+vim.fn.sign_define("DiagnosticSignError", { text = " " })
+vim.fn.sign_define("DiagnosticSignWarn", { text = " " })
+vim.fn.sign_define("DiagnosticSignHint", { text = "󰌸 " })
+vim.fn.sign_define("DiagnosticSignInfo", { text = " " })
+-- Define custom Debug signs
+vim.fn.sign_define("DapStopped", { text = " " })
+vim.fn.sign_define("DapLogPoint", { text = " " })
+vim.fn.sign_define("DapBreakpoint", { text = " " })
+vim.fn.sign_define("DapBreakpointCondition", { text = " " })
+vim.fn.sign_define("DapBreakpointRejected", { text = " " })
 
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",

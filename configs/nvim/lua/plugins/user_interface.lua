@@ -1,31 +1,19 @@
-return{
-	-- Twilight and Zen-mode for better focus
-	{
-		"folke/twilight.nvim",
-		dependencies = { "folke/zen-mode.nvim", },
-		opts = {
-			dimming = {
-				context = 20, -- amount of lines we will try to show around the current line
-			},
-			exclude = {}, -- exclude these filetypes
-		},
-		config = function()
-			vim.keymap.set("n", "<leader>tm", "<cmd>ZenMode<cr>", { desc = "[T]wilight [Z]en Mode" })
-		end
-	},
-
+return {
 	-- Auto resize windows
-	{ "anuvyklack/windows.nvim",
+	{
+		"anuvyklack/windows.nvim",
 		dependencies = {
 			"anuvyklack/middleclass",
-			"anuvyklack/animation.nvim"
+			"anuvyklack/animation.nvim",
+		},
+		-- event = "VeryLazy",
+		keys = {
+			{ "<leader>wa", "<cmd>WindowsEnableAutowidth<cr>", desc = "[W]indows Enable [A]utowidth" },
+			{ "<leader>wt", "<cmd>WindowsToggleAutowidth<cr>", desc = "[W]indows [T]oggle Autowidth" },
 		},
 		config = function()
-			vim.o.winwidth = 10
-			vim.o.winminwidth = 5
-			vim.o.equalalways = false
-			require('windows').setup()
-		end
+			require("windows").setup()
+		end,
 	},
 
 	-- Show keybinding complitions
@@ -45,11 +33,18 @@ return{
 				},
 			},
 			layout = {
-				width = { min = 20, max=30 }, -- min and max width of the columns
+				width = { min = 20, max = 30 }, -- min and max width of the columns
 				spacing = 2, -- spacing between columns
 			},
 		},
-		keys = { { "<leader>?", function() require("which-key").show({ global = false }) end, desc = "Buffer Local Keymaps (which-key)", },
+		keys = {
+			{
+				"<leader>?",
+				function()
+					require("which-key").show({ global = false })
+				end,
+				desc = "Buffer Local Keymaps (which-key)",
+			},
 		},
 	},
 
@@ -69,10 +64,7 @@ return{
 		dependencies = {
 			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
 			"MunifTanjim/nui.nvim",
-			-- OPTIONAL:
-			--   `nvim-notify` is only needed, if you want to use the notification view.
-			--   If not available, we use `mini` as the fallback
-			-- "rcarriga/nvim-notify",
-		}
+			-- "rcarriga/nvim-notify", -- OPTIONAL: `nvim-notify` is only needed, if you want to use the notification view.
+		},
 	},
 }

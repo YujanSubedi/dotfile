@@ -20,9 +20,9 @@ Contains config files of:
 | Browsers          | ZenBrowser, Firefox, QuteBrowser                                   |
 
 Used themes:
-| Gtk-theme   | kali-dark             |
-| icons-theme | candy-icons           |
-| mouse-theme | Bibata-Modern-Classic |
+| Gtk-theme   | Kali-Dark             |
+| Icons-theme | Candy-Icons           |
+| Mouse-theme | Bibata-Modern-Classic |
 
 *** Setup on Arch
 #+begin_src bash
@@ -76,7 +76,7 @@ Installation:
   sudo visudo
   # sudoedit /etc/sudoers
 #+end_src
-#+begin_src text
+#+begin_src txt
   Defaults timestamp_timeout=0
 #+end_src
 
@@ -84,19 +84,19 @@ Installation:
 #+begin_src bash
   sudo -E systemctl edit getty@tty1.service
 #+end_src
-#+begin_src text
+#+begin_src txt
   [Service]
   ExecStart=
-  ExecStart=-/usr/bin/agetty --autologin <User_Name> --noclear %I $TERM
+  ExecStart=-/usr/bin/agetty --autologin <User_Name> --noclear %I "$TERM"
 #+end_src
 
 **** Autorun Window Manager on tt1:
 #+begin_src bash
-  $EDITOR ~/.bash_profile
+  "$EDITOR" ~/.bash_profile
 #+end_src
 #+begin_src bash
-  # [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx # For Xserver based WM, requires .xinitrc
-  # [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec Hyprland # For Hyprland
+  # [[ -z "$DISPLAY" && "$XDG_VTNR" -eq 1 ]] && exec startx # For Xserver based WM, requires .xinitrc
+  # [[ -z "$DISPLAY" && "$XDG_VTNR" -eq 1 ]] && exec Hyprland # For Hyprland
 #+end_src
 
 **** Power Handling:
@@ -109,7 +109,7 @@ Nvidia driver options
 #+begin_src bash
   sudoedit /etc/modprobe.d/nvidia.conf
 #+end_src
-#+begin_src text
+#+begin_src txt
   options nvidia_drm modeset=1 fbdev=1
 #+end_src
 
@@ -117,6 +117,30 @@ Kernal modules to load on startup
 #+begin_src bash
   sudoedit /etc/mkinitcpio.conf
 #+end_src
-#+begin_src text
+#+begin_src txt
   MODULES=(amdgpu nvidia nvidia_modeset nvidia_uvm nvidia_drm)
+#+end_src
+
+**** Shell configs
+Use dash as sh
+#+begin_src bash
+  sudo pacman -S --noconfirm --needed dash
+  sudo ln -sf /bin/dash /bin/sh
+#+end_src
+Use zsh as default shell
+#+begin_src bash
+  sudo pacman -S --noconfirm --needed zsh
+  sudoedit /etc/passwd
+#+end_src
+find username and change /bin/bash to /bin/zsh at end of line.
+#+begin_src txt
+  [user_name]:[password_placeholder]:[user_id]:[group_id]:[user_info]:[home_direcotry]:bin/zsh
+#+end_src
+Use bash and zsh config
+#+begin_src bash
+  [ -d "$HOME/.config" ] || mkdir ~/.config/
+  cp -r ./configs/shell ~/.config/
+  ln -s ~/.config/shell/profile ~/.zprofile
+  ln -s ~/.config/shell/profile ~/.bash_profile
+  ln -s ~/.config/shell/barshrc ~/.bashrc
 #+end_src

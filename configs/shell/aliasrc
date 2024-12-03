@@ -34,66 +34,73 @@ alias tree="eza -la --git --tree"
 alias vi="nvim --noplugin"
 alias vim="nvim --noplugin"
 alias neofetch="fastfetch"
+alias gitlog="git log --parents --graph --decorate"
+
+# Tmux
 alias tml="tmux ls"
 alias tmd="tmux detach-client"
 alias tmda="tmux kill-server"
 alias tmds="tmux kill-session -t"
 alias tmdo="tmux kill-session -a"
-alias gitlog="git log --parents --graph --decorate"
+
+# flutter on emulator
+alias futtu="tmux kill-session -t 'flutter'; tmux new-session -s 'flutter' -d 'emulator -avd my_avd' \; split-window -h 'sleep 7 && flutter run' \; attach"
+alias futturl="tmux send-keys -t 'flutter' r"
+alias futtukill="tmux kill-session -t 'flutter'"
 
 # Default Qemu command
-alias defqemu="qemu-system-x86_64 --enable-kvm -drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/x64/OVMF_CODE.fd -cpu host -smp 4 -m 4G -display sdl,gl=on -vga virtio"
+alias defqemu="qemu-system-x86_64 --enable-kvm -drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/x64/OVMF_CODE.4m.fd -cpu host -smp 4 -m 4G -display sdl,gl=on -vga virtio"
 
 # Reduce img size by conversion by ffmpeg
 # for file in *.{jpg,jpeg,png};do ffmpeg -i $file -y "${file%.*}.jpg" ; done
 
 # Functions
 
-function condaactivate() {
-    conda_env="pytorch"
-    [ -z "$1" ] || conda_env=$1
-    conda_env="${conda_env}_env"
-    source ~/miniconda3/etc/profile.d/conda.sh && conda activate $conda_env
+condaactivate() {
+	conda_env="pytorch"
+	[ -z "$1" ] || conda_env=$1
+	conda_env="${conda_env}_env"
+	source ~/miniconda3/etc/profile.d/conda.sh && conda activate "${conda_env}"
 }
 
 # Function to attach tmux at given directory
-function tma() {
-    [ -z "$1" ] || cd "$1"
-    tmux_id=$(pwd | sed 's/\./_/g')
-    if [[ -n $TMUX ]]; then
-        tmux switch-client -t $tmux_id
-    else
-        tmux new-session -s $tmux_id || tmux attach -t $tmux_id
-    fi
+tma() {
+	[ -z "$1" ] || cd "$1" || exit
+	tmux_id=$(pwd | sed 's/\./_/g')
+	if [ -n "$TMUX" ]; then
+		tmux switch-client -t "$tmux_id"
+	else
+		tmux new-session -s "$tmux_id" || tmux attach -t "$tmux_id"
+	fi
 }
 
 # Go to the location where tmux server is made
-function tmc() {
-    cd $(tmux display-message -p '#{session_name}')
+tmc() {
+	cd "$(tmux display-message -p '#{session_name}')" || exit
 }
 
 # Go to the location with fzf
-function fcd() {
-    cd $(fd -t d | fz)
+fcd() {
+	cd "$(fd -t d | fz)" || exit
 }
 
 # Record screen without audio
-function scrrec() {
-    Output_Video=Recording-$(date +%F_%T).mp4
-    [ -z "$1" ] || Output_Video=$1
-    wf-recorder -g "$(slurp)" -f ~/Pictures/Recordings/$Output_Video
+scrrec() {
+	Output_Video=Recording-$(date +%F_%T).mp4
+	[ -z "${1}" ] || Output_Video="${1}"
+	wf-recorder -g "$(slurp)" -f ~/Pictures/Recordings/"${Output_Video}"
 }
 
 # Record screen microphone audio
-function scrrecmicaudio(){
-    Output_Video=Recording-$(date +%F_%T).mp4
-    [ -z "$1" ] || Output_Video=$1
-    wf-recorder -g "$(slurp)" -a -f ~/Pictures/Recordings/$Output_Video
+scrrecmicaudio() {
+	Output_Video=Recording-$(date +%F_%T).mp4
+	[ -z "${1}" ] || Output_Video="${1}"
+	wf-recorder -g "$(slurp)" -a -f ~/Pictures/Recordings/"${Output_Video}"
 }
 
 # Record screen output audio
-function scrrecoutaudio(){
-    Output_Video=Recording-$(date +%F_%T).mp4
-    [ -z "$1" ] || Output_Video=$1
-    wf-recorder -g "$(slurp)" --audio=alsa_output.pci-0000_06_00.6.analog-stereo.monitor -f ~/Pictures/Recordings/$Output_Video
+scrrecoutaudio() {
+	Output_Video=Recording-$(date +%F_%T).mp4
+	[ -z "${1}" ] || Output_Video="${1}"
+	wf-recorder -g "$(slurp)" --audio=alsa_output.pci-0000_06_00.6.analog-stereo.monitor -f ~/Pictures/Recordings/"${Output_Video}"
 }
