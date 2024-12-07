@@ -359,6 +359,7 @@ sudo pacman -S --noconfirm --needed gdb ltrace strace
 
 # Git
 sudo pacman -S --noconfirm --needed git
+# sudo pacman -S --noconfirm --needed lazygit
 
 # Networking Tools - ncat, nmap, dig, nslookup, arp, netstat, telnet
 sudo pacman -S --noconfirm --needed openssl openssh inetutils
@@ -618,6 +619,7 @@ for virt_option in "${Virtualization[@]}"; do
 		;;
 	Docker)
 		sudo pacman -S --noconfirm --needed docker docker-buildx
+		# $aur_helper -S --noconfirm --needed lazydocker-bin
 		sudo usermod -aG docker "$USER"
 		;;
 	Virt_Manager)

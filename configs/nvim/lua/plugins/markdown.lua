@@ -4,9 +4,17 @@ return {
 		"lervag/vimtex",
 		ft = "tex", -- only load on tex files
 		init = function()
-			-- VimTeX configuration goes here, e.g.
 			vim.g.vimtex_view_method = "zathura"
 		end,
+	},
+
+	-- Leetcode integration
+	{
+		"kawre/leetcode.nvim",
+		build = ":TSUpdate html",
+		cmd = "Leet",
+		keys = { { "<leader>tl", ":Leet ", desc = "Leetcode Commands" } },
+		opts = {},
 	},
 
 	--  Markdown Render and Preview
@@ -27,7 +35,6 @@ return {
 			})
 			vim.api.nvim_create_user_command("PeekOpen", peek.open, {})
 			vim.api.nvim_create_user_command("PeekClose", peek.close, {})
-			-- vim.keymap.set("n", "<leader>tm", "<cmd>PeekOpen<cr>", { desc = "Markdown Preview" })
 		end,
 	},
 

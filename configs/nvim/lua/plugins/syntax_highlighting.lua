@@ -1,4 +1,17 @@
 return {
+	-- Highlight colors on buffer
+	{ "brenoprata10/nvim-highlight-colors", event = "VeryLazy", opts = { enable_named_colors = false } },
+
+	-- Rose-pine Colortheme
+	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+		opts = { styles = { transparency = true } },
+		init = function()
+			vim.cmd("colorscheme rose-pine")
+		end,
+	},
+
 	-- Hide .env vars
 	{
 		"laytan/cloak.nvim",
@@ -12,6 +25,21 @@ return {
 		},
 	},
 
+	-- Show git changes on file
+	{
+		"lewis6991/gitsigns.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+		opts = {
+			signs = {
+				add = { text = "+" },
+				change = { text = "~" },
+				delete = { text = "_" },
+				topdelete = { text = "‾" },
+				changedelete = { text = "~" },
+			},
+		},
+	},
+
 	-- Treesitter for languages
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -20,7 +48,7 @@ return {
 		opts = {
 			-- ensure_installed = "all",
 			ensure_installed = { "c", "cpp", "lua", "python", "norg" },
-			ignore_install = { "org", "latex" },
+			ignore_install = { "org", "latex", "verilog" },
 			auto_install = true,
 			highlight = {
 				enable = true,

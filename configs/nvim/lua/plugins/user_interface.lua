@@ -1,70 +1,66 @@
 return {
+	-- Replace word in the current directory
+	{
+		"smjonas/inc-rename.nvim",
+		keys = { { "<leader>rn", ":IncRename ", desc = "[R]ename selected keyword,variable" } },
+		opts = {},
+	},
+
+	-- Find color coding
+	{
+		"max397574/colortils.nvim",
+		cmd = "Colortils",
+		keys = { { "<leader>gc", "<cmd>Colortils<cr>", desc = "[G]et [C]olortils" } },
+		opts = {},
+	},
+
 	-- Auto resize windows
 	{
 		"anuvyklack/windows.nvim",
-		dependencies = {
-			"anuvyklack/middleclass",
-			"anuvyklack/animation.nvim",
-		},
-		-- event = "VeryLazy",
+		dependencies = { "anuvyklack/middleclass" },
 		keys = {
 			{ "<leader>wa", "<cmd>WindowsEnableAutowidth<cr>", desc = "[W]indows Enable [A]utowidth" },
 			{ "<leader>wt", "<cmd>WindowsToggleAutowidth<cr>", desc = "[W]indows [T]oggle Autowidth" },
 		},
-		config = function()
-			require("windows").setup()
-		end,
+		opts = {},
 	},
 
-	-- Show keybinding complitions
-	{
-		"folke/which-key.nvim",
-		event = "VeryLazy",
-		opts = {
-			plugins = {
-				presets = {
-					operators = true, -- adds help for operators like d, y, ...
-					motions = false, -- adds help for motions
-					text_objects = true, -- help for text objects triggered after entering an operator
-					windows = true, -- default bindings on <c-w>
-					nav = true, -- misc bindings to work with windows
-					z = true, -- bindings for folds, spelling and others prefixed with z
-					g = true, -- bindings for prefixed with g
-				},
-			},
-			layout = {
-				width = { min = 20, max = 30 }, -- min and max width of the columns
-				spacing = 2, -- spacing between columns
-			},
-		},
-		keys = {
-			{
-				"<leader>?",
-				function()
-					require("which-key").show({ global = false })
-				end,
-				desc = "Buffer Local Keymaps (which-key)",
-			},
-		},
-	},
-
-	-- Have command line on Center, better highlighting and notification
+	-- Command line on middle, show keys, surround and arrounds
 	{
 		"folke/noice.nvim",
-		event = "VeryLazy",
-		opts = {
-			presets = {
-				-- inc_rename = true, -- enables an input dialog for inc-rename.nvim
-				-- bottom_search = true, -- use a classic bottom cmdline for search
-				-- command_palette = true, -- position the cmdline and popupmenu together
-				-- long_message_to_split = true, -- long messages will be sent to a split
-				-- lsp_doc_border = false, -- add a border to hover docs and signature help
-			},
-		},
 		dependencies = {
-			-- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-			"MunifTanjim/nui.nvim",
-			-- "rcarriga/nvim-notify", -- OPTIONAL: `nvim-notify` is only needed, if you want to use the notification view.
+			{ "andymass/vim-matchup" },
+			{ "MunifTanjim/nui.nvim" },
+			{ "folke/which-key.nvim", event = "VeryLazy", opts = {} },
+			{ "echasnovski/mini.ai", opts = { n_lines = 25 } },
+			{ "echasnovski/mini.surround", opts = { n_lines = 25 } },
+		},
+		event = "VeryLazy",
+		opts = {},
+	},
+
+	-- Better notification, lazygit and other features
+	{
+		"folke/snacks.nvim",
+		event = "VimEnter",
+		opts = {
+			quickfile = { enabled = true },
+			statuscolumn = { enabled = true },
+			bigfile = { enabled = true, size = 1048576 },
+			notifier = { enabled = true, width = { min = 15, max = 45 }, top_down = false },
+			styles = { notification = { wo = { wrap = true } } },
+		},
+		keys = {
+			{ "<leader>.", "<cmd>lua Snacks.scratch()<cr>", desc = "Toggle Scratch Buffer" },
+			{ "<leader>S", "<cmd>lua Snacks.scratch.select()<cr>", desc = "Select Scratch Buffer" },
+			{ "<leader>nf", "Snacks.notifier.show_history()", desc = "Notification History" },
+			{ "<leader>bk", "Snacks.bufdelete()", desc = "Delete Buffer" },
+			{ "<leader>rf", "<cmd>lua Snacks.rename.rename_file()<cr>", desc = "Rename File" },
+			{ "<leader>gu", "<cmd>lua Snacks.gitbrowse()<cr>", desc = "Git Browse" },
+			{ "<leader>gi", "<cmd>lua Snacks.git.blame_line()<cr>", desc = "Git Blame Line" },
+			-- { "<leader>gf", "<cmd>lua Snacks.lazygit.log_file()<cr>", desc = "Lazygit Current File History" },
+			-- { "<leader>gg", "<cmd>lua Snacks.lazygit()<cr>", desc = "Lazygit" },
+			-- { "<leader>gl", "<cmd>lua Snacks.lazygit.log()<cr>", desc = "Lazygit Log (cwd)" },
 		},
 	},
 }

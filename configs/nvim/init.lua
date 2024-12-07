@@ -1,10 +1,10 @@
--- Include nvim variables and keybindings
+-- Include nvim options, keybindings, statusline
 require("settings")
 require("statusline")
 require("keybindings")
 require("autocmd_bindings")
 
--- Setup Lazy pluginmanager
+-- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -21,6 +21,6 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Setup lazy to load from lua/plugins/
-require("lazy").setup("plugins")
+-- Setup lazy.nvim
+require("lazy").setup({ spec = { { import = "plugins" } } })
 vim.keymap.set("n", "<leader>ml", "<cmd>Lazy<CR>", { desc = "Lazy Install" })

@@ -3,10 +3,15 @@ return {
 	{
 		"nvim-flutter/flutter-tools.nvim",
 		ft = "dart",
-		keys = {
-			{ "<leader>rf", "<cmd>!tmux send-keys -t 'flutter' r<cr>", desc = "[R]eload [F]lutter" },
-			{ "<leader>rF", "<cmd>!tmux send-keys -t 'flutter' R<cr>", desc = "[R]estart [F]lutter" },
-		},
+		config = function()
+			vim.api.nvim_create_autocmd("BufWritePost", {
+				group = vim.api.nvim_create_augroup("flutter reload", { clear = true }),
+				pattern = "*.dart",
+				callback = function()
+					vim.fn.system("tmux has-session -t 'flutter' && tmux send-keys -t 'flutter' r")
+				end,
+			})
+		end,
 	},
 
 	-- Linter
@@ -16,14 +21,14 @@ return {
 		config = function()
 			local lint = require("lint")
 			lint.linters_by_ft = {
-				-- python = { "ruff" },
 				sh = { "shellcheck" },
 				html = { "htmlhint" },
 				json = { "jsonlint" },
 				markdown = { "markdownlint" },
 			}
-			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
+			-- Autogroup for linting
+			local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
 				group = lint_augroup,
 				callback = function()
@@ -97,6 +102,8 @@ return {
 					"rust_analyzer", --rust
 					"lua_ls", -- lua
 					"pyright", -- python
+					"ruff", -- python linter
+					"verible", -- verilog linter
 					"texlab", -- latex
 					"zls", -- zig
 					"gopls", -- golang

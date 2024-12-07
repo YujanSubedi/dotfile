@@ -10,6 +10,7 @@
 | shell    |                          | bash-debug-adapter     | shellcheck   | beautysh, shfmt |
 | lua      | lua_ls                   |                        |              | stylua          |
 | python   | pyright                  | debugpy                | ruff         | yapf            |
+| verilog  |                          |                        | verible      |                 |
 | latex    | texlab                   |                        |              |                 |
 | markdown |                          |                        | markdownlint | prettier        |
 | golang   | gopls                    | delve                  |              |                 |
@@ -22,10 +23,33 @@
 Install Dap, Linter and Formatter:
 
 ```txt
-MasonInstall codelldb bash-debug-adapter shellcheck beautysh shfmt stylua debugpy ruff yapf markdownlint prettier delve jsonlint htmlhint
+MasonInstall codelldb bash-debug-adapter shellcheck beautysh shfmt stylua debugpy yapf markdownlint prettier delve jsonlint htmlhint
 ```
 
 ### Extra plugins that are may be useful
+
+- Harpon For saving buffer state
+
+```lua
+{
+    "ThePrimeagen/harpoon",
+    event = "VeryLazy",
+    branch = "harpoon2",
+    config = function()
+        local harpoon = require("harpoon") harpoon:setup() vim.keymap.set("n", "<A-a>", function() harpoon:list():add() end, { desc = "Add to Harpoon buffers" })
+        vim.keymap.set("n", "<A-0>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end, { desc = "Show all Harpoon buffers" })
+        vim.keymap.set("n", "<A-1>", function() harpoon:list():select(1) end, { desc = "Goto Harpoon buffer 1" })
+        vim.keymap.set("n", "<A-2>", function() harpoon:list():select(2) end, { desc = "Goto Harpoon buffer 2" })
+        vim.keymap.set("n", "<A-3>", function() harpoon:list():select(3) end, { desc = "Goto Harpoon buffer 3" })
+        vim.keymap.set("n", "<A-4>", function() harpoon:list():select(4) end, { desc = "Goto Harpoon buffer 4" })
+        vim.keymap.set("n", "<A-5>", function() harpoon:list():select(5) end, { desc = "Goto Harpoon buffer 5" })
+        vim.keymap.set("n", "<A-6>", function() harpoon:list():select(6) end, { desc = "Goto Harpoon buffer 6" })
+        vim.keymap.set("n", "<A-7>", function() harpoon:list():select(7) end, { desc = "Goto Harpoon buffer 7" })
+        vim.keymap.set("n", "<A-8>", function() harpoon:list():select(8) end, { desc = "Goto Harpoon buffer 8" })
+        vim.keymap.set("n", "<A-9>", function() harpoon:list():select(9) end, { desc = "Goto Harpoon buffer 9" })
+    end,
+},
+```
 
 - Todo Highlight
 

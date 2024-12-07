@@ -1,17 +1,22 @@
 return {
 	-- Auto complete brackets
-	{ "m4xshen/autoclose.nvim", event = "VeryLazy", opts = {} },
+	{ "altermo/ultimate-autopair.nvim", event = "VeryLazy", opts = {} },
 
 	-- Snippet Courtesy of @Zeioth,
 	{
 		"L3MON4D3/LuaSnip",
-		dependencies = {
-			"rafamadriz/friendly-snippets",
-			-- "benfowler/telescope-luasnip.nvim",
-		},
+		dependencies = { "rafamadriz/friendly-snippets" },
 		event = "VeryLazy",
 		build = vim.fn.has("win32") ~= 0 and "make install_jsregexp" or nil,
 		config = function(_, opts)
+			-- -- Custom snippets
+			local custom_snippets = require("snippets")
+			require("luasnip").add_snippets("cpp", custom_snippets.cpp)
+			require("luasnip").add_snippets("c", custom_snippets.c)
+			require("luasnip").add_snippets("verilog", custom_snippets.verilog)
+			require("luasnip").add_snippets("systemverilog", custom_snippets.systemverilog)
+
+			-- Vscode Snippet
 			local Luasnip = require("luasnip")
 			if opts then
 				Luasnip.config.setup(opts)
@@ -106,9 +111,7 @@ return {
 			cmp.setup.cmdline({ "/", "?" }, { sources = { { name = "buffer" } } })
 
 			-- Completion within the commandline
-			cmp.setup.cmdline(":", {
-				sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }),
-			})
+			cmp.setup.cmdline(":", { sources = cmp.config.sources({ { name = "path" } }, { { name = "cmdline" } }) })
 		end,
 	},
 }

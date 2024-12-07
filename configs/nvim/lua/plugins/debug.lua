@@ -12,10 +12,28 @@ return {
 		branch = "master",
 		build = "sh install.sh",
 		cmd = "SnipRun",
+		opts = { display = { "Terminal" } },
 		keys = {
 			{ "<leader>ss", "<cmd>SnipRun<CR>", mode = "v", desc = "[S]nip [R]un visual" },
 			{ "<leader>ss", "<cmd>%SnipRun<CR>", desc = "[S]nip [R]un" },
 			{ "<leader>sk", "<cmd>SnipClose<CR>", desc = "[S]nip [K]ill" },
+		},
+	},
+
+	-- Competitive coding tests
+	{
+		"xeluxee/competitest.nvim",
+		cmd = "CompetiTest",
+		keys = {
+			{ "<leader>te", "<cmd>CompetiTest run<cr>", desc = "Execute testcase" },
+			{ "<leader>ti", "<cmd>CompetiTest add_testcase<cr>", desc = "Add testcases" },
+			{ "<leader>tt", "<cmd>CompetiTest edit_testcase<cr>", desc = "Edit testcase" },
+		},
+		opts = {
+			editor_ui = {
+				normal_mode_mappings = { switch_window = { "<A-i>", "<leader><Tab>" } },
+				insert_mode_mappings = { switch_window = { "<A-i>" } },
+			},
 		},
 	},
 

@@ -1,4 +1,31 @@
 return {
+	-- Enhanced f, F, t, T and remap s to serarch
+	{
+		"folke/flash.nvim",
+		keys = {
+			{ "<a-s>", mode = { "n", "x", "o" }, "<cmd>lua require('flash').jump()<cr>", desc = "Flash" },
+			{ "<a-S>", mode = { "n", "x", "o" }, "<cmd>lua require('flash').treesitter()<cr>", desc = "Flash Tree" },
+			{ "r", mode = "o", "<cmd>lua require('flash').remote()<cr>", desc = "Remote Flash" },
+			{ "R", mode = { "o", "x" }, "<cmd>lua require('flash').treesitter_search()<cr>", desc = "Tree Search" },
+			{ "<c-s>", mode = { "c" }, "<cmd>lua require('flash').toggle()<cr>", desc = "Toggle Flash Search" },
+		},
+		opts = {},
+	},
+
+	-- Quickfix and Symbols jumps
+	{
+		"folke/trouble.nvim",
+		cmd = "Trouble",
+		opts = {}, -- for default options, refer to the configuration section for custom setup.
+		keys = {
+			{ "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", desc = "Quickfix List (Trouble)" },
+			{ "<leader>xL", "<cmd>Trouble loclist toggle<cr>", desc = "Location List (Trouble)" },
+			{ "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Diagnostics (Trouble)" },
+			{ "<leader>ta", "<cmd>Trouble symbols toggle focus=false<cr>", desc = "Symbols (Trouble)" },
+			{ "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", desc = "Buffer (Trouble)" },
+		},
+	},
+
 	-- Telescope for navigation
 	{
 		"nvim-telescope/telescope.nvim",
@@ -8,7 +35,6 @@ return {
 			"nvim-telescope/telescope-fzf-native.nvim",
 			"nvim-telescope/telescope-ui-select.nvim",
 			"nvim-tree/nvim-web-devicons",
-			"debugloop/telescope-undo.nvim",
 		},
 		config = function()
 			require("telescope").setup({
@@ -21,7 +47,7 @@ return {
 
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
-			pcall(require("telescope").load_extension, "undo")
+			-- pcall(require("telescope").load_extension, "noice")
 
 			-- Telescope keymaps
 			local builtin = require("telescope.builtin")
@@ -36,13 +62,10 @@ return {
 			vim.keymap.set("n", "<leader>fr", builtin.resume, { desc = "[F]ind [R]esume Telescope" })
 			vim.keymap.set("n", "<leader>fc", builtin.colorscheme, { desc = "[F]ind [C]olorScheme Telescope" })
 			vim.keymap.set("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers Telescope" })
-			vim.keymap.set("n", "<leader>gf", builtin.git_files, { desc = "[G]it [F]ile Search Telescope" })
-			vim.keymap.set("n", "<leader>gg", builtin.git_bcommits, { desc = "[G]it [G]et Buffer Commits Telescope" })
-			vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "[G]it [S]tatus Telescope" })
 			vim.keymap.set("n", "<A-f>", builtin.find_files, { desc = "[F]ind [F]iles Telescope" })
 			vim.keymap.set("n", "<A-g>", builtin.live_grep, { desc = "[F]ind by [G]rep Telescope" })
-			vim.keymap.set("n", "<leader>u", "<cmd>Telescope undo<cr>", { desc = "[U]ndo Tree Telescope" })
-			vim.keymap.set("n", "<A-u>", "<cmd>Telescope undo<cr>", { desc = "[U]ndo Tree Telescope" })
+			vim.keymap.set("n", "<leader>gg", builtin.git_bcommits, { desc = "Git Buffer Commits" })
+			vim.keymap.set("n", "<leader>gs", builtin.git_status, { desc = "Git Status" })
 
 			-- Additional telescope keymaps
 			vim.keymap.set("n", "<leader>/", function()
@@ -77,50 +100,6 @@ return {
 					map("K", vim.lsp.buf.hover, "Hover Documentation")
 				end,
 			})
-		end,
-	},
-
-	-- Harpon For saving buffer state
-	{
-		"ThePrimeagen/harpoon",
-		event = "VeryLazy",
-		branch = "harpoon2",
-		config = function()
-			local harpoon = require("harpoon")
-			harpoon:setup()
-			vim.keymap.set("n", "<A-a>", function()
-				harpoon:list():add()
-			end, { desc = "Add to Harpoon buffers" })
-			vim.keymap.set("n", "<A-1>", function()
-				harpoon:list():select(1)
-			end, { desc = "Goto Harpoon buffer 1" })
-			vim.keymap.set("n", "<A-2>", function()
-				harpoon:list():select(2)
-			end, { desc = "Goto Harpoon buffer 2" })
-			vim.keymap.set("n", "<A-3>", function()
-				harpoon:list():select(3)
-			end, { desc = "Goto Harpoon buffer 3" })
-			vim.keymap.set("n", "<A-4>", function()
-				harpoon:list():select(4)
-			end, { desc = "Goto Harpoon buffer 4" })
-			vim.keymap.set("n", "<A-5>", function()
-				harpoon:list():select(5)
-			end, { desc = "Goto Harpoon buffer 5" })
-			vim.keymap.set("n", "<A-6>", function()
-				harpoon:list():select(6)
-			end, { desc = "Goto Harpoon buffer 6" })
-			vim.keymap.set("n", "<A-7>", function()
-				harpoon:list():select(7)
-			end, { desc = "Goto Harpoon buffer 7" })
-			vim.keymap.set("n", "<A-8>", function()
-				harpoon:list():select(8)
-			end, { desc = "Goto Harpoon buffer 8" })
-			vim.keymap.set("n", "<A-9>", function()
-				harpoon:list():select(9)
-			end, { desc = "Goto Harpoon buffer 9" })
-			vim.keymap.set("n", "<A-0>", function()
-				harpoon.ui:toggle_quick_menu(harpoon:list())
-			end, { desc = "Show all Harpoon buffers" })
 		end,
 	},
 }
