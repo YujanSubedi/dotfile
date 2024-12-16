@@ -3,7 +3,7 @@ return {
 	{
 		"lervag/vimtex",
 		ft = "tex", -- only load on tex files
-		init = function()
+		config = function()
 			vim.g.vimtex_view_method = "zathura"
 		end,
 	},
@@ -17,24 +17,19 @@ return {
 		opts = {},
 	},
 
-	--  Markdown Render and Preview
+	-- Flutter
 	{
-		"toppair/peek.nvim",
-		dependencies = {
-			"MeanderingProgrammer/render-markdown.nvim",
-			{ "SCJangra/table-nvim", opts = {} },
-			{ "jghauser/follow-md-links.nvim" },
-		},
-		ft = "markdown", -- only load on markdown files
-		build = "deno task --quiet build:fast",
+		"nvim-flutter/flutter-tools.nvim",
+		ft = "dart", -- only load on dart files
 		config = function()
-			local peek = require("peek")
-			peek.setup({
-				app = "zen-browser",
-				-- theme = "light",
+			-- Auto reload on save
+			vim.api.nvim_create_autocmd("BufWritePost", {
+				group = vim.api.nvim_create_augroup("flutter reload", { clear = true }),
+				pattern = "*.dart",
+				callback = function()
+					vim.fn.system("tmux has-session -t 'flutter' && tmux send-keys -t 'flutter' r")
+				end,
 			})
-			vim.api.nvim_create_user_command("PeekOpen", peek.open, {})
-			vim.api.nvim_create_user_command("PeekClose", peek.close, {})
 		end,
 	},
 
@@ -48,14 +43,26 @@ return {
 			load = {
 				["core.defaults"] = {},
 				["core.concealer"] = {},
-				["core.dirman"] = {
-					config = {
-						workspaces = { notes = "~/notes" },
-						default_workspace = "notes",
-					},
-				},
+				["core.dirman"] = { config = { workspaces = { notes = "~/notes" }, default_workspace = "notes" } },
 			},
 		},
+	},
+
+	--  Markdown Render and Preview
+	{
+		"toppair/peek.nvim",
+		dependencies = {
+			"MeanderingProgrammer/render-markdown.nvim",
+			{ "SCJangra/table-nvim", opts = {} },
+		},
+		ft = "markdown", -- only load on markdown files
+		build = "deno task --quiet build:fast",
+		config = function()
+			local peek = require("peek")
+			peek.setup({ app = "zen-browser" })
+			vim.api.nvim_create_user_command("PeekOpen", peek.open, {})
+			vim.api.nvim_create_user_command("PeekClose", peek.close, {})
+		end,
 	},
 
 	-- Orgmode

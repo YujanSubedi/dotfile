@@ -10,7 +10,7 @@ return {
 	{
 		"max397574/colortils.nvim",
 		cmd = "Colortils",
-		keys = { { "<leader>gc", "<cmd>Colortils<cr>", desc = "[G]et [C]olortils" } },
+		keys = { { "<leader>cs", "<cmd>Colortils<cr>", desc = "[C]olortils [S]elections" } },
 		opts = {},
 	},
 
@@ -18,20 +18,16 @@ return {
 	{
 		"anuvyklack/windows.nvim",
 		dependencies = { "anuvyklack/middleclass" },
-		keys = {
-			{ "<leader>wa", "<cmd>WindowsEnableAutowidth<cr>", desc = "[W]indows Enable [A]utowidth" },
-			{ "<leader>wt", "<cmd>WindowsToggleAutowidth<cr>", desc = "[W]indows [T]oggle Autowidth" },
-		},
+		keys = { { "<leader>wt", "<cmd>WindowsToggleAutowidth<cr>", desc = "[W]indows [T]oggle Autowidth" } },
+		event = "VeryLazy",
 		opts = {},
 	},
 
-	-- Command line on middle, show keys, surround and arrounds
+	-- Autopair around surround
 	{
-		"folke/noice.nvim",
+		"altermo/ultimate-autopair.nvim",
 		dependencies = {
 			{ "andymass/vim-matchup" },
-			{ "MunifTanjim/nui.nvim" },
-			{ "folke/which-key.nvim", event = "VeryLazy", opts = {} },
 			{ "echasnovski/mini.ai", opts = { n_lines = 25 } },
 			{ "echasnovski/mini.surround", opts = { n_lines = 25 } },
 		},
@@ -39,9 +35,14 @@ return {
 		opts = {},
 	},
 
-	-- Better notification, lazygit and other features
+	-- Better Notification, Command line and which key
 	{
 		"folke/snacks.nvim",
+		dependencies = {
+			{ "MunifTanjim/nui.nvim" },
+			{ "folke/noice.nvim", opts = {} },
+			{ "folke/which-key.nvim", opts = {} },
+		},
 		event = "VimEnter",
 		opts = {
 			quickfile = { enabled = true },
@@ -53,8 +54,8 @@ return {
 		keys = {
 			{ "<leader>.", "<cmd>lua Snacks.scratch()<cr>", desc = "Toggle Scratch Buffer" },
 			{ "<leader>S", "<cmd>lua Snacks.scratch.select()<cr>", desc = "Select Scratch Buffer" },
-			{ "<leader>nf", "Snacks.notifier.show_history()", desc = "Notification History" },
-			{ "<leader>bk", "Snacks.bufdelete()", desc = "Delete Buffer" },
+			{ "<leader>nf", "<cmd>lua Snacks.notifier.show_history()<cr>", desc = "Notification History" },
+			{ "<leader>bk", "<cmd>lua Snacks.bufdelete()<cr>", desc = "Delete Buffer" },
 			{ "<leader>rf", "<cmd>lua Snacks.rename.rename_file()<cr>", desc = "Rename File" },
 			{ "<leader>gu", "<cmd>lua Snacks.gitbrowse()<cr>", desc = "Git Browse" },
 			{ "<leader>gi", "<cmd>lua Snacks.git.blame_line()<cr>", desc = "Git Blame Line" },

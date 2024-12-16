@@ -19,10 +19,10 @@ user_pref("browser.fullscreen.autohide", false);
 user_pref("full-screen-api.ignore-widgets", true);
 
 // History and downloads
-user_pref("privacy.cpd.cache", true);    // [DEFAULT: true]
+user_pref("privacy.cpd.cache", true); // [DEFAULT: true]
 user_pref("privacy.clearHistory.cache", true);
 user_pref("privacy.cpd.formdata", true); // [DEFAULT: true]
-user_pref("privacy.cpd.history", true);  // [DEFAULT: true]
+user_pref("privacy.cpd.history", true); // [DEFAULT: true]
 // user_pref("privacy.cpd.downloads", true); // not used, see note above
 user_pref("privacy.clearHistory.historyFormDataAndDownloads", true);
 user_pref("privacy.cpd.cookies", false);

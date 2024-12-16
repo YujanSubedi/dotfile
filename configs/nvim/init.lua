@@ -1,8 +1,8 @@
--- Include nvim options, keybindings, statusline
+-- Include nvim options, keybindings, statusline, and autocommands
 require("settings")
-require("statusline")
 require("keybindings")
-require("autocmd_bindings")
+require("statusline")
+require("autocmd_opts")
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

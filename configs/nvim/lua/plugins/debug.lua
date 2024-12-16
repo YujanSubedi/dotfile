@@ -12,12 +12,12 @@ return {
 		branch = "master",
 		build = "sh install.sh",
 		cmd = "SnipRun",
-		opts = { display = { "Terminal" } },
 		keys = {
 			{ "<leader>ss", "<cmd>SnipRun<CR>", mode = "v", desc = "[S]nip [R]un visual" },
 			{ "<leader>ss", "<cmd>%SnipRun<CR>", desc = "[S]nip [R]un" },
 			{ "<leader>sk", "<cmd>SnipClose<CR>", desc = "[S]nip [K]ill" },
 		},
+		opts = { display = { "Terminal" } },
 	},
 
 	-- Competitive coding tests
@@ -31,7 +31,7 @@ return {
 		},
 		opts = {
 			editor_ui = {
-				normal_mode_mappings = { switch_window = { "<A-i>", "<leader><Tab>" } },
+				normal_mode_mappings = { switch_window = { "<A-i>", "<A-j>", "<A-k>", "<leader><Tab>" } },
 				insert_mode_mappings = { switch_window = { "<A-i>" } },
 			},
 		},
@@ -42,16 +42,16 @@ return {
 		"mfussenegger/nvim-dap",
 		dependencies = {
 			"rcarriga/nvim-dap-ui",
+			-- "nvim-neotest/nvim-nio",
 			"theHamsta/nvim-dap-virtual-text",
 			{ "jay-babu/mason-nvim-dap.nvim", opts = { handlers = {} } },
 		},
 		keys = {
-			{ "<leader>db", "<cmd>DapToggleBreakpoint<cr>", desc = "Add breakpoint at line" },
+			{ "<leader>db", "<cmd>DapToggleBreakpoint<cr>", desc = "Add breakpoint at line debugger" },
 			{ "<leader>dr", "<cmd>DapContinue<cr>", desc = "Start or continue the debugger" },
-			{ "<A-b>", "<cmd>DapToggleBreakpoint<cr>", desc = "Add breakpoint at line" },
+			{ "<A-b>", "<cmd>DapToggleBreakpoint<cr>", desc = "Add breakpoint at line debugger" },
 			{ "<A-r>", "<cmd>DapContinue<cr>", desc = "Start or continue the debugger" },
 		},
-
 		config = function()
 			local dap = require("dap")
 			local dapui = require("dapui")

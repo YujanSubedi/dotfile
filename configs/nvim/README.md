@@ -54,34 +54,34 @@ MasonInstall codelldb bash-debug-adapter shellcheck beautysh shfmt stylua debugp
 - Todo Highlight
 
 ```lua
-    {
-        "folke/todo-comments.nvim",
-        event = { "BufReadPre", "BufNewFile" },
-        opts = { signs = false },
-    },
+{
+    "folke/todo-comments.nvim",
+    event = "VeryLazy",
+    opts = { signs = false },
+},
 ```
 
 - Show context
 
 ```lua
-    {
-        "utilyre/barbecue.nvim",
-        name = "barbecue",
-        event = "VeryLazy",
-        dependencies = { "SmiteshP/nvim-navic" },
-        opts = { show_dirname = false, show_modified = true, },
-    },
+{
+    "utilyre/barbecue.nvim",
+    name = "barbecue",
+    event = "VeryLazy",
+    dependencies = { "SmiteshP/nvim-navic" },
+    opts = { show_dirname = false, show_modified = true, },
+},
 ```
 
 - Show context and jump
 
 ```lua
-    {
-        "SmiteshP/nvim-navbuddy",
-        dependencies = { "SmiteshP/nvim-navic" },
-        keys = { { "<leader>ta", "<cmd>NavBuddy<CR>", desc = "[T]oggle [N]avbuddy View" } },
-        opts = { lsp = { auto_attach = true } },
-    },
+{
+    "SmiteshP/nvim-navbuddy",
+    dependencies = { "SmiteshP/nvim-navic" },
+    keys = { { "<leader>ta", "<cmd>NavBuddy<CR>", desc = "[T]oggle [N]avbuddy View" } },
+    opts = { lsp = { auto_attach = true } },
+},
 ```
 
 - Aerial View

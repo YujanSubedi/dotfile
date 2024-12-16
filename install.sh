@@ -324,6 +324,7 @@ sudo pacman -S --noconfirm --needed go
 # Rust
 # sudo pacman -S --noconfirm --needed rust
 sudo pacman -S --noconfirm --needed rustup && rustup default stable
+rustup component add rust-analyzer
 
 # Zig
 sudo pacman -S --noconfirm --needed zig

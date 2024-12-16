@@ -1,29 +1,25 @@
 return {
-	-- Auto complete brackets
-	{ "altermo/ultimate-autopair.nvim", event = "VeryLazy", opts = {} },
-
-	-- Snippet Courtesy of @Zeioth,
+	-- Code Snippet
 	{
 		"L3MON4D3/LuaSnip",
 		dependencies = { "rafamadriz/friendly-snippets" },
 		event = "VeryLazy",
 		build = vim.fn.has("win32") ~= 0 and "make install_jsregexp" or nil,
-		config = function(_, opts)
-			-- -- Custom snippets
-			local custom_snippets = require("snippets")
-			require("luasnip").add_snippets("cpp", custom_snippets.cpp)
-			require("luasnip").add_snippets("c", custom_snippets.c)
-			require("luasnip").add_snippets("verilog", custom_snippets.verilog)
-			require("luasnip").add_snippets("systemverilog", custom_snippets.systemverilog)
+		config = function()
+			local Luasnip = require("luasnip")
+
+			-- Custom snippets
+			local custom_snippets = require("custom_snippets")
+			Luasnip.add_snippets("cpp", custom_snippets.cpp)
+			Luasnip.add_snippets("c", custom_snippets.c)
+			Luasnip.add_snippets("verilog", custom_snippets.verilog)
+			Luasnip.add_snippets("systemverilog", custom_snippets.systemverilog)
 
 			-- Vscode Snippet
-			local Luasnip = require("luasnip")
-			if opts then
-				Luasnip.config.setup(opts)
-			end
 			vim.tbl_map(function(type)
 				require("luasnip.loaders.from_" .. type).lazy_load()
 			end, { "vscode", "snipmate", "lua" })
+
 			-- friendly-snippets - enable standardized comments snippets
 			Luasnip.filetype_extend("c", { "cdoc" })
 			Luasnip.filetype_extend("sh", { "shelldoc" })
@@ -45,11 +41,11 @@ return {
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
-			"hrsh7th/cmp-buffer", -- source for text in buffer
-			"hrsh7th/cmp-path", -- source for file system paths in commands
-			"hrsh7th/cmp-nvim-lsp", -- source for file system paths in commands
-			"hrsh7th/cmp-cmdline", -- source for file system paths in commands
-			"saadparwaiz1/cmp_luasnip", -- source for luasnip
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-nvim-lsp",
+			"saadparwaiz1/cmp_luasnip",
 		},
 		event = "VeryLazy",
 		config = function()
@@ -71,40 +67,23 @@ return {
 					["<A-w>"] = cmp.mapping.confirm({ select = true }),
 
 					-- Tab for next
-					["<Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_next_item()
-						elseif luasnip.expand_or_jumpable() then
-							luasnip.expand_or_jump()
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
+					-- ["<Tab>"] = cmp.mapping(function(fallback)
+					-- 	if cmp.visible() then cmp.select_next_item()
+					-- 	elseif luasnip.expand_or_jumpable() then luasnip.expand_or_jump()
+					-- 	else fallback() end end, { "i", "s" }),
+					--
+					-- Shift Tab for previous
+					-- ["<S-Tab>"] = cmp.mapping(function(fallback)
+					-- 	if cmp.visible() then cmp.select_prev_item()
+					-- 	elseif luasnip.jumpable(-1) then luasnip.jump(-1)
+					-- 	else fallback() end end, { "i", "s" }),
 
-					["<S-Tab>"] = cmp.mapping(function(fallback)
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif luasnip.jumpable(-1) then
-							luasnip.jump(-1)
-						else
-							fallback()
-						end
-					end, { "i", "s" }),
-
-					-- -- Enter for completion
-					-- ["<CR>"] = cmp.mapping.confirm {
-					-- 	behavior = cmp.ConfirmBehavior.Insert,
-					-- 	select = true,
-					-- },
+					-- Enter for completion
+					-- ["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = false }),
 				}),
 
 				-- sources for autocompletion
-				sources = {
-					{ name = "nvim_lsp" },
-					{ name = "luasnip" }, -- snippets
-					{ name = "buffer" }, -- text within current buffer
-					{ name = "path" }, -- file system paths
-				},
+				sources = { { name = "nvim_lsp" }, { name = "luasnip" }, { name = "buffer" }, { name = "path" } },
 			})
 
 			-- Completion within the search

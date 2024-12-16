@@ -1,17 +1,12 @@
 return {
-	-- Flutter
+	-- Mason Installer
 	{
-		"nvim-flutter/flutter-tools.nvim",
-		ft = "dart",
-		config = function()
-			vim.api.nvim_create_autocmd("BufWritePost", {
-				group = vim.api.nvim_create_augroup("flutter reload", { clear = true }),
-				pattern = "*.dart",
-				callback = function()
-					vim.fn.system("tmux has-session -t 'flutter' && tmux send-keys -t 'flutter' r")
-				end,
-			})
-		end,
+		"williamboman/mason.nvim",
+		event = "VeryLazy",
+		keys = { { "<leader>mm", "<cmd>Mason<CR>", desc = "Go to [M]ason [I]nstall" } },
+		opts = {
+			ui = { icons = { package_installed = "󱄅 ", package_pending = " ", package_uninstalled = "󱌣 " } },
+		},
 	},
 
 	-- Linter
@@ -61,45 +56,29 @@ return {
 					html = { "prettier" },
 					json = { "prettier" },
 				},
-				format_on_save = {
-					lsp_fallback = true,
-					async = false,
-					timeout_ms = 300,
-				},
+				format_on_save = { lsp_fallback = true, async = false, timeout_ms = 300 },
 			})
 
 			vim.keymap.set({ "n", "v" }, "<leader>mf", function()
-				conform.format({
-					lsp_fallback = true,
-					async = false,
-					timeout_ms = 1000,
-				})
+				conform.format({ lsp_fallback = true, async = false, timeout_ms = 1000 })
 			end, { desc = "Format the current buffer" })
 		end,
 	},
 
-	-- Mason Installer
+	-- Language Server Protocol
 	{
-		"neovim/nvim-lspconfig",
+		"williamboman/mason-lspconfig.nvim",
 		dependencies = {
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
+			"neovim/nvim-lspconfig",
 		},
 		event = "VeryLazy",
-		keys = { { "<leader>mm", "<cmd>Mason<CR>", desc = "Go to [M]ason [I]nstall" } },
-
 		config = function()
-			require("mason").setup({
-				ui = {
-					icons = { package_installed = "󱄅 ", package_pending = " ", package_uninstalled = "󱌣 " },
-				},
-			})
-
-			-- Language Server Protocol
+			local lspconfig = require("lspconfig")
 			require("mason-lspconfig").setup({
+				automatic_installation = false,
 				ensure_installed = {
 					"clangd", -- c/c++
-					"rust_analyzer", --rust
+					-- "rust_analyzer", --rust
 					"lua_ls", -- lua
 					"pyright", -- python
 					"ruff", -- python linter
@@ -109,16 +88,19 @@ return {
 					"gopls", -- golang
 					"cssls", -- css
 					"ts_ls", -- js/ts
+					"dockerls", -- docker
 				},
 				handlers = {
 					function(server_name)
-						require("lspconfig")[server_name].setup({})
+						lspconfig[server_name].setup({})
 					end,
+					-- Install by rustup
+					lspconfig.rust_analyzer.setup({
+						settings = { ["rust-analyzer"] = { cargo = { allFeatures = true } } },
+					}),
 				},
 			})
-
-			-- Start Server
-			vim.cmd("LspStart")
+			vim.cmd("LspStart") -- Start Server
 		end,
 	},
 }

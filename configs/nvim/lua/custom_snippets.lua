@@ -1,3 +1,4 @@
+-- Custom Code snippet:
 local ls = require("luasnip")
 local rep = require("luasnip.extras").rep
 local s = ls.snippet

@@ -28,7 +28,7 @@ return {
 	-- Show git changes on file
 	{
 		"lewis6991/gitsigns.nvim",
-		event = { "BufReadPre", "BufNewFile" },
+		event = "VeryLazy",
 		opts = {
 			signs = {
 				add = { text = "+" },
@@ -46,14 +46,10 @@ return {
 		event = "VimEnter",
 		build = ":TSUpdate",
 		opts = {
-			-- ensure_installed = "all",
-			ensure_installed = { "c", "cpp", "lua", "python", "norg" },
-			ignore_install = { "org", "latex", "verilog" },
 			auto_install = true,
-			highlight = {
-				enable = true,
-				additional_vim_regex_highlighting = { "ruby" },
-			},
+			ignore_install = { "org", "latex", "verilog" },
+			ensure_installed = { "c", "cpp", "lua", "python", "norg" },
+			highlight = { enable = true, additional_vim_regex_highlighting = { "ruby" } },
 			indent = { enable = true, disable = { "ruby" } },
 		},
 		config = function(_, opts)
