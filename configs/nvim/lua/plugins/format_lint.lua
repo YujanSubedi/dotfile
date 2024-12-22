@@ -1,12 +1,9 @@
 return {
-	-- Mason Installer
+	-- Config nvim with lua
 	{
-		"williamboman/mason.nvim",
-		event = "VeryLazy",
-		keys = { { "<leader>mm", "<cmd>Mason<CR>", desc = "Go to [M]ason [I]nstall" } },
-		opts = {
-			ui = { icons = { package_installed = "󱄅 ", package_pending = " ", package_uninstalled = "󱌣 " } },
-		},
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		opts = { library = { { path = "luvit-meta/library", words = { "vim%.uv" } } } },
 	},
 
 	-- Linter
@@ -55,6 +52,7 @@ return {
 					css = { "prettier" },
 					html = { "prettier" },
 					json = { "prettier" },
+					jsonc = { "prettier" },
 				},
 				format_on_save = { lsp_fallback = true, async = false, timeout_ms = 300 },
 			})
@@ -62,45 +60,6 @@ return {
 			vim.keymap.set({ "n", "v" }, "<leader>mf", function()
 				conform.format({ lsp_fallback = true, async = false, timeout_ms = 1000 })
 			end, { desc = "Format the current buffer" })
-		end,
-	},
-
-	-- Language Server Protocol
-	{
-		"williamboman/mason-lspconfig.nvim",
-		dependencies = {
-			"neovim/nvim-lspconfig",
-		},
-		event = "VeryLazy",
-		config = function()
-			local lspconfig = require("lspconfig")
-			require("mason-lspconfig").setup({
-				automatic_installation = false,
-				ensure_installed = {
-					"clangd", -- c/c++
-					-- "rust_analyzer", --rust
-					"lua_ls", -- lua
-					"pyright", -- python
-					"ruff", -- python linter
-					"verible", -- verilog linter
-					"texlab", -- latex
-					"zls", -- zig
-					"gopls", -- golang
-					"cssls", -- css
-					"ts_ls", -- js/ts
-					"dockerls", -- docker
-				},
-				handlers = {
-					function(server_name)
-						lspconfig[server_name].setup({})
-					end,
-					-- Install by rustup
-					lspconfig.rust_analyzer.setup({
-						settings = { ["rust-analyzer"] = { cargo = { allFeatures = true } } },
-					}),
-				},
-			})
-			vim.cmd("LspStart") -- Start Server
 		end,
 	},
 }

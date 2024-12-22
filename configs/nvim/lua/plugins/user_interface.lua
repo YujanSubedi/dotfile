@@ -23,16 +23,16 @@ return {
 		opts = {},
 	},
 
-	-- Autopair around surround
+	-- Mini Git diff signs, Arround and Surround
 	{
-		"altermo/ultimate-autopair.nvim",
+		"echasnovski/mini.diff",
 		dependencies = {
-			{ "andymass/vim-matchup" },
 			{ "echasnovski/mini.ai", opts = { n_lines = 25 } },
 			{ "echasnovski/mini.surround", opts = { n_lines = 25 } },
 		},
 		event = "VeryLazy",
-		opts = {},
+		opts = { view = { style = "sign", signs = { add = "+", change = "~", delete = "_" } } },
+		keys = { { "<leader>gm", "<cmd>lua MiniDiff.toggle_overlay()<cr>", desc = "Toggle Git MiniDiff View" } },
 	},
 
 	-- Better Notification, Command line and which key
@@ -59,9 +59,6 @@ return {
 			{ "<leader>rf", "<cmd>lua Snacks.rename.rename_file()<cr>", desc = "Rename File" },
 			{ "<leader>gu", "<cmd>lua Snacks.gitbrowse()<cr>", desc = "Git Browse" },
 			{ "<leader>gi", "<cmd>lua Snacks.git.blame_line()<cr>", desc = "Git Blame Line" },
-			-- { "<leader>gf", "<cmd>lua Snacks.lazygit.log_file()<cr>", desc = "Lazygit Current File History" },
-			-- { "<leader>gg", "<cmd>lua Snacks.lazygit()<cr>", desc = "Lazygit" },
-			-- { "<leader>gl", "<cmd>lua Snacks.lazygit.log()<cr>", desc = "Lazygit Log (cwd)" },
 		},
 	},
 }

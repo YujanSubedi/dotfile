@@ -5,7 +5,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  imports = [ 
+  imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
@@ -21,7 +21,7 @@
     enable = true;
     device = "nodev";
     # gfxmodeEfi = "1920x1080";
-    theme = "/usr/grub/themes/DanHeng";
+    # theme = "/usr/grub/themes/Dota";
     efiSupport = true;
     # useOSProber = true;
   };
@@ -30,7 +30,7 @@
   networking.hostName = "NixOS"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Asia/Kathmandu";
@@ -47,29 +47,6 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    layout = "us";
-    dpi = 96;
-    # videoDrivers = ["nvidia" "amdgpu" ];
-  };
-  services.xserver.displayManager.sddm = {
-    enable = true;
-    settings = {
-      Theme = {
-	Current = "/usr/sddm/themes/Anime";
-	ThemeDir = "/usr/sddm/themes";
-	FacesDir = "/usr/sddm/faces";
-      };
-    };
-  };
-  services.xserver.windowManager.xmonad = {
-    enable = true;
-    enableContribAndExtras = true;
-  };
-  services.xserver.windowManager.qtile.enable = true;
-
   # Enable CUPS to print documents.
   # services.printing.enable = true;
 
@@ -80,108 +57,38 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  # Zsh
+  programs.zsh.enable = true;
+
+  # Hyprland Window Manager
+  programs.hyprland.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.user_name = {
     isNormalUser = true;
     extraGroups = [ "wheel" "networkmanager" "docker" ];
+    shell = zsh;
     #   packages = with pkgs; [
     #     firefox
-    #     tree
     #   ];
   };
 
   # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
 
   # Allow other scripts to run like lsp and plugins in neovim
-  programs.nix-ld.enable = true;
+  # programs.nix-ld.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    # Termainal tools #
-    vim
-    git
-    wget
-    neovim
-    neofetch
-    htop
-    nvtop
-    cmatrix
-    alacritty
-    tmux
-    unzip
-    # Compiler, Interpreter and Livraries #
-    gcc13
-    ghc
-    lua
-    python3
-    nodejs
-    cmake
-    # Window manager utils #
-    picom
-    polybar
-    nitrogen
-    rofi
-    scrot
-    brightnessctl
-    # Filemanager and other application #
-    lf
-    yazi
-    ueberzugpp
-    ffmpeg
-    zathura
-    sxiv
-    mpv
-    arandr
-    pavucontrol
-    # Sddm theme dependency #
-    libsForQt5.qt5.qtgraphicaleffects
-    libsForQt5.qt5.qtquickcontrols2
-    # Themes #
-    arc-theme
-    papirus-icon-theme
-    lxappearance
-    # Other applications #
-    firefox
-    brave
-    discord
-    vscode
-    # Cuda #
-    # cudatoolkit
-    # linuxPackages.nvidia_x11
-    # gitRepo
-    # gnupg
-    # autoconf
-    # curl
-    # procps
-    # gnumake
-    # util-linux
-    # m4
-    # gperf
-    # unzip
-    # libGLU
-    # libGL
-    # xorg.libXi
-    # xorg.libXmu
-    # freeglut
-    # xorg.libXext
-    # xorg.libX11
-    # xorg.libXv
-    # xorg.libXrandr zlib 
-    # ncurses5
-    # stdenv.cc
-    # binutils
-    # AMD utils #
-    # microcodeAmd
   ];
 
   # Fonts
   fonts.packages = with pkgs; [
-    fira-code
     noto-fonts
     jetbrains-mono
-    (nerdfonts.override { fonts = ["JetBrainsMono"]; })
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
   # programs.mtr.enable = true;

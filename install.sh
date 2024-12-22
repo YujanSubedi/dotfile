@@ -304,7 +304,7 @@ sudo timedatectl set-ntp true
 
 # C, Cpp
 sudo pacman -S --noconfirm --needed gcc
-# sudo pacman -S --noconfirm --needed llvm clang
+sudo pacman -S --noconfirm --needed llvm clang
 # sudo pacman -S --noconfirm --needed tcc
 
 # Lua
@@ -560,6 +560,7 @@ case $window_manager in # Hyprland Xmonad Qtile NONE
 Hyprland)
 	sudo pacman -S --noconfirm --needed hyprland
 	sudo pacman -S --noconfirm --needed xdg-desktop-portal-hyprland
+	$aur_helper -S --noconfirm --needed hyprland-qtutils
 	;;
 Xmonad)
 	sudo pacman -S --noconfirm --needed xmonad xmonad-contrib
@@ -569,45 +570,6 @@ Xmonad)
 Qtile)
 	sudo pacman -S --noconfirm --needed qtile
 	sudo pacman -S --noconfirm --needed python-psutil python-iwlib
-	;;
-*) ;;
-esac
-
-# Copy Configs
-case $Copy_configs in # Yes No
-Yes)
-	cp -r Pictures ~
-	[ -d "$HOME/Pictures/Screenshots" ] || mkdir ~/Pictures/Screenshots/
-	[ -d "$HOME/Pictures/Recordings" ] || mkdir ~/Pictures/Recordings/
-
-	[ -d "$HOME/.config" ] || mkdir ~/.config/
-	cp -r ./configs/* ~/.config/
-
-	ln -s ~/.config/shell/profile ~/.zprofile
-	ln -s ~/.config/shell/profile ~/.bash_profile
-	ln -s ~/.config/shell/barshrc ~/.bashrc
-
-	# Bat and Tmux
-	bat cache --build
-	[ -d "$HOME/config/tmux/tpm" ] || git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/tpm
-
-	case $window_manager in
-	Hyprland)
-		cp -r ./Display_protocol/Wayland/* ~/.config/
-		cp -r ./Window_managers/Hyprland/* ~/.config/
-		;;
-	Xmonad)
-		sudo cp ./old_files/suckless/st /bin/
-		cp -r ./Display_protocol/X11/* ~/.config/
-		cp -r ./Window_managers/Xmonad/* ~/.config/
-		;;
-	Qtile)
-		sudo cp ./old_files/suckless/st /bin/
-		cp -r ./Display_protocol/X11/* ~/.config/
-		cp -r ./Window_managers/Qtile/* ~/.config/
-		;;
-	*) ;;
-	esac
 	;;
 *) ;;
 esac
@@ -710,6 +672,45 @@ for application in "${Extra_applications[@]}"; do
 	*) ;;
 	esac
 done
+
+# Copy Configs
+case $Copy_configs in # Yes No
+Yes)
+	cp -r Pictures ~
+	[ -d "$HOME/Pictures/Screenshots" ] || mkdir ~/Pictures/Screenshots/
+	[ -d "$HOME/Pictures/Recordings" ] || mkdir ~/Pictures/Recordings/
+
+	[ -d "$HOME/.config" ] || mkdir ~/.config/
+	cp -r ./configs/* ~/.config/
+
+	ln -s ~/.config/shell/profile ~/.zprofile
+	ln -s ~/.config/shell/profile ~/.bash_profile
+	ln -s ~/.config/shell/barshrc ~/.bashrc
+
+	# Bat and Tmux
+	bat cache --build
+	[ -d "$HOME/config/tmux/tpm" ] || git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/tpm
+
+	case $window_manager in
+	Hyprland)
+		cp -r ./Display_protocol/Wayland/* ~/.config/
+		cp -r ./Window_managers/Hyprland/* ~/.config/
+		;;
+	Xmonad)
+		sudo cp ./old_files/suckless/st /bin/
+		cp -r ./Display_protocol/X11/* ~/.config/
+		cp -r ./Window_managers/Xmonad/* ~/.config/
+		;;
+	Qtile)
+		sudo cp ./old_files/suckless/st /bin/
+		cp -r ./Display_protocol/X11/* ~/.config/
+		cp -r ./Window_managers/Qtile/* ~/.config/
+		;;
+	*) ;;
+	esac
+	;;
+*) ;;
+esac
 
 # Uncomplicated Firewall (ufw) Setup
 case $firewall in # Yes No

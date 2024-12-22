@@ -11,6 +11,8 @@
 | lua      | lua_ls                   |                        |              | stylua          |
 | python   | pyright                  | debugpy                | ruff         | yapf            |
 | verilog  |                          |                        | verible      |                 |
+| docker   | dockerls                 |                        |              |                 |
+| nix      | rnix                     |                        |              |                 |
 | latex    | texlab                   |                        |              |                 |
 | markdown |                          |                        | markdownlint | prettier        |
 | golang   | gopls                    | delve                  |              |                 |

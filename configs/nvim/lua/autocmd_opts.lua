@@ -32,6 +32,15 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 })
 
+-- CSV
+vim.api.nvim_create_autocmd("FileType", {
+	group = filetype_opts,
+	pattern = "csv",
+	callback = function()
+		vim.api.nvim_buf_set_keymap(0, "n", "<A-m>", "<cmd>CsvViewToggle<cr>", { desc = "Markdown Preview" })
+	end,
+})
+
 -- Dart (Flutter)
 vim.api.nvim_create_autocmd("FileType", {
 	group = filetype_opts,

@@ -1,11 +1,4 @@
 return {
-	-- Config nvim with lua
-	{
-		"folke/lazydev.nvim",
-		ft = "lua", -- only load on lua files
-		opts = { library = { { path = "luvit-meta/library", words = { "vim%.uv" } } } },
-	},
-
 	-- Run code Snip
 	{
 		"michaelb/sniprun",
@@ -42,7 +35,6 @@ return {
 		"mfussenegger/nvim-dap",
 		dependencies = {
 			"rcarriga/nvim-dap-ui",
-			-- "nvim-neotest/nvim-nio",
 			"theHamsta/nvim-dap-virtual-text",
 			{ "jay-babu/mason-nvim-dap.nvim", opts = { handlers = {} } },
 		},

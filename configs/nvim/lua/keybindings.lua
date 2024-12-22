@@ -33,10 +33,10 @@ vim.keymap.set("v", "<A-Up>", [[:m '<-2<CR>gv=gv]], { desc = "Move Highlighted T
 vim.keymap.set("v", "<A-Down>", [[:m '>+1<CR>gv=gv]], { desc = "Move Highlighted Text Downwards" })
 
 -- Window Split Managements
-vim.keymap.set("n", "<leader>h", "<C-w>h", { desc = "Move focus to left Window" })
-vim.keymap.set("n", "<leader>l", "<C-w>l", { desc = "Move focus to right Window" })
-vim.keymap.set("n", "<leader>j", "<C-w>j", { desc = "Move focus to lower Window" })
-vim.keymap.set("n", "<leader>k", "<C-w>k", { desc = "Move focus to upper Window" })
+vim.keymap.set("n", "<leader>wh", "<C-w>h", { desc = "Move focus to left Window" })
+vim.keymap.set("n", "<leader>wl", "<C-w>l", { desc = "Move focus to right Window" })
+vim.keymap.set("n", "<leader>wj", "<C-w>j", { desc = "Move focus to lower Window" })
+vim.keymap.set("n", "<leader>wk", "<C-w>k", { desc = "Move focus to upper Window" })
 vim.keymap.set("n", "<leader>ww", "<C-w>", { desc = "Same as <C-w>" })
 vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split window Vertical" })
 vim.keymap.set("n", "<leader>ws", "<C-w>s", { desc = "Split window Horizontal" })

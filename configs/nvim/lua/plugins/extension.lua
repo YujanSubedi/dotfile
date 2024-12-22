@@ -1,4 +1,11 @@
 return {
+	-- Csv table
+	{
+		"hat0uma/csvview.nvim",
+		cmd = "CsvViewToggle",
+		opts = { view = { display_mode = "border" } },
+	},
+
 	-- Latex
 	{
 		"lervag/vimtex",
@@ -14,7 +21,8 @@ return {
 		build = ":TSUpdate html",
 		cmd = "Leet",
 		keys = { { "<leader>tl", ":Leet ", desc = "Leetcode Commands" } },
-		opts = {},
+		opts = { lang = "cpp" },
+		-- opts = { lang = "rust" },
 	},
 
 	-- Flutter
@@ -60,6 +68,7 @@ return {
 		config = function()
 			local peek = require("peek")
 			peek.setup({ app = "zen-browser" })
+			-- peek.setup({ app = "zen-browser", theme="light" })
 			vim.api.nvim_create_user_command("PeekOpen", peek.open, {})
 			vim.api.nvim_create_user_command("PeekClose", peek.close, {})
 		end,
