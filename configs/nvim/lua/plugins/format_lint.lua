@@ -54,7 +54,7 @@ return {
 					json = { "prettier" },
 					jsonc = { "prettier" },
 				},
-				format_on_save = { lsp_fallback = true, async = false, timeout_ms = 300 },
+				format_on_save = { lsp_fallback = true, async = false, timeout_ms = 375 },
 			})
 
 			vim.keymap.set({ "n", "v" }, "<leader>mf", function()

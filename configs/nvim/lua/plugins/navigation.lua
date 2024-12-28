@@ -58,13 +58,13 @@ return {
 			vim.keymap.set("n", "<A-g>", builtin.live_grep, { desc = "[F]ind by [G]rep Telescope" })
 
 			-- Additional telescope keymaps
-			vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "[/] search in buffer" })
-			vim.keymap.set("n", "<leader>s/", function()
+			vim.keymap.set("n", "<leader>/", builtin.current_buffer_fuzzy_find, { desc = "Fzf / in buffer Telescope" })
+			vim.keymap.set("n", "<leader>fo", function()
 				builtin.live_grep({ grep_open_files = true, prompt_title = "Live Grep in Open Files" })
-			end, { desc = "[S]earch [/] in Open Files" })
-			vim.keymap.set("n", "<leader>n/", function()
+			end, { desc = "[S]earch [/] in Open Files Telescope" })
+			vim.keymap.set("n", "<leader>fn", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
-			end, { desc = "[S]earch [N]eovim files" })
+			end, { desc = "[S]earch [N]eovim files Telescope" })
 
 			-- Lsp keymaps with help of telescope
 			vim.api.nvim_create_autocmd("LspAttach", {
@@ -80,6 +80,7 @@ return {
 					map("<leader>dw", builtin.lsp_dynamic_workspace_symbols, "[W]orkspace [S]ymbols")
 				end,
 			})
+			require("plugins_tweaks.custom_telescope_picker")
 		end,
 	},
 }

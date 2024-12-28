@@ -24,8 +24,8 @@ return {
 		},
 		opts = {
 			editor_ui = {
-				normal_mode_mappings = { switch_window = { "<A-i>", "<A-j>", "<A-k>", "<leader><Tab>" } },
-				insert_mode_mappings = { switch_window = { "<A-i>" } },
+				normal_mode_mappings = { switch_window = { "<A-i>", "<A-o>", "<leader><Tab>" } },
+				insert_mode_mappings = { switch_window = { "<A-i>", "<A-o>" } },
 			},
 		},
 	},

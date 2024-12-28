@@ -21,8 +21,7 @@ return {
 		build = ":TSUpdate html",
 		cmd = "Leet",
 		keys = { { "<leader>tl", ":Leet ", desc = "Leetcode Commands" } },
-		opts = { lang = "cpp" },
-		-- opts = { lang = "rust" },
+		opts = { lang = "rust" },
 	},
 
 	-- Flutter

@@ -20,7 +20,7 @@ return {
 		config = function()
 			local Luasnip = require("luasnip")
 			-- Custom snippets
-			local custom_snippets = require("custom_snippets")
+			local custom_snippets = require("plugins_tweaks.custom_luasnip_snippets")
 			Luasnip.add_snippets("cpp", custom_snippets.cpp)
 			Luasnip.add_snippets("c", custom_snippets.c)
 			Luasnip.add_snippets("verilog", custom_snippets.verilog)

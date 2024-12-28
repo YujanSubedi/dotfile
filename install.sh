@@ -463,7 +463,7 @@ sudo pacman -S --noconfirm --needed vimiv imagemagick wf-recorder
 sudo pacman -S --noconfirm --needed mpv ffmpeg ffmpegthumbnailer
 sudo pacman -S --noconfirm --needed zathura zathura-pdf-mupdf
 # sudo pacman -S --noconfirm --needed zathura zathura-pdf-poppler
-sudo pacman -S --noconfirm --needed yazi p7zip jq
+sudo pacman -S --noconfirm --needed yazi 7zip jq
 
 # File manager
 # sudo pacman -S --noconfirm --needed nemo

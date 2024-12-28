@@ -3,21 +3,21 @@
 
 ** Dotfiles
 Contains config files of:
-| Window Manager    | Hyprland, Xmoand, Qtile                                            |
-| Compositor        | Hyprland, Picom                                                    |
-| Teminal Emmulator | Foot, Simple Terminal(st), Alacritty, Kitty, Wezterm, Urxvt, Xterm |
-| Shell             | Zsh, Bash                                                          |
-| Text Editor       | Neovim, Emacs, Zed                                                 |
-| Status Bar        | Waybar, Polybar, Xmobar, Qtile builtin bar                         |
-| Launch Menu       | Wofi, Rofi                                                         |
-| Display Manager   | Lightdm, Sddm, Ly                                                  |
-| Lock Screen       | Hyprlock, I3lock                                                   |
-| Terminal tools    | Tmux, Bat, Fastfetch                                               |
-| File Manager      | Yazi, Lf                                                           |
-| Pdf Reader        | Zathura                                                            |
-| Image Viewer      | Vimiv                                                              |
-| Notification      | Dunst                                                              |
-| Browsers          | ZenBrowser, Firefox, QuteBrowser                                   |
+| Window Manager    | Hyprland, Xmoand, Qtile                                                     |
+| Compositor        | Hyprland, Picom                                                             |
+| Teminal Emmulator | Foot, Simple Terminal(st), Urxvt, Ghostty, Alacritty, Kitty, Wezterm, Xterm |
+| Shell             | Zsh, Bash                                                                   |
+| Text Editor       | Neovim, Emacs, Zed                                                          |
+| Status Bar        | Waybar, Polybar, Xmobar, Qtile builtin bar                                  |
+| Launch Menu       | Wofi, Rofi                                                                  |
+| Display Manager   | Lightdm, Sddm, Ly                                                           |
+| Lock Screen       | Hyprlock, I3lock                                                            |
+| Terminal tools    | Tmux, Bat, Fastfetch                                                        |
+| File Manager      | Yazi, Lf                                                                    |
+| Pdf Reader        | Zathura                                                                     |
+| Image Viewer      | Vimiv                                                                       |
+| Notification      | Dunst                                                                       |
+| Browsers          | ZenBrowser, Firefox, QuteBrowser                                            |
 
 Used themes:
 | Gtk-theme   | Kali-Dark             |

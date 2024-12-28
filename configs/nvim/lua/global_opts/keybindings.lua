@@ -41,8 +41,8 @@ vim.keymap.set("n", "<leader>ww", "<C-w>", { desc = "Same as <C-w>" })
 vim.keymap.set("n", "<leader>wv", "<C-w>v", { desc = "Split window Vertical" })
 vim.keymap.set("n", "<leader>ws", "<C-w>s", { desc = "Split window Horizontal" })
 vim.keymap.set("n", "<leader><Tab>", "<C-w>w", { desc = "Move focus in Splitted Windows" })
-vim.keymap.set("n", "<A-j>", "<C-w>w", { desc = "Move focus in Splitted Windows" })
-vim.keymap.set("n", "<A-k>", "<C-w>W", { desc = "Move focus in Splitted Windows" })
+vim.keymap.set("n", "<A-i>", "<C-w>w", { desc = "Move focus in Splitted Windows" })
+vim.keymap.set("n", "<A-o>", "<C-w>W", { desc = "Move focus in Splitted Windows" })
 
 -- Toggle settings
 vim.keymap.set("n", "<leader>ehe", "<cmd>lua vim.lsp.inlay_hint.enable(true)<cr>", { desc = "Enable inlay hint" })
