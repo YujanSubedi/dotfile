@@ -33,7 +33,7 @@ return {
 		opts = {
 			auto_install = true,
 			ignore_install = { "org", "latex", "verilog" },
-			ensure_installed = { "c", "cpp", "lua", "python", "norg" },
+			ensure_installed = { "c", "cpp", "rust", "bash", "lua", "python", "norg", "markdown" },
 			highlight = { enable = true, additional_vim_regex_highlighting = { "ruby" } },
 			indent = { enable = true, disable = { "ruby" } },
 		},

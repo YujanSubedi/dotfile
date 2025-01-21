@@ -4,6 +4,7 @@
 
 | Language | Language Server Protocol | Debug Adapter Protocol | Linter       | Formatter       |
 | -------- | ------------------------ | ---------------------- | ------------ | --------------- |
+| assembly |                          |                        |              | asmfmt          |
 | c/c++    | clangd                   | codelldb               |              |                 |
 | rust     | rust_analyzer            | codelldb               |              |                 |
 | zig      | zls                      | codelldb               |              |                 |
@@ -11,11 +12,12 @@
 | lua      | lua_ls                   |                        |              | stylua          |
 | python   | pyright                  | debugpy                | ruff         | yapf            |
 | verilog  |                          |                        | verible      |                 |
-| docker   | dockerls                 |                        |              |                 |
 | nix      | rnix                     |                        |              |                 |
+| docker   | dockerls                 |                        |              |                 |
 | latex    | texlab                   |                        |              |                 |
 | markdown |                          |                        | markdownlint | prettier        |
 | golang   | gopls                    | delve                  |              |                 |
+| odin     | ols                      |                        |              |                 |
 | dart     | flutter-tools            |                        |              |                 |
 | json     |                          |                        | jsonlint     | prettier        |
 | html     |                          |                        | htmlhint     | prettier        |
@@ -25,7 +27,7 @@
 Install Dap, Linter and Formatter:
 
 ```txt
-MasonInstall codelldb bash-debug-adapter shellcheck beautysh shfmt stylua debugpy yapf markdownlint prettier delve jsonlint htmlhint
+MasonInstall asmfmt codelldb bash-debug-adapter shellcheck beautysh shfmt stylua debugpy yapf markdownlint prettier delve jsonlint htmlhint
 ```
 
 ### Extra plugins that are may be useful

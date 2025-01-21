@@ -1,4 +1,7 @@
 return {
+	-- Rest Api
+	{ "rest-nvim/rest.nvim", ft = "http" },
+
 	-- Csv table
 	{
 		"hat0uma/csvview.nvim",
@@ -67,7 +70,7 @@ return {
 		config = function()
 			local peek = require("peek")
 			peek.setup({ app = "zen-browser" })
-			-- peek.setup({ app = "zen-browser", theme="light" })
+			-- peek.setup({ app = "zen-browser", theme = "light" })
 			vim.api.nvim_create_user_command("PeekOpen", peek.open, {})
 			vim.api.nvim_create_user_command("PeekClose", peek.close, {})
 		end,

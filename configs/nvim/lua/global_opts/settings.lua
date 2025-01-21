@@ -20,13 +20,13 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 vim.opt.winminwidth = 10
+vim.opt.scrolloff = 10
 vim.opt.splitright = true
 
 -- Window only Options
 vim.wo.number = true
 vim.wo.relativenumber = true
 vim.wo.cursorline = true
-vim.wo.scrolloff = 10
 vim.wo.signcolumn = "yes"
 vim.wo.foldlevel = 7
 vim.wo.linebreak = true

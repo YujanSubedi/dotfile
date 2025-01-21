@@ -43,9 +43,11 @@ return {
 
 			conform.setup({
 				formatters_by_ft = {
+					asm = { "asmfmt" },
 					sh = { "beautysh", "shfmt" },
 					lua = { "stylua" },
 					python = { "yapf" },
+					haskell = { "ormolu" },
 					markdown = { "prettier" },
 					javascript = { "prettier" },
 					typescript = { "prettier" },

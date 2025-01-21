@@ -39,6 +39,7 @@ return {
 			require("telescope").load_extension("fzf")
 			require("telescope").load_extension("ui-select")
 			-- require("telescope").load_extension("noice")
+			-- require("telescope").load_extension("rest")
 
 			-- Telescope keymaps
 			local builtin = require("telescope.builtin")

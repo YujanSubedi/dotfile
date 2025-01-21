@@ -39,12 +39,12 @@ if [[ "$default_flag" == true ]]; then
 	cpu_architecture=AMD                                    # AMD Intel NONE
 	graphic_driver=Nvidia                                   # Nvidia Nvidia_with_Cuda NONE
 	display_manager=NONE                                    # NONE Ly Lightdm Sddm Gdm
-	display_protocol=Wayland                                # XWayland Wayland Xorg NONE
+	display_protocol=Wayland                                # Wayland Xorg NONE
 	window_manager=Hyprland                                 # Hyprland Xmonad Qtile NONE
 	aur_helper=paru                                         # paru yay
 	Virtualization=(Qemu Docker)                            # Qemu Docker Virt_Manager
 	Network_tools=(Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark) # Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark Burpsuite
-	Browsers=(Zen_Browser Firefox Tor_Browser)              # Zen_Browser Firefox Tor_Browser QuteBrowser Brave_Browser Librewolf
+	Browsers=(Zen_Browser Firefox Tor_Browser)              # Zen_Browser Firefox Tor_Browser QuteBrowser Vivaldi Brave_Browser Librewolf
 	Extra_applications=(Discord Gimp Openshot)              # Discord Gimp Openshot LibreOffice Texlive Spotify
 	Copy_configs=No                                         # Yes No
 	firewall=Yes                                            # Yes No
@@ -94,7 +94,7 @@ else # Let user select
 	echo -e "${GREEN}Display Manager: ${YELLOW}$display_manager${NONE}"
 
 	echo "Display Manager:"
-	select display_protocol in XWayland Wayland Xorg NONE; do
+	select display_protocol in Wayland Xorg NONE; do
 		case $REPLY in
 		0 | 1 | 2 | 3)
 			break
@@ -177,7 +177,7 @@ else # Let user select
 	echo -e "${BLUE}Network Tools: ${YELLOW}${Network_tools[*]}${NONE}"
 
 	echo "Browsers: Multiple options can be selected selperated by space."
-	options=(Zen_and_Firefox Zen_Browser Firefox Tor_Browser QuteBrowser Brave_Browser Librewolf)
+	options=(Zen_and_Firefox Zen_Browser Firefox Tor_Browser Vivaldi QuteBrowser Brave_Browser Librewolf)
 	Browsers=()
 	for i in "${!options[@]}"; do
 		echo "$i) ${options[$i]}"
@@ -293,9 +293,9 @@ done
 
 # Start of Installation
 
-# Update the Package manager and system
-sudo pacman -Syu --noconfirm
-sudo pacman -Fy --noconfirm
+# Update the Package manager
+sudo pacman -Syy --noconfirm
+sudo pacman -Fyy --noconfirm
 
 # Synchronize time by NTP
 sudo timedatectl set-ntp true
@@ -323,14 +323,18 @@ sudo pacman -S --noconfirm --needed go
 
 # Rust
 # sudo pacman -S --noconfirm --needed rust
-sudo pacman -S --noconfirm --needed rustup && rustup default stable
+sudo pacman -S --noconfirm --needed rustup
+rustup default stable
 rustup component add rust-analyzer
+
+# Verilog
+sudo pacman -S --noconfirm --needed iverilog gtkwave
 
 # Zig
 sudo pacman -S --noconfirm --needed zig
 
-# Verilog
-sudo pacman -S --noconfirm --needed iverilog gtkwave
+# Odin
+sudo pacman -S --noconfirm --needed odin
 
 # Java
 # sudo pacman -S --noconfirm --needed iverilog jdk21-openjdk
@@ -391,12 +395,14 @@ esac
 # Update aur_helper
 $aur_helper -Syy
 
+# Update all packages
+$aur_helper -Syu
+
 # Downgrade packages rollback for broken packages
 $aur_helper -S --noconfirm --needed downgrade
 
 # Additional programming languages from aur
 # $aur_helper -S --noconfirm --needed ghdl
-# $aur_helper -S --noconfirm --needed odin
 # $aur_helper -S --noconfirm --needed bun
 # $aur_helper -S --noconfirm --needed mojo
 # $aur_helper -S --noconfirm --needed flutter
@@ -527,16 +533,7 @@ Gdm)
 esac
 
 # Display Protocol
-case $display_protocol in # XWayland Wayland Xorg NONE
-XWayland)
-	sudo pacman -S --noconfirm --needed xorg xorg-server xorg-xinit
-	sudo pacman -S --noconfirm --needed wayland wayland-protocols xorg-xwayland
-	sudo pacman -S --noconfirm --needed qt5-wayland qt6-wayland
-	sudo pacman -S --noconfirm --needed grim slurp hyprlock
-	sudo pacman -S --noconfirm --needed nwg-look wl-clipboard
-	sudo pacman -S --noconfirm --needed wofi waybar swww
-	sudo pacman -S --noconfirm --needed foot
-	;;
+case $display_protocol in # Wayland Xorg NONE
 Wayland)
 	sudo pacman -S --noconfirm --needed wayland wayland-protocols xorg-xwayland
 	sudo pacman -S --noconfirm --needed qt5-wayland qt6-wayland
@@ -550,7 +547,7 @@ Xorg)
 	sudo pacman -S --noconfirm --needed picom nitrogen rofi
 	sudo pacman -S --noconfirm --needed scrot i3lock xclip
 	sudo pacman -S --noconfirm --needed lxappearance
-	$aur_helper -S --noconfirm --needed ueberzugpp
+	sudo pacman -S --noconfirm --needed ghostty
 	;;
 *) ;;
 esac
@@ -621,8 +618,8 @@ done
 for browser in "${Browsers[@]}"; do
 	case $browser in # Zen_Browser Firefox Tor_Browser QuteBrowser Brave_Browser Librewolf
 	Zen_Browser)
-		$aur_helper -S --noconfirm --needed zen-browser-avx2-bin
-		# $aur_helper -S --noconfirm --needed zen-browser-bin
+		$aur_helper -S --noconfirm --needed zen-browser-bin
+		# $aur_helper -S --noconfirm --needed zen-browser-avx2-bin
 		;;
 	Firefox)
 		sudo pacman -S --noconfirm --needed firefox
@@ -632,6 +629,9 @@ for browser in "${Browsers[@]}"; do
 		;;
 	QuteBrowser)
 		sudo pacman -S --noconfirm --needed qutebrowser python-adblock
+		;;
+	Vivaldi)
+		sudo pacman -S --noconfirm --needed vivaldi
 		;;
 	Brave_Browser)
 		$aur_helper -S --noconfirm --needed brave-bin

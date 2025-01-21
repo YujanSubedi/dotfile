@@ -21,17 +21,20 @@ return {
 			local Luasnip = require("luasnip")
 			-- Custom snippets
 			local custom_snippets = require("plugins_tweaks.custom_luasnip_snippets")
-			Luasnip.add_snippets("cpp", custom_snippets.cpp)
+			Luasnip.add_snippets("asm", custom_snippets.asm)
 			Luasnip.add_snippets("c", custom_snippets.c)
+			Luasnip.add_snippets("cpp", custom_snippets.cpp)
 			Luasnip.add_snippets("verilog", custom_snippets.verilog)
 			Luasnip.add_snippets("systemverilog", custom_snippets.systemverilog)
+			-- Friendly snippets as dependency
+			require("luasnip.loaders.from_vscode").lazy_load()
 		end,
 	},
 
 	-- Autocompletion
 	{
 		"saghen/blink.cmp",
-		version = "v0.*",
+		version = "*",
 		event = "VeryLazy",
 		opts = {
 			keymap = {
@@ -42,7 +45,8 @@ return {
 				["<A-n>"] = { "select_next", "fallback" },
 				["<A-N>"] = { "select_prev", "fallback" },
 			},
-			sources = { default = { "lsp", "path", "buffer", "snippets", "luasnip" } },
+			snippets = { preset = "luasnip" },
+			sources = { default = { "lsp", "path", "buffer", "snippets" } },
 		},
 	},
 
@@ -65,6 +69,7 @@ return {
 					"texlab", -- latex
 					"rnix", -- nix
 					"zls", -- zig
+					"ols", -- odin
 					"gopls", -- golang
 					"cssls", -- css
 					"ts_ls", -- js/ts

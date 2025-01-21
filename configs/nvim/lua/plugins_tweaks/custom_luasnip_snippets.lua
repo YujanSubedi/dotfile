@@ -6,6 +6,15 @@ local t = ls.text_node
 local i = ls.insert_node
 
 return {
+	-- assembly snippet
+	asm = {
+		s("c_start", {
+			t({ ".global _start", ".intel_syntax noprefix", "", "_start:", "\t" }),
+			i(1, ""),
+			t({ "", "\tmov rax, 60", "\tmov rdi, 0", "\tsyscall" }),
+		}),
+	},
+
 	-- c snippet
 	c = {
 		s("c_main", {
