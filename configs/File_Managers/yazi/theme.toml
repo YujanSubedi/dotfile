@@ -1,0 +1,28 @@
+[filetype]
+
+rules = [
+	# Archives
+{ mime = "application/zip",             fg = "#ff8700" },
+{ mime = "application/gzip",            fg = "#ff8700" },
+{ mime = "application/x-tar",           fg = "#ff8700" },
+{ mime = "application/x-bzip",          fg = "#ff8700" },
+{ mime = "application/x-bzip2",         fg = "#ff8700" },
+{ mime = "application/x-7z-compressed", fg = "#ff8700" },
+{ mime = "application/x-rar",           fg = "#ff8700" },
+{ mime = "application/x-xz",            fg = "#ff8700" },
+	# Images
+{ mime = "image/*", fg = "#af87ff" },
+	# Videos
+{ mime = "video/*", fg = "#ff0000" },
+	# Audio
+{ mime = "audio/*", fg = "#ff0000" },
+	# Directories
+{ name = "*/", fg = "#00b2b2" },
+	# Other files
+{ mime = "inode/symlink", fg = "#00ffff" }, # Symbolic Links
+{ mime = "inode/fifo", fg = "#87d7ff" }, # Named Pipes
+{ mime = "inode/socket", fg = "#ffd700" }, # Sockets
+{ mime = "blockdevice", fg = "#005fff", bg = "#00afaf" }, # Block Devices
+{ mime = "chardevice", fg = "#005fff", bg = "#00afaf" }, # Character Devices
+{ mime = "application/x-executable", fg = "#ff00ff" }, # Executables
+]

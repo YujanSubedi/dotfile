@@ -1,0 +1,120 @@
+* {
+  font-family:
+    JetBrainsMono NF,
+    monospace;
+  font-weight: bold;
+  font-size: 15px;
+  background-color: transparent;
+}
+
+#clock,
+#battery,
+#workspaces,
+#tray,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#disk,
+#backlight {
+  color: #999999;
+  border: 2px solid #ffffff;
+  background-color: alpha(#000000, 0.9);
+  border-radius: 70px 70px 70px 70px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.2rem;
+  border-bottom: 3px solid #ffffff;
+  border-top: 3px solid #ffffff;
+}
+
+#workspaces {
+  color: #000000;
+  border: 2px solid #ffffff;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+#workspaces button {
+  color: #555555;
+}
+
+#workspaces button.empty {
+  color: #000000;
+}
+
+#workspaces button.active {
+  color: #7acaca;
+}
+
+#workspaces button.urgent {
+  color: #11111b;
+  background: #a6e3a1;
+  border-radius: 20px;
+}
+
+#workspaces button:hover {
+  color: #11111b;
+  background: #86a3a1;
+  border-radius: 20px;
+}
+
+#cpu {
+  color: #a8a133;
+  border-radius: 10px 0px 0px 10px;
+  margin-left: 5px;
+}
+
+#backlight {
+  color: #cdd6f4;
+  border-radius: 0px 0px 0px 0px;
+}
+
+#memory {
+  color: #009189;
+  border-radius: 0px 0px 0px 0px;
+}
+
+#disk {
+  color: #ec407a;
+  border-radius: 0px 0px 0px 0px;
+}
+
+#tray {
+  margin-right: 5px;
+}
+
+#network {
+  color: #f9e2af;
+  border-radius: 10px 0px 0px 10px;
+}
+
+#pulseaudio {
+  color: #89b4fa;
+  border-radius: 0px 0px 0px 0px;
+}
+
+#pulseaudio.microphone {
+  color: #cba6f7;
+  border-radius: 0px 10px 10px 0px;
+  margin-right: 5px;
+}
+
+#clock {
+  color: #999999;
+  font-size: 20px;
+  border: 3px solid #ffffff;
+  /* margin-left: 30rem; */
+  padding: 0px 40px 0px 40px;
+}
+
+#clock.date {
+  font-size: 15px;
+  border: 2px solid #ffffff;
+}
+
+#battery {
+  color: #a6e3a1;
+  border-radius: 0px 10px 10px 0px;
+}

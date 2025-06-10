@@ -1,0 +1,25 @@
+Config { font = "NotoSans Nerd Font 12"
+	, borderColor = "#181825"
+		, border = TopB
+		, bgColor = "#181825"
+		, fgColor = "#99aaaa"
+		, position = TopH 33
+		, commands = [
+		Run Network "eth0" ["-L","0","-H","32","--normal","green","--high","red"] 12
+			, Run Wireless "wlan0" ["-t", "<ssid> <quality>%"] 10
+			, Run Cpu ["-t", "<total>%"] 12
+			, Run Memory ["-t","<usedratio>%"] 12
+			, Run Date "<fc=#ee9a00>󰸘</fc> %a, %b %d, %Y | <fc=#ee9a00>󱑍</fc> %I:%M %p" "date" 12
+			, Run DiskU [("/", "<free>/<size>")]["-L", "20", "-H", "50", "-m", "1", "-p", "3"
+			] 20
+			, Run BatteryP ["BAT0"]["-t", "<left>%"
+			, "-L", "10", "-H", "80"
+			, "-l", "red", "-h", "green"
+			, "--", "-O", "󱐌 <left>%", "-o", "<left>%"
+			] 10
+			, Run StdinReader
+		]
+		, sepChar = "%"
+		, alignSep = "}{"
+		, template = " <action=`rofi -show drun -theme ~/.config/rofi/config.rasi`><fc=#3dd0e1> </fc></action> | %StdinReader% }{ <fc=#b9c244> </fc>%cpu% | <fc=#00b19f> </fc>%memory% | <fc=#ec407a> </fc>%disku% | <fc=#772222>󰈁</fc>%eth0% | <fc=#61c766>󰀂</fc> %wlan0wi% | <fc=#6c77bb>󱊢</fc>%battery% | %date% | <action=`sh ~/.config/rofi/powermenu.sh`><fc=#4dd0e1>⏻ </fc></action> "
+}

@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# current_tty=$XDG_VTNR
+# echo "Current tty is $current_tty"
+
+# case ${current_tty} in
+# 	2)
+# 		echo "Running Qtile"
+# 		exec qtile start
+# 		;;
+# 	3)
+# 		echo "Running Xmonad"
+# 		exec xmonad
+# 		;;
+# 	*)
+# 		echo "Running Dwm"
+# 		exec dwm
+# 		;;
+# esac
+
+# exec dwm
+# exec qtile start
+# exec xmonad
+# exec steam -windowed

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# ~/.bashrc
+
+# Main Prompt for bash
+# Function to get the Git branch
+function parse_git_branch() {
+  branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+  [[ -n $(git status --short 2>/dev/null) ]] && git_status="*" || git_status=""
+  [ -n "$branch" ] && echo -e "\e[38;5;14m 🡪 git:(\e[38;5;35m$branch\e[38;5;1m$git_status\e[38;5;14m)"
+}
+
+PS1=' (\[\e[38;5;2m\]\uϮ\h\[\e[m\]):[\[\e[38;5;214m\]\w\[\e[m\]]$(parse_git_branch)\n \[\e[38;5;1m\]✗ \[\e[m\]'
+
+# Alias:
+source ~/.config/shell/aliasrc
+
+# Keybindings:
+# make <C-l> behave as clear x
+bind '"\C-l":"\e\C-l A"'
+# make <C-w> give exit command
+bind '"\C-w":"\e\C-d"'
+
+# other shortcuts
+bind '"\C-e":"source ~/miniconda3/etc/profile.d/conda.sh \n"'
+bind '"\C-f":"pacman -Ss "'
+bind '"\ef":"pacman -F "'
+bind '"\C-n":"nvim . \n"'
+bind '"\en":"nvim . \n"'
+# bind '"\ee":"emacs -nw . \n"'
+
+# Set vi mode
+set -o vi
