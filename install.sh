@@ -295,8 +295,8 @@ done
 # Start of Installation
 
 # Update the Package manager
-sudo pacman -Syy --noconfirm
-sudo pacman -Fyy --noconfirm
+sudo pacman -Sy --noconfirm
+sudo pacman -Fy --noconfirm
 
 # Synchronize time by NTP
 sudo timedatectl set-ntp true
@@ -316,7 +316,7 @@ sudo pacman -S --noconfirm --needed python
 
 # JavaScript, TypeScript
 sudo pacman -S --noconfirm --needed npm
-sudo pacman -S --noconfirm --needed deno
+# sudo pacman -S --noconfirm --needed deno
 # sudo pacman -S --noconfirm --needed yarn
 
 # GoLang
@@ -332,7 +332,7 @@ rustup default stable
 sudo pacman -S --noconfirm --needed iverilog gtkwave
 
 # Zig
-sudo pacman -S --noconfirm --needed zig
+# sudo pacman -S --noconfirm --needed zig
 
 # Odin
 # sudo pacman -S --noconfirm --needed odin
@@ -394,7 +394,7 @@ yay)
 esac
 
 # Update aur_helper
-$aur_helper -Syy
+$aur_helper -Sy
 
 # Update all packages
 # $aur_helper -Syu
@@ -487,24 +487,33 @@ sudo pacman -S --noconfirm --needed zbar
 # sudo pacman -S --noconfirm --needed flatpak
 # $aur_helper -S --noconfirm --needed snapd
 
-# Cpu architecture
+# Cpu architecture and graphic_driver
 case $cpu_architecture in # AMD Intel NONE
 AMD)
-	sudo pacman -S --noconfirm --needed amd-ucode
+	case $graphic_driver in # Nvidia Nvidia_with_Cuda NONE
+	Nvidia)
+		sudo pacman -S --noconfirm --needed amd-ucode nvidia
+		;;
+	Nvidia_with_Cuda)
+		sudo pacman -S --noconfirm --needed amd-ucode nvidia cuda cudnn
+		;;
+	*)
+		sudo pacman -S --noconfirm --needed amd-ucode
+		;;
+	esac
 	;;
 Intel)
-	sudo pacman -S --noconfirm --needed intel-ucode
-	;;
-*) ;;
-esac
-
-# Grpahic driver
-case $graphic_driver in # Nvidia Nvidia_with_Cuda NONE
-Nvidia)
-	sudo pacman -S --noconfirm --needed nvidia
-	;;
-Nvidia_with_Cuda)
-	sudo pacman -S --noconfirm --needed nvidia cuda cudnn
+	case $graphic_driver in # Nvidia Nvidia_with_Cuda NONE
+	Nvidia)
+		sudo pacman -S --noconfirm --needed intel-ucode nvidia
+		;;
+	Nvidia_with_Cuda)
+		sudo pacman -S --noconfirm --needed intel-ucode nvidia cuda cudnn
+		;;
+	*)
+		sudo pacman -S --noconfirm --needed intel-ucode
+		;;
+	esac
 	;;
 *) ;;
 esac

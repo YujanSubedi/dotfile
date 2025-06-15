@@ -39,7 +39,7 @@ offset = 3x3
 scale = 0
 
 # Maximum number of notification (0 means no limit)
-notification_limit = 20
+notification_limit = 5
 
 ### Progress bar ###
 
@@ -335,17 +335,17 @@ per_monitor_dpi = false
 # Otherwise the "#" and following would be interpreted as a comment.
 background = "#303446"
 foreground = "#c6d0f5"
-timeout = 10
-default_icon = ~/.config/dunst/icons/low.png
+timeout = 15
+default_icon = ~/Pictures/Icons/notification/low.png
 # Icon for notifications with low urgency, uncomment to enable
 #default_icon = /path/to/icon
 
 [urgency_normal]
 background = "#303446"
 foreground = "#c6d0f5"
-timeout = 10
+timeout = 30
 override_pause_level = 30
-default_icon = ~/.config/dunst/icons/normal.png
+default_icon = ~/Pictures/Icons/notification/normal.png
 # Icon for notifications with normal urgency, uncomment to enable
 #default_icon = /path/to/icon
 
@@ -353,9 +353,9 @@ default_icon = ~/.config/dunst/icons/normal.png
 background = "#303446"
 foreground = "#c6d0f5"
 frame_color = "#ef3936"
-timeout = 10
+timeout = 45
 override_pause_level = 60
-default_icon = ~/.config/dunst/icons/urgent.png
+default_icon = ~/Pictures/Icons/notification/urgent.png
 # Icon for notifications with critical urgency, uncomment to enable
 #default_icon = /path/to/icon
 

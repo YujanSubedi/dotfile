@@ -30,7 +30,7 @@ Used themes:
 ### Setup on Arch
 
 ``` bash
-git clone https://github.com/YujanSubedi/dotfile
+git clone --depth 1 https://github.com/YujanSubedi/dotfile
 cd dotfile
 ./install.sh
 ```
@@ -237,7 +237,7 @@ Wallpapers and lockscreen:
 
 [Pictures collection](https://github.com/YujanSubedi/Pictures)
 
-Resources for wallpapers are:
+Resources for wallpapers:
 
 - [Alpha Coders](https://wall.alphacoders.com)
 - [Wallpaper Flare](https://www.wallpaperflare.com/)
