@@ -82,4 +82,5 @@ export TERMINAL="foot"
 # Run Window Manager on tty1 #
 # [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ] && exec dwl
 # [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ] && exec startx
-[ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ] && exec Hyprland
+# [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ] && exec Hyprland
+[ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ] && exec niri-session

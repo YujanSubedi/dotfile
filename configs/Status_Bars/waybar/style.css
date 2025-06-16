@@ -91,8 +91,8 @@ window#waybar {
 }
 
 #workspaces button {
+  color: #7a95c9;
   padding: 0 5px;
-  background-color: transparent;
   color: #999999;
 }
 
@@ -100,17 +100,8 @@ window#waybar {
   color: #142127;
 }
 
-#workspaces button:hover {
-  background: rgba(0, 0, 0, 0.2);
-  box-shadow: inset 0 -1px #cecece;
-}
-
 #workspaces button.active {
   color: #00c1b9;
-}
-
-#workspaces button.focused {
-  background-color: #b7bdf8;
 }
 
 #workspaces button.urgent {

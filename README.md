@@ -4,13 +4,13 @@ Contains config files of:
 
 | Application       | Configurations                                                              |
 | ----------------- | --------------------------------------------------------------------------- |
-| Window Manager    | Hyprland, Xmoand, Qtile                                                     |
-| Compositor        | Hyprland, Picom                                                             |
+| Window Manager    | Niri, Hyprland, Xmoand, Qtile                                               |
+| Compositor        | Niri, Hyprland, Picom                                                       |
 | Teminal Emmulator | Foot, Simple Terminal(st), Urxvt, Ghostty, Alacritty, Kitty, Wezterm, Xterm |
 | Shell             | Zsh, Bash                                                                   |
 | Text Editor       | Neovim, Emacs, Zed                                                          |
 | Status Bar        | Waybar, Polybar, Xmobar, Qtile builtin bar                                  |
-| Launch Menu       | Wofi, Rofi                                                                  |
+| Launch Menu       | Rofi, Wofi                                                                  |
 | Lock Screen       | Hyprlock, I3lock                                                            |
 | Terminal tools    | Tmux, Bat, Fastfetch                                                        |
 | File Manager      | Yazi, Lf                                                                    |
@@ -34,6 +34,24 @@ git clone --depth 1 https://github.com/YujanSubedi/dotfile
 cd dotfile
 ./install.sh
 ```
+
+-----
+
+### Niri
+
+Installation:
+
+``` bash
+sudo pacman -S --noconfirm --needed niri xwayland-satellite xdg-desktop-portal-gtk xdg-desktop-portal-gnome waybar hyprpaper foot
+[ -d "$HOME/.config" ] || mkdir ~/.config/
+cp -r ./configs/Window_Managers/niri ~/.config/
+cp -r ./configs/Window_Managers/hypr ~/.config/
+cp -r ./configs/Terminal_Emulators/foot ~/.config/
+cp -r ./configs/Application_Launchers/rofi ~/.config/
+cp -r ./configs/Status_Bars/waybar ~/.config/
+```
+
+![](./Screenshots/Niri.jpg)
 
 -----
 
@@ -243,5 +261,6 @@ Resources for wallpapers:
 - [Wallpaper Flare](https://www.wallpaperflare.com/)
 - [r/wallpapers](https://www.reddit.com/r/wallpapers/)
 - [4K Wallpapers](https://4kwallpapers.com/)
+- [wallhaven](https://wallhaven.cc/)
 
 -----

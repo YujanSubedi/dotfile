@@ -41,7 +41,7 @@ if [[ "$default_flag" == true ]]; then
 	graphic_driver=Nvidia                                   # Nvidia Nvidia_with_Cuda NONE
 	display_manager=NONE                                    # NONE Ly Lightdm Sddm Gdm
 	display_protocol=Wayland                                # Wayland Xorg NONE
-	window_manager=Hyprland                                 # Hyprland Xmonad Qtile NONE
+	window_manager=Niri                                     # Niri Hyprland Xmonad Qtile NONE
 	aur_helper=paru                                         # paru yay
 	Virtualization=(Docker)                                 # Qemu Docker Virt_Manager Waydroid
 	Network_tools=(Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark) # Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark Burpsuite
@@ -108,9 +108,9 @@ else # Let user select
 	echo -e "${GREEN}Display Protocol: ${YELLOW}$display_protocol${NONE}"
 
 	echo "Window Manager:"
-	select window_manager in Hyprland Xmonad Qtile NONE; do
+	select window_manager in Niri Hyprland Xmonad Qtile NONE; do
 		case $REPLY in
-		1 | 2 | 3 | 4)
+		1 | 2 | 3 | 4 | 5)
 			break
 			;;
 		*)
@@ -565,6 +565,11 @@ esac
 
 # Window Manager
 case $window_manager in # Hyprland Xmonad Qtile NONE
+Niri)
+	sudo pacman -S --noconfirm --needed niri
+	sudo pacman -S --noconfirm --needed xwayland-satellite
+	sudo pacman -S --noconfirm --needed xdg-desktop-portal-gtk xdg-desktop-portal-gnome
+	;;
 Hyprland)
 	sudo pacman -S --noconfirm --needed hyprland
 	sudo pacman -S --noconfirm --needed xdg-desktop-portal-hyprland
@@ -712,6 +717,12 @@ Yes)
 	cp -r ./configs/Application_Launchers/rofi ~/.config/
 
 	case $window_manager in
+	Niri)
+		cp -r ./configs/Window_Managers/niri ~/.config/
+		cp -r ./configs/Window_Managers/hypr ~/.config/
+		cp -r ./configs/Terminal_Emulators/foot ~/.config/
+		cp -r ./configs/Status_Bars/waybar ~/.config/
+		;;
 	Hyprland)
 		cp -r ./configs/Window_Managers/hypr ~/.config/
 		cp -r ./configs/Terminal_Emulators/foot ~/.config/

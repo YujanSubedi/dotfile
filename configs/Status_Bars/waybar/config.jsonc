@@ -4,7 +4,8 @@
     "layer": "top",
     "position": "top",
     "modules-center": [
-      "hyprland/workspaces"
+      // "hyprland/workspaces"
+      "niri/workspaces"
     ],
     "fixed-center": true,
     "output": "HDMI-A-1",
@@ -18,7 +19,8 @@
     "position": "top",
     "modules-left": [
       "custom/arch",
-      "hyprland/workspaces",
+      // "hyprland/workspaces",
+      "niri/workspaces",
       "cpu",
       "memory",
       "disk",
@@ -26,6 +28,7 @@
       "battery"
     ],
     "modules-center": [
+      // "wlr/taskbar",
       "mpris"
     ],
     "modules-right": [
