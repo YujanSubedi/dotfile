@@ -65,6 +65,11 @@ alias ollama_stop_service="sudo systemctl stop ollama"
 
 # Functions
 
+# Function to add ssh-agent and ssh-key for github
+github_ssh() {
+	eval "$(ssh-agent)" && ssh-add ~/.ssh/git/github
+}
+
 # Function to compile assembly code
 asm_compile() {
 	[ -z "$1" ] && echo "No file provided" && exit

@@ -157,6 +157,7 @@ ExecStart=-/usr/bin/agetty --autologin <User_Name> --noclear %I "$TERM"
 ``` bash
 # [[ -z "$DISPLAY" && "$XDG_VTNR" -eq 1 ]] && exec startx # For Xserver based WM, requires .xinitrc
 # [[ -z "$DISPLAY" && "$XDG_VTNR" -eq 1 ]] && exec Hyprland # For Hyprland
+# [[ -z "$DISPLAY" && "$XDG_VTNR" -eq 1 ]] && exec niri-session # For Niri
 ```
 
 -----

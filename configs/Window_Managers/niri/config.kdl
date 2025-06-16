@@ -26,10 +26,11 @@ cursor { xcursor-theme "Bibata-Modern-Classic"; xcursor-size 24; }
 
 spawn-at-startup "foot" "--server"
 spawn-at-startup "waybar"
-spawn-at-startup "hyprpaper"
-spawn-at-startup "xwayland-satellite"
-spawn-at-startup "niri" "msg" "action" "focus-workspace" "2";
-spawn-at-startup "hyprlock"
+spawn-at-startup "niri" "msg" "action" "focus-workspace" "2"
+spawn-at-startup "sh" "-c" "swaybg -i ~/Pictures/Wallpapers/00057.jpg"
+spawn-at-startup "~/.config/niri/scripts/battery_monitor.sh"
+spawn-at-startup "swaylock"
+// spawn-at-startup "xwayland-satellite"
 
 screenshot-path "~/Pictures/Screenshots/Screenshot-%F_%T.png"
 
@@ -41,10 +42,10 @@ workspace "5"
 workspace "6"
 workspace "7"
 workspace "8"
-workspace "9"
 
 prefer-no-csd
 // overview { workspace-shadow { off; }; }
+hotkey-overlay { skip-at-startup; }
 
 window-rule {
     geometry-corner-radius 7
@@ -58,14 +59,12 @@ window-rule {
 }
 
 layer-rule {
-    match namespace="hyprpaper"
+    match namespace="wallpaper"
     place-within-backdrop true
 }
 
 // Disable the hot corners.
-gestures {
-    hot-corners { off; }
-}
+gestures { hot-corners { off; }; }
 
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
@@ -75,13 +74,13 @@ binds {
     Mod+Return hotkey-overlay-title="Open a Terminal: footclient" { spawn "footclient"; }
     Mod+R hotkey-overlay-title="Run an Application: rofi" { spawn "rofi" "-show" "drun"; }
     Mod+U hotkey-overlay-title="Find Window: rofi" { spawn "rofi" "-show" "window"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // Other Application
     Mod+I hotkey-overlay-title="Open Neovim" { spawn "footclient" "-e" "nvim"; }
     Mod+Shift+I hotkey-overlay-title="Open Yazi" { spawn "footclient" "-e" "yazi"; }
     Mod+Shift+P hotkey-overlay-title="Open Private Browser" { spawn "zen-browser" "--private-window"; }
     Mod+Space hotkey-overlay-title="Toggle Waybar" { spawn "killall" "-SIGUSR1" "waybar"; }
+    Mod+Shift+Y hotkey-overlay-title="Change Wallpaper" { spawn "~/.config/niri/scripts/change_wallpaper.sh"; }
 
     // Audio
     XF86AudioRaiseVolume allow-when-locked=true { spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "+5%"; }
@@ -184,8 +183,8 @@ binds {
     Mod+Print { screenshot-screen; }
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
-    Mod+Ctrl+Q { quit; }
 
-    // moving the mouse or pressing any other key.
-    Mod+Shift+Q { power-off-monitors; }
+    Mod+Alt+Q { power-off-monitors; }
+    Mod+Shift+Q hotkey-overlay-title="Lock the Screen: swaylock" { spawn "sh" "-c" "systemctl suspend; swaylock"; }
+    Mod+Ctrl+Q { quit; }
 }
