@@ -11,7 +11,7 @@ Contains config files of:
 | Text Editor       | Neovim, Emacs, Zed                                                          |
 | Status Bar        | Waybar, Polybar, Xmobar, Qtile builtin bar                                  |
 | Launch Menu       | Rofi, Wofi                                                                  |
-| Lock Screen       | Hyprlock, I3lock                                                            |
+| Lock Screen       | Swaylock, Hyprlock, I3lock                                                  |
 | Terminal tools    | Tmux, Bat, Fastfetch                                                        |
 | File Manager      | Yazi, Lf                                                                    |
 | Pdf Reader        | Zathura                                                                     |
@@ -42,10 +42,10 @@ cd dotfile
 Installation:
 
 ``` bash
-sudo pacman -S --noconfirm --needed niri xwayland-satellite xdg-desktop-portal-gtk xdg-desktop-portal-gnome waybar hyprpaper foot
+sudo pacman -S --noconfirm --needed niri xwayland-satellite xdg-desktop-portal-gtk xdg-desktop-portal-gnome waybar foot swaybg swaylock
 [ -d "$HOME/.config" ] || mkdir ~/.config/
 cp -r ./configs/Window_Managers/niri ~/.config/
-cp -r ./configs/Window_Managers/hypr ~/.config/
+cp -r ./configs/Session_Lock/swaylock/ ~/.config/
 cp -r ./configs/Terminal_Emulators/foot ~/.config/
 cp -r ./configs/Application_Launchers/rofi ~/.config/
 cp -r ./configs/Status_Bars/waybar ~/.config/
@@ -77,7 +77,7 @@ cp -r ./configs/Status_Bars/waybar ~/.config/
 Installation:
 
 ``` bash
-sudo pacman -S --noconfirm --needed qtile python-psutil python-iwlib nitrogen picom rofi
+sudo pacman -S --noconfirm --needed qtile python-psutil python-iwlib nitrogen picom rofi ghostty
 [ -d "$HOME/.config" ] || mkdir ~/.config/
 cp -r ./configs/Window_Managers/qtile ~/.config/
 cp -r ./configs/Terminal_Emulators/ghostty ~/.config/
@@ -93,7 +93,7 @@ cp -r ./configs/Application_Launchers/rofi ~/.config/
 Installation:
 
 ``` bash
-sudo pacman -S --noconfirm --needed xmonad xmonad-contrib polybar picom nitrogen rofi
+sudo pacman -S --noconfirm --needed xmonad xmonad-contrib polybar picom nitrogen rofi ghostty
 [ -d "$HOME/.config" ] || mkdir ~/.config/
 cp -r ./configs/Window_Managers/xmonad ~/.config/
 cp -r ./configs/Terminal_Emulators/ghostty ~/.config/

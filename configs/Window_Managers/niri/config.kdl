@@ -27,9 +27,9 @@ cursor { xcursor-theme "Bibata-Modern-Classic"; xcursor-size 24; }
 spawn-at-startup "foot" "--server"
 spawn-at-startup "waybar"
 spawn-at-startup "niri" "msg" "action" "focus-workspace" "2"
-spawn-at-startup "sh" "-c" "swaybg -i ~/Pictures/Wallpapers/00057.jpg"
 spawn-at-startup "~/.config/niri/scripts/battery_monitor.sh"
-spawn-at-startup "swaylock"
+spawn-at-startup "sh" "-c" "swaybg -m fill -i ~/Pictures/Wallpapers/00057.jpg"
+spawn-at-startup "sh" "-c" "[ $XDG_VTNR -eq 1 ] && swaylock"
 // spawn-at-startup "xwayland-satellite"
 
 screenshot-path "~/Pictures/Screenshots/Screenshot-%F_%T.png"
@@ -162,6 +162,7 @@ binds {
     Mod+Minus { switch-preset-window-width; }
     Mod+Equal { reset-window-height; }
     Mod+W { maximize-column; }
+    // Mod+F { toggle-windowed-fullscreen; }
     Mod+F { fullscreen-window; }
     Mod+Shift+W       { toggle-window-floating; }
 

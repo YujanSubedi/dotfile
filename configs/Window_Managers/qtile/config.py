@@ -303,7 +303,7 @@ screens = [
                                    "Button1": search,
                                    "Button3": view_window
                                }),
-                widget.Image(filename='~/.config/qtile/Assets/6.png'),
+                widget.Image(filename='~/.config/qtile/Assets/6.jpg'),
 
                 # Workspaces #
                 widget.GroupBox(
@@ -326,7 +326,7 @@ screens = [
                 ),
 
                 #widget.Spacer(length=8, background='#353446'),
-                widget.Image(filename='~/.config/qtile/Assets/2.png'),
+                widget.Image(filename='~/.config/qtile/Assets/2.jpg'),
 
                 # CPU Monitor #
                 widget.TextBox(
@@ -340,7 +340,7 @@ screens = [
                     fontsize=13,
                     update_interval=3,
                 ),
-                widget.Image(filename='~/.config/qtile/Assets/2.png'),
+                widget.Image(filename='~/.config/qtile/Assets/2.jpg'),
 
                 # Memeory Monitor #
                 widget.TextBox(
@@ -352,7 +352,7 @@ screens = [
                     format='{MemPercent}%',
                     update_interval=3,
                 ),
-                widget.Image(filename='~/.config/qtile/Assets/2.png'),
+                widget.Image(filename='~/.config/qtile/Assets/2.jpg'),
 
                 # Free Space in Partition #
                 widget.TextBox(
@@ -365,7 +365,7 @@ screens = [
                     format='{uf}{m} / {s}{m}',
                     update_interval=5,
                 ),
-                widget.Image(filename='~/.config/qtile/Assets/5.png'),
+                widget.Image(filename='~/.config/qtile/Assets/5.jpg'),
 
                 # Layouts #
                 widget.CurrentLayoutIcon(background='#282738', scale=0.5),
@@ -374,26 +374,26 @@ screens = [
                 #      background='#282738',
                 #      fmt='{}',
                 #  ),
-                widget.Image(filename='~/.config/qtile/Assets/4.png'),
+                widget.Image(filename='~/.config/qtile/Assets/4.jpg'),
 
                 # Active Window #
                 widget.WindowName(
                     format="{name}",
                     empty_group_string='Desktop',
                 ),
-                widget.Image(filename='~/.config/qtile/Assets/3.png'),
+                widget.Image(filename='~/.config/qtile/Assets/3.jpg'),
 
                 # System Tray #
                 widget.Systray(background='#282738', fontsize=2),
                 widget.TextBox(text=' ', background='#282738'),
-                widget.Image(filename='~/.config/qtile/Assets/6.png'),
+                widget.Image(filename='~/.config/qtile/Assets/6.jpg'),
 
                 # Wifi Monitor #
                 widget.Wlan(interface='wlp4s0',
                             disconnected_message='󰯡 ',
                             format='󰀂   {percent:2.0%} {essid}',
                             use_ethernet=True),
-                widget.Image(filename='~/.config/qtile/Assets/2.png'),
+                widget.Image(filename='~/.config/qtile/Assets/2.jpg'),
 
                 # Battery Monitor #
                 widget.BatteryIcon(
@@ -405,7 +405,7 @@ screens = [
                     format='{percent:2.0%}',
                     fontsize=13,
                 ),
-                widget.Image(filename='~/.config/qtile/Assets/5.png'),
+                widget.Image(filename='~/.config/qtile/Assets/5.jpg'),
 
                 # Date #
                 widget.TextBox(
@@ -418,7 +418,7 @@ screens = [
                     background='#282738',
                     format='%a, %b %d, %Y',
                 ),
-                widget.Image(filename='~/.config/qtile/Assets/7.png'),
+                widget.Image(filename='~/.config/qtile/Assets/7.jpg'),
 
                 # Time #
                 widget.TextBox(
@@ -431,7 +431,7 @@ screens = [
                     background='#282738',
                     format='%I:%M %p',
                 ),
-                widget.Image(filename='~/.config/qtile/Assets/7.png'),
+                widget.Image(filename='~/.config/qtile/Assets/7.jpg'),
                 widget.TextBox(fmt='⏻ ',
                                background='#282738',
                                fontsize=18,

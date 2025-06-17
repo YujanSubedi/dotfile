@@ -9,6 +9,9 @@ unsetopt BEEP
 export HISTSIZE=100000
 export SAVEHIST=100000
 
+# limit cpu cargo
+export CARGO_BUILD_JOBS=3
+
 # XDG Based directories
 export XDG_CACHE_HOME="${HOME}/.cache"
 export XDG_CONFIG_HOME="${HOME}/.config"

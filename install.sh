@@ -45,7 +45,7 @@ if [[ "$default_flag" == true ]]; then
 	aur_helper=paru                                         # paru yay
 	Virtualization=(Docker)                                 # Qemu Docker Virt_Manager Waydroid
 	Network_tools=(Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark) # Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark Burpsuite
-	Browsers=(Zen_Browser Ungoogled_Chromium Tor_Browser)   # Zen_Browser Firefox Ungoogled_Chromium Tor_Browser QuteBrowser Vivaldi Brave_Browser Librewolf
+	Browsers=(Zen_Browser Tor_Browser)                      # Zen_Browser Firefox Ungoogled_Chromium Tor_Browser QuteBrowser Vivaldi Brave_Browser Librewolf
 	Extra_applications=(Gimp)                               # Discord Gimp Openshot LibreOffice Texlive Spotify LocalSend
 	Copy_configs=No                                         # Yes No
 	firewall=Yes                                            # Yes No
@@ -107,17 +107,35 @@ else # Let user select
 	done
 	echo -e "${GREEN}Display Protocol: ${YELLOW}$display_protocol${NONE}"
 
-	echo "Window Manager:"
-	select window_manager in Niri Hyprland Xmonad Qtile NONE; do
-		case $REPLY in
-		1 | 2 | 3 | 4 | 5)
-			break
-			;;
-		*)
-			echo "Invalid Selection"
-			;;
-		esac
-	done
+	case $display_protocol in # Wayland Xorg NONE
+	Wayland)
+		echo "Window Manager:"
+		select window_manager in Niri Hyprland NONE; do
+			case $REPLY in
+			1 | 2 | 3)
+				break
+				;;
+			*)
+				echo "Invalid Selection"
+				;;
+			esac
+		done
+		;;
+	Xorg)
+		echo "Window Manager:"
+		select window_manager in Qtile Xmonad NONE; do
+			case $REPLY in
+			1 | 2 | 3)
+				break
+				;;
+			*)
+				echo "Invalid Selection"
+				;;
+			esac
+		done
+		;;
+	*) ;;
+	esac
 	echo -e "${GREEN}Window Manager: ${YELLOW}$window_manager${NONE}"
 
 	echo "Aur Helper"
@@ -463,7 +481,7 @@ sudo pacman -S --noconfirm --needed bluez-utils bluez
 # sudo pacman -S --noconfirm --needed udiskie udisk2
 
 # Multimedia
-sudo pacman -S --noconfirm --needed vimiv imagemagick wf-recorder feh
+sudo pacman -S --noconfirm --needed vimiv imagemagick feh
 sudo pacman -S --noconfirm --needed mpv ffmpeg ffmpegthumbnailer
 sudo pacman -S --noconfirm --needed zathura zathura-pdf-mupdf
 # sudo pacman -S --noconfirm --needed zathura zathura-pdf-poppler
@@ -542,16 +560,26 @@ esac
 # Display Protocol
 case $display_protocol in # Wayland Xorg NONE
 Wayland)
-	sudo pacman -S --noconfirm --needed wayland wayland-protocols xorg-xwayland
-	sudo pacman -S --noconfirm --needed qt5-wayland qt6-wayland
-	sudo pacman -S --noconfirm --needed grim slurp hyprlock
+	# sudo pacman -S --noconfirm --needed qt5-wayland qt6-wayland
 	sudo pacman -S --noconfirm --needed nwg-look wl-clipboard
-	sudo pacman -S --noconfirm --needed waybar
-	sudo pacman -S --noconfirm --needed rofi-wayland
-	# sudo pacman -S --noconfirm --needed swww
-	sudo pacman -S --noconfirm --needed hyprpaper
-	sudo pacman -S --noconfirm --needed hyprpicker
-	sudo pacman -S --noconfirm --needed foot
+	sudo pacman -S --noconfirm --needed slurp wf-recorder
+	sudo pacman -S --noconfirm --needed foot waybar rofi-wayland
+	# Window Manager
+	case $window_manager in # Niri Hyprland NONE
+	Niri)
+		sudo pacman -S --noconfirm --needed niri
+		sudo pacman -S --noconfirm --needed swaybg swaylock
+		sudo pacman -S --noconfirm --needed xwayland-satellite
+		sudo pacman -S --noconfirm --needed xdg-desktop-portal-gtk xdg-desktop-portal-gnome
+		;;
+	Hyprland)
+		sudo pacman -S --noconfirm --needed hyprland
+		sudo pacman -S --noconfirm hyprpaper hyprlock
+		sudo pacman -S --noconfirm --needed xdg-desktop-portal-hyprland grim hyprpicker
+		# sudo pacman -S --noconfirm --needed hyprpolkitagent
+		;;
+	*) ;;
+	esac
 	;;
 Xorg)
 	sudo pacman -S --noconfirm --needed xorg xorg-server xorg-xinit
@@ -559,30 +587,19 @@ Xorg)
 	sudo pacman -S --noconfirm --needed scrot i3lock xclip
 	sudo pacman -S --noconfirm --needed lxappearance
 	sudo pacman -S --noconfirm --needed ghostty
-	;;
-*) ;;
-esac
-
-# Window Manager
-case $window_manager in # Hyprland Xmonad Qtile NONE
-Niri)
-	sudo pacman -S --noconfirm --needed niri
-	sudo pacman -S --noconfirm --needed xwayland-satellite
-	sudo pacman -S --noconfirm --needed xdg-desktop-portal-gtk xdg-desktop-portal-gnome
-	;;
-Hyprland)
-	sudo pacman -S --noconfirm --needed hyprland
-	sudo pacman -S --noconfirm --needed xdg-desktop-portal-hyprland
-	# sudo pacman -S --noconfirm --needed hyprpolkitagent
-	;;
-Xmonad)
-	sudo pacman -S --noconfirm --needed xmonad xmonad-contrib
-	# sudo pacman -S --noconfirm --needed xmobar haskell-iwlib
-	sudo pacman -S --noconfirm --needed polybar
-	;;
-Qtile)
-	sudo pacman -S --noconfirm --needed qtile
-	sudo pacman -S --noconfirm --needed python-psutil python-iwlib
+	# Window Manager
+	case $window_manager in # Qtile Xmonad NONE
+	Qtile)
+		sudo pacman -S --noconfirm --needed qtile
+		sudo pacman -S --noconfirm --needed python-psutil python-iwlib
+		;;
+	Xmonad)
+		sudo pacman -S --noconfirm --needed xmonad xmonad-contrib
+		# sudo pacman -S --noconfirm --needed xmobar haskell-iwlib
+		sudo pacman -S --noconfirm --needed polybar
+		;;
+	*) ;;
+	esac
 	;;
 *) ;;
 esac
