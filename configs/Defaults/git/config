@@ -1,0 +1,32 @@
+[user]
+
+[core]
+	editor = nvim
+	compression = 6
+	preloadindex = true
+
+[push]
+	default = current
+	followTags = true
+	autoSetupRemote = true
+
+[pull]
+	default = current
+	rebase = true
+
+[rebase]
+	autoStash = true
+	missingCommitsCheck = warn
+
+[merge]
+    conflictStyle = diff3
+
+[status]
+	showStash = true
+	; branch = true
+
+[url "git@github.com:"]
+	insteadOf = gh
+
+[url "git@github.com:YujanSubedi"]
+	insteadOf = ys
