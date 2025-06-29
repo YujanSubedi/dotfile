@@ -47,11 +47,11 @@ keys = [
     # Run rofi to run program #
     Key([mod],
         "r",
-        lazy.spawn("rofi -show drun -theme ~/.config/rofi/config.rasi"),
+        lazy.spawn("rofi -show drun"),
         desc="Spawn a cmd menu"),
     Key([mod],
         "0",
-        lazy.spawn("rofi -show window -theme ~/.config/rofi/config.rasi"),
+        lazy.spawn("rofi -show window"),
         desc="Show all tabs"),
 
     # Emacs
@@ -274,35 +274,19 @@ widget_defaults = dict(
 extension_defaults = [widget_defaults.copy()]
 
 
-def search():
-    qtile.cmd_spawn("rofi -show drun -theme ~/.config/rofi/config.rasi")
-
-
-def view_window():
-    qtile.cmd_spawn("rofi -show window -theme ~/.config/rofi/config.rasi")
-
-
-def powermenu():
-    qtile.cmd_spawn("sh ./.config/rofi/powermenu.sh")
-
-
 # # # Bar: # # #
 
 screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.Spacer(length=18, background='#282738'),
+                widget.Spacer(length=15, background='#282738'),
 
                 # Search bar #
                 widget.TextBox(fmt=' ',
                                background='#282738',
                                fontsize=17,
-                               foreground='#4dd0e1',
-                               mouse_callbacks={
-                                   "Button1": search,
-                                   "Button3": view_window
-                               }),
+                               foreground='#4dd0e1'),
                 widget.Image(filename='~/.config/qtile/Assets/6.jpg'),
 
                 # Workspaces #
@@ -431,13 +415,7 @@ screens = [
                     background='#282738',
                     format='%I:%M %p',
                 ),
-                widget.Image(filename='~/.config/qtile/Assets/7.jpg'),
-                widget.TextBox(fmt='⏻ ',
-                               background='#282738',
-                               fontsize=18,
-                               foreground='#4dd0e1',
-                               mouse_callbacks={"Button1": powermenu}),
-                widget.Spacer(length=10, background='#282738'),
+                widget.Spacer(length=15, background='#282738'),
             ],
             30,
             margin=[0, -5, 0, -5],

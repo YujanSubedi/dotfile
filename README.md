@@ -121,6 +121,14 @@ cp ./Pictures/Lockscreen/lockscreen.jpg ~/Pictures/Lockscreen/
 
 -----
 
+- Synchronize time by NTP:
+
+``` bash
+ sudo timedatectl set-ntp true
+```
+
+-----
+
 - Sudo requires password everytime:
 
 ``` bash

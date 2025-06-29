@@ -24,17 +24,17 @@ return {
 				"lua_ls", -- lua
 				"pyright", -- python
 				"ruff", -- python linter
-				"verible", -- verilog linter
-				"texlab", -- latex
-				-- "rnix", -- nix
 				-- "zls", -- zig
 				-- "ols", -- odin
-				"gopls", -- golang
+				-- "gopls", -- golang
 				"cssls", -- css
 				"ts_ls", -- js/ts for node
-				"denols", -- js/ts for deno
+				-- "denols", -- js/ts for deno
+				-- "texlab",    -- latex
 				"jsonls", -- json
 				"dockerls", -- docker
+				-- "rnix", -- nix
+				-- "verible", -- verilog linter
 			}
 
 			-- debugger adapter protocols
@@ -77,8 +77,8 @@ return {
 			ensure_installed = {},
 			automatic_enable = {
 				exclude = {
-					-- "ts_ls",
-					"denols",
+					-- "denols",
+					-- "rust_analyzer"
 				},
 			},
 		},

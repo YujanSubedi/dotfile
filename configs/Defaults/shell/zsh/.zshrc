@@ -33,6 +33,7 @@ bindkey -s '^F' 'pacman -Ss '
 bindkey -s '^[f' 'pacman -F '
 bindkey -s '^N' 'nvim .\n'
 bindkey -s '^[n' 'ncd\n'
+bindkey -s '^[`' 'footclient &\n'
 
 # Set vi mode in Zsh:
 bindkey -v

@@ -1,5 +1,6 @@
 image=~/Pictures/Lockscreen/lockscreen.jpg
 ignore-empty-password
+indicator-caps-lock
 indicator-radius=100
 indicator-thickness=5
 inside-color=2b2d31aa

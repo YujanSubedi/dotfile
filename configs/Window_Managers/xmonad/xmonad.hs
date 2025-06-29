@@ -74,8 +74,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- , ((mod1Mask,               xK_Return), namedScratchpadAction myScratchPads "terminal")
 
     -- launch dmenu
-    , ((modm,               xK_r     ), spawn "rofi -show drun -theme ~/.config/rofi/config.rasi")
-    , ((modm,               xK_0     ), spawn "rofi -show window -theme ~/.config/rofi/config.rasi")
+    , ((modm,               xK_r     ), spawn "rofi -show drun")
+    , ((modm,               xK_u     ), spawn "rofi -show window")
 
     -- launch emacs
     , ((modm,               xK_i     ), spawn "emacs")

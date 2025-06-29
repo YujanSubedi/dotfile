@@ -37,19 +37,19 @@ trap exit SIGINT
 
 # Default value
 if [[ "$default_flag" == true ]]; then
-	cpu_architecture=AMD                                    # AMD Intel NONE
-	graphic_driver=Nvidia                                   # Nvidia Nvidia_with_Cuda NONE
-	display_manager=NONE                                    # NONE Ly Lightdm Sddm Gdm
-	display_protocol=Wayland                                # Wayland Xorg NONE
-	window_manager=Niri                                     # Niri Hyprland Xmonad Qtile NONE
-	aur_helper=paru                                         # paru yay
-	Virtualization=(Docker)                                 # Qemu Docker Virt_Manager Waydroid
-	Network_tools=(Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark) # Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark Burpsuite
-	Browsers=(Zen_Browser Tor_Browser)                      # Zen_Browser Firefox Ungoogled_Chromium Tor_Browser QuteBrowser Vivaldi Brave_Browser Librewolf
-	Extra_applications=(Gimp)                               # Discord Gimp Openshot LibreOffice Texlive Spotify LocalSend
-	Copy_configs=No                                         # Yes No
-	firewall=Yes                                            # Yes No
-	Restart_flag=No                                         # Yes No
+	cpu_architecture=AMD                          # AMD Intel NONE
+	graphic_driver=NONE                           # Nvidia Nvidia_with_Cuda NONE
+	display_manager=NONE                          # NONE Ly Lightdm Sddm Gdm
+	display_protocol=Wayland                      # Wayland Xorg NONE
+	window_manager=Niri                           # Niri Hyprland Xmonad Qtile NONE
+	aur_helper=paru                               # paru yay
+	Virtualization=(Docker)                       # Qemu Docker Virt_Manager Waydroid
+	Network_tools=(Qbit_Torrent Yt_Dlp Wireshark) # Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark Burpsuite
+	Browsers=(Zen_Browser Tor_Browser)            # Zen_Browser Firefox Ungoogled_Chromium Tor_Browser QuteBrowser Vivaldi Brave_Browser Librewolf
+	Extra_applications=(Gimp)                     # Discord Gimp Openshot LibreOffice Texlive Spotify LocalSend
+	Copy_configs=No                               # Yes No
+	firewall=Yes                                  # Yes No
+	Restart_flag=No                               # Yes No
 
 else # Let user select
 	# Cpu MicroCode
@@ -316,78 +316,32 @@ done
 sudo pacman -Sy --noconfirm
 sudo pacman -Fy --noconfirm
 
-# Synchronize time by NTP
-sudo timedatectl set-ntp true
-
-# Install programming languages
-
-# C, Cpp
+# C, Cpp, Rust
 sudo pacman -S --noconfirm --needed gcc
-sudo pacman -S --noconfirm --needed llvm clang
-# sudo pacman -S --noconfirm --needed tcc
-
-# Lua
-sudo pacman -S --noconfirm --needed lua
-
-# Python
-sudo pacman -S --noconfirm --needed python
-
-# JavaScript, TypeScript
-sudo pacman -S --noconfirm --needed npm
-# sudo pacman -S --noconfirm --needed deno
-# sudo pacman -S --noconfirm --needed yarn
-
-# GoLang
-sudo pacman -S --noconfirm --needed go
-
-# Rust
-# sudo pacman -S --noconfirm --needed rust
 sudo pacman -S --noconfirm --needed rustup
 rustup default stable
-# rustup component add rust-analyzer
+# sudo pacman -S --noconfirm --needed llvm clang
+# sudo pacman -S --noconfirm --needed rust
 
-# Verilog
-sudo pacman -S --noconfirm --needed iverilog gtkwave
+# Vi, Vim and Neovim
+# sudo pacman -S --noconfirm --needed vi vim
+sudo pacman -S --noconfirm --needed neovim
 
-# Zig
-# sudo pacman -S --noconfirm --needed zig
-
-# Odin
-# sudo pacman -S --noconfirm --needed odin
-
-# Java
-# sudo pacman -S --noconfirm --needed iverilog jdk21-openjdk
-
-# Haskell
-# sudo pacman -S --noconfirm --needed ghc
-
-# Php
-# sudo pacman -S --noconfirm --needed php
-
-# Perl
-# sudo pacman -S --noconfirm --needed perl
-
-# Matlab
-# sudo pacman -S --noconfirm --needed octave
-
-# Webassembly
-# sudo pacman -S --noconfirm --needed emscripten
-
-# # C/CPP libraries
-sudo pacman -S --noconfirm --needed raylib
-sudo pacman -S --noconfirm --needed glew freeglut glu glfw
-sudo pacman -S --noconfirm --needed cmake
-
-# C/CPP Debuggers
-sudo pacman -S --noconfirm --needed gdb ltrace strace
-
-# Git
+# Git and networking tools
 sudo pacman -S --noconfirm --needed git
-# sudo pacman -S --noconfirm --needed lazygit
+sudo pacman -S --noconfirm --needed openssh nmap
+sudo pacman -S --noconfirm --needed wget xh
 
-# Networking Tools - ncat, nmap, dig, nslookup, arp, netstat, telnet
-sudo pacman -S --noconfirm --needed openssl openssh inetutils
-sudo pacman -S --noconfirm --needed net-tools bind nmap gnu-netcat
+# Networking Tools - dig, nslookup, arp, netstat, telnet
+# sudo pacman -S --noconfirm --needed bind
+# sudo pacman -S --noconfirm --needed net-tools inetutils gnu-netcat
+
+# Compression and decompression
+sudo pacman -S --noconfirm --needed tar zip unzip 7zip
+
+# Fonts
+sudo pacman -S --noconfirm --needed noto-fonts noto-fonts-emoji
+sudo pacman -S --noconfirm --needed ttf-jetbrains-mono ttf-jetbrains-mono-nerd
 
 # To install Aur Packages
 sudo pacman -S --noconfirm --needed base-devel
@@ -414,58 +368,54 @@ esac
 # Update aur_helper
 $aur_helper -Sy
 
-# Update all packages
-# $aur_helper -Syu
-
 # Downgrade packages rollback for broken packages
-$aur_helper -S --noconfirm --needed downgrade
+# $aur_helper -S --noconfirm --needed downgrade
 
-# Additional programming languages from aur
+# C/CPP libraries
+sudo pacman -S --noconfirm --needed glew freeglut glu glfw
+# sudo pacman -S --noconfirm --needed cmake
+# sudo pacman -S --noconfirm --needed raylib
+
+# C/CPP Debuggers
+sudo pacman -S --noconfirm --needed gdb ltrace strace
+
+# Programming languages
+# sudo pacman -S --noconfirm --needed lua
+# sudo pacman -S --noconfirm --needed go
+# sudo pacman -S --noconfirm --needed python
+# sudo pacman -S --noconfirm --needed zig
+# sudo pacman -S --noconfirm --needed npm
+# sudo pacman -S --noconfirm --needed deno
+# sudo pacman -S --noconfirm --needed yarn
+# sudo pacman -S --noconfirm --needed iverilog gtkwave
+# sudo pacman -S --noconfirm --needed odin
+# sudo pacman -S --noconfirm --needed jdk-openjdk
+# sudo pacman -S --noconfirm --needed ghc
+# sudo pacman -S --noconfirm --needed php
+# sudo pacman -S --noconfirm --needed perl
+# sudo pacman -S --noconfirm --needed octave
+# sudo pacman -S --noconfirm --needed emscripten
 # $aur_helper -S --noconfirm --needed ghdl
 # $aur_helper -S --noconfirm --needed bun
 # $aur_helper -S --noconfirm --needed mojo
 # $aur_helper -S --noconfirm --needed flutter
 
-# Vi, Vim and Neovim
-# sudo pacman -S --noconfirm --needed vi vim
-sudo pacman -S --noconfirm --needed neovim
-
-# Neovim dependency
-sudo pacman -S --noconfirm --needed ripgrep tar zip unzip
-
-# Emacs
-# sudo pacman -S --noconfirm --needed emacs
-# sudo pacman -S --noconfirm --needed zed
-
-# Fonts
-sudo pacman -S --noconfirm --needed noto-fonts noto-fonts-emoji
-sudo pacman -S --noconfirm --needed ttf-jetbrains-mono ttf-jetbrains-mono-nerd
-
 # Terminals tools
-sudo pacman -S --noconfirm --needed man-db
-sudo pacman -S --noconfirm --needed man-pages opengl-man-pages
-sudo pacman -S --noconfirm --needed bash-completion zsh-completions
-sudo pacman -S --noconfirm --needed usbutils fastfetch ncdu
-sudo pacman -S --noconfirm --needed choose fzf parallel
-sudo pacman -S --noconfirm --needed git-delta duf eza
-sudo pacman -S --noconfirm --needed ripgrep-all fd
+sudo pacman -S --noconfirm --needed ripgrep fd fzf
+sudo pacman -S --noconfirm --needed man-db man-pages
 sudo pacman -S --noconfirm --needed bat bat-extras
+sudo pacman -S --noconfirm --needed btop ncdu
 sudo pacman -S --noconfirm --needed brightnessctl
-sudo pacman -S --noconfirm --needed btop nvtop
-sudo pacman -S --noconfirm --needed wget xh curlie
+sudo pacman -S --noconfirm --needed duf
+# sudo pacman -S --noconfirm --needed tmux
+# sudo pacman -S --noconfirm --needed curlie
 # sudo pacman -S --noconfirm --needed httpie
-sudo pacman -S --noconfirm --needed whois
-sudo pacman -S --noconfirm --needed tmux
-
-# Notification
-sudo pacman -S --noconfirm --needed dunst
-
-# Multiwindow settings
-# sudo pacman -S --noconfirm --needed arandr
+# sudo pacman -S --noconfirm --needed git-delta
+# sudo pacman -S --noconfirm --needed whois
 
 # Enable audio
 sudo pacman -S --noconfirm --needed pipewire wireplumber
-sudo pacman -S --noconfirm --needed pipewire-pulse pavucontrol
+sudo pacman -S --noconfirm --needed pipewire-pulse pavucontrol pipewire-jack
 
 # Printer
 # sudo pacman -S --noconfirm --needed cups
@@ -481,29 +431,33 @@ sudo pacman -S --noconfirm --needed bluez-utils bluez
 # sudo pacman -S --noconfirm --needed udiskie udisk2
 
 # Multimedia
-sudo pacman -S --noconfirm --needed vimiv imagemagick feh
-sudo pacman -S --noconfirm --needed mpv ffmpeg ffmpegthumbnailer
-sudo pacman -S --noconfirm --needed zathura zathura-pdf-mupdf
-# sudo pacman -S --noconfirm --needed zathura zathura-pdf-poppler
-sudo pacman -S --noconfirm --needed yazi 7zip jq
+sudo pacman -S --noconfirm --needed vimiv imagemagick
+sudo pacman -S --noconfirm --needed mpv ffmpeg yt-dlp
+# sudo pacman -S --noconfirm --needed zathura zathura-pdf-mupdf
+sudo pacman -S --noconfirm --needed zathura zathura-pdf-poppler
+sudo pacman -S --noconfirm --needed yazi
+
+# Notification
+sudo pacman -S --noconfirm --needed dunst
 
 # File manager
 # sudo pacman -S --noconfirm --needed nemo
 
 # Qrcode tools
-sudo pacman -S --noconfirm --needed qrtool
-sudo pacman -S --noconfirm --needed zbar
+# sudo pacman -S --noconfirm --needed qrtool
+# sudo pacman -S --noconfirm --needed zbar
 
 # Scan for other os Grub
 # sudo pacman -S --noconfirm --needed os-prober
 
-# Flatpaks and Snaps suppots
+# Nix, Flatpaks and Snaps supports
+# $aur_helper -S --noconfirm --needed nix
+# sudo pacman -S --noconfirm --needed flatpak
+# $aur_helper -S --noconfirm --needed snapd
 # sudo pacman -S --noconfirm --needed xdg-desktop-portal
 # sudo pacman -S --noconfirm --needed xdg-desktop-portal-gtk
 # sudo pacman -S --noconfirm --needed xdg-desktop-portal-hyprland
 # sudo pacman -S --noconfirm --needed wlroots xdg-desktop-portal-wlr
-# sudo pacman -S --noconfirm --needed flatpak
-# $aur_helper -S --noconfirm --needed snapd
 
 # Cpu architecture and graphic_driver
 case $cpu_architecture in # AMD Intel NONE
@@ -561,7 +515,7 @@ esac
 case $display_protocol in # Wayland Xorg NONE
 Wayland)
 	# sudo pacman -S --noconfirm --needed qt5-wayland qt6-wayland
-	sudo pacman -S --noconfirm --needed nwg-look wl-clipboard
+	# sudo pacman -S --noconfirm --needed nwg-look wl-clipboard
 	sudo pacman -S --noconfirm --needed slurp wf-recorder
 	sudo pacman -S --noconfirm --needed foot waybar rofi-wayland
 	# Window Manager
@@ -608,6 +562,7 @@ esac
 for virt_option in "${Virtualization[@]}"; do
 	case $virt_option in # Qemu Docker Virt_Manager Waydroid
 	Qemu)
+		# sudo pacman -S --noconfirm --needed qemu-base
 		sudo pacman -S --noconfirm --needed qemu-full
 		;;
 	Docker)
@@ -736,7 +691,7 @@ Yes)
 	case $window_manager in
 	Niri)
 		cp -r ./configs/Window_Managers/niri ~/.config/
-		cp -r ./configs/Window_Managers/hypr ~/.config/
+		cp -r ./configs/Session_Lock/swaylock/ ~/.config/
 		cp -r ./configs/Terminal_Emulators/foot ~/.config/
 		cp -r ./configs/Status_Bars/waybar ~/.config/
 		;;
@@ -764,7 +719,7 @@ esac
 case $firewall in # Yes No
 Yes)
 	sudo pacman -S --noconfirm --needed ufw
-	sudo systemctl enable --now ufw
+	# sudo systemctl enable --now ufw
 	sudo ufw enable
 	;;
 *) ;;
