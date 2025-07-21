@@ -1,0 +1,41 @@
+# Title bar and other features
+window-decoration = false
+resize-overlay = never
+
+# Fonts
+font-family = "JetBrains Mono"
+font-size = 13
+# font-feature = -calt
+
+# Paddings
+window-padding-x=5
+window-padding-y=5
+
+# Cursor
+cursor-style = underline
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+# Colors
+background-opacity = 0.90
+foreground = a5a2a2
+background = 131517
+palette = 0=090300
+palette = 1=db2d20
+palette = 2=01a252
+palette = 3=c98d0c
+palette = 4=12488b
+palette = 5=933799
+palette = 6=2991b3
+palette = 7=a5a2a2
+palette = 8=4e4c54
+palette = 9=f66151
+palette = 10=33d17a
+palette = 11=fded02
+palette = 12=2a7bde
+palette = 13=c061cb
+palette = 14=33c7de
+palette = 15=c2c2c2
+
+# Keybindings
+keybind = alt+`=new_window

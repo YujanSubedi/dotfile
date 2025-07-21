@@ -1,0 +1,13 @@
+[mgr]
+append_keymap  = [
+	# Goto
+	{ on = [ "g", "y" ],       run = "cd ~/Yujan/",                       desc = "Go to the ~/Yujan" },
+	{ on = [ "g", "n" ],       run = "cd ~/notes/",                       desc = "Go to the ~/notes" },
+	{ on = [ "g", "m" ],       run = "cd ~/Music/",                       desc = "Go to the ~/Music/" },
+	{ on = [ "g", "i" ],       run = "cd ~/Resources/",                   desc = "Go to the ~/Resources" },
+	{ on = [ "g", "p" ],       run = "cd ~/Pictures/",                    desc = "Go to the ~/Pictures" },
+	{ on = [ "g", "s" ],       run = "cd ~/Pictures/Screenshots/",        desc = "Go to the ~/Pictures/Screenshots" },
+	{ on = [ "g", "w" ],       run = "cd ~/Pictures/Wallpapers/",         desc = "Go to the ~/Pictures/Wallpapers" },
+	{ on = [ "g", "r" ],       run = "cd ~/Videos/Recordings/",           desc = "Go to the ~/Videos/Recordings" },
+	{ on = [ "g", "t" ],       run = "cd ~/.local/share/Trash/",          desc = "Go to the ~/.local/share/Trash/" },
+]

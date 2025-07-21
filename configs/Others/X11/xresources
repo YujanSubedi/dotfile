@@ -1,0 +1,64 @@
+XTerm.termName: xterm-256color
+
+! ## Set font and fontsize ##
+XTerm*faceName: JetbrainsMono Nerd Font
+XTerm*faceSize: 14
+
+! ## Scrollbar ##
+XTerm*vt100.scrollBar: false
+
+! Scrolling by using Shift-PageUp / Shift-PageDown or mousewheel by default ##
+! Lines of output you can scroll back over
+XTerm*saveLines: 15000
+
+! Enable copy/paste hotkeyes (mouse highlight = copy ,  shift+Insert = paste)
+XTerm*selectToClipboard: true
+
+! Alt key
+XTerm.vt100.metaSendsEscape: true
+
+! ## Select text ##
+XTerm*highlightSelection: true
+! Remove trailing spaces
+XTerm*trimSelection: true
+
+! ~~~~~~~~~~~~~~~~~~
+! ## Color Themes ##
+! ~~~~~~~~~~~~~~~~~~
+XTerm*background: #252525
+XTerm*foreground: #a5a2a2
+
+XTerm*colorUL: #a5a2a2
+XTerm*underlineColor: #a5a2a2
+
+! ! black
+XTerm*color0  : #090300
+XTerm*color8  : #4e4c54
+!
+! ! red
+XTerm*color1  : #db2d20
+XTerm*color9  : #f66151
+!
+! ! green
+XTerm*color2  : #01a252
+XTerm*color10 : #33d17a
+!
+! ! yellow
+XTerm*color3  : #c98d0c
+XTerm*color11 : #fded02
+!
+! ! blue
+XTerm*color4  : #12488b
+XTerm*color12 : #2a7bde
+!
+! ! magenta
+XTerm*color5  : #933799
+XTerm*color13 : #c061cb
+!
+! ! cyan
+XTerm*color6  : #2991b3
+XTerm*color14 : #33c7de
+!
+! ! white
+XTerm*color7  : #a5a2a2
+XTerm*color15 : #c2c2c2

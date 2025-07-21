@@ -1,0 +1,52 @@
+[
+  //Bar to be displayed at the HDMI output
+  {
+    "layer": "top",
+    "position": "top",
+    "modules-center": [
+      // "hyprland/workspaces"
+      "niri/workspaces"
+    ],
+    "fixed-center": true,
+    "output": "HDMI-A-1",
+    "hyprland/workspaces": {
+      "disable-scroll": true
+    }
+  },
+  // Bar to be displayed at the Laptop Monitor output
+  {
+    "layer": "top",
+    "position": "top",
+    "modules-left": [
+      "custom/arch",
+      // "hyprland/workspaces",
+      "niri/workspaces",
+      "cpu",
+      "memory",
+      "disk",
+      "backlight",
+      "battery"
+    ],
+    "modules-center": [
+      // "wlr/taskbar",
+      "mpris"
+    ],
+    "modules-right": [
+      "privacy",
+      "tray",
+      "bluetooth",
+      "network",
+      "pulseaudio",
+      "clock",
+      "clock#time"
+    ],
+    "fixed-center": true,
+    "output": [
+      "eDP-1",
+      "eDP-2"
+    ],
+    //"output": "eDP-1",
+    //"passthrough" : "true",
+    "include": "~/.config/waybar/modules.jsonc"
+  }
+]

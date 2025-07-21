@@ -1,0 +1,101 @@
+* {
+  font-family:
+    JetBrainsMono Nerd Font,
+    monospace;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+window#waybar {
+  background-color: #111516;
+  color: #999999;
+}
+
+#cpu,
+#memory,
+#disk,
+#battery,
+#backlight,
+#tary,
+#bluetooth,
+#network,
+#pulseaudio,
+#clock {
+  padding: 1px 3px;
+  margin: 4px;
+}
+
+#workspaces {
+  padding: 0px 8px;
+}
+#workspaces button {
+  color: #555555;
+}
+#workspaces button.empty {
+  color: #111516;
+}
+#workspaces button.active {
+  color: #7acaca;
+}
+
+#workspaces button.urgent {
+  color: #11111b;
+  background: #a6e3a1;
+  border-radius: 20px;
+}
+
+#workspaces button:hover {
+  color: #11111b;
+  background: #86a3a1;
+  border-radius: 20px;
+}
+
+#cpu {
+  color: #f6c177;
+}
+#memory {
+  color: #009189;
+}
+#disk {
+  color: #ec407a;
+}
+
+#battery {
+  color: #a9d27c;
+}
+#backlight {
+  color: #adb6d4;
+}
+
+#bluetooth {
+  color: #31748f;
+}
+#bluetooth.off,
+#bluetooth.on,
+#bluetooth.connected,
+#bluetooth.discoverable,
+#bluetooth.discovering,
+#bluetooth.pairable {
+  color: #0db9d7;
+}
+
+#network {
+  color: #ff9e64;
+}
+#network.disconnected {
+  color: #cd3320;
+}
+
+#pulseaudio {
+  color: #ab9ae7;
+}
+#pulseaudio.muted {
+  color: #7b5aa7;
+}
+
+#clock {
+  color: #99a2b7;
+}
+#clock.date {
+  color: #999999;
+}

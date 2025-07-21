@@ -1,0 +1,89 @@
+#!/bin/bash
+
+# Bash Profile: ~/.bash_profile
+# Zsh Profile: ~/.zprofile
+# Disable bell
+unsetopt BEEP
+
+# history size
+export HISTSIZE=100000
+export SAVEHIST=100000
+
+# limit cpu cargo
+export CARGO_BUILD_JOBS=5
+
+# XDG Based directories
+export XDG_CACHE_HOME="${HOME}/.cache"
+export XDG_CONFIG_HOME="${HOME}/.config"
+export XDG_RUNTIME_DIR="/run/user/${UID}"
+export XDG_DATA_HOME="${HOME}/.local/share"
+export XDG_STATE_HOME="${HOME}/.local/state"
+
+# History file
+export HISTFILE="${XDG_CONFIG_HOME}/shell/shell_history"
+
+# Zsh config directory
+export ZDOTDIR="${XDG_CONFIG_HOME}/shell/zsh"
+
+# Inputrc and xprofile
+export INPUTRC="${XDG_CONFIG_HOME}/shell/inputrc"
+export XINITRC="${XDG_CONFIG_HOME}/X11/xinitrc"
+export XAUTHORITY="${XDG_RUNTIME_DIR}/Xauthority"
+
+# Home directories cleanup
+export EMACSDIR="${HOME}/.config/emacs"
+export WGETRC="${XDG_CONFIG_HOME}/wget/wgetrc"
+export GNUPGHOME="${XDG_DATA_HOME}/gnupg"
+export GDBHISTFILE="${XDG_DATA_HOME}/gdb/history"
+export GTK2_RC_FILES="${XDG_CONFIG_HOME}/gtk-2.0/gtkrc"
+export PARALLEL_HOME="${XDG_CONFIG_HOME}/parallel"
+export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
+
+export PSQLRC="${XDG_CONFIG_HOME}/pg/psqlrc"
+export PSQL_HISTORY="${XDG_STATE_HOME}/psql_history"
+export PGPASSFILE="${XDG_CONFIG_HOME}/pg/pgpass"
+export PGSERVICEFILE="${XDG_CONFIG_HOME}/pg/pg_service.conf"
+
+export GOPATH="${XDG_DATA_HOME}/go"
+export GOMODCACHE="${XDG_CACHE_HOME}/go/mod"
+export CARGO_HOME="${XDG_DATA_HOME}/cargo"
+export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
+
+export PYTHON_HISTORY="${XDG_STATE_HOME}/python_history"
+export PYTHONPYCACHEPREFIX="${XDG_CACHE_HOME}/python"
+export PYTHONUSERBASE="${XDG_DATA_HOME}/python"
+
+export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
+export NODE_REPL_HISTORY="${XDG_DATA_HOME}/node_repl_history"
+export _JAVA_OPTIONS="-Djava.util.prefs.userRoot='${XDG_CONFIG_HOME}/java'"
+
+# Android emulator for flutter
+# export ANDROID_HOME=~/Android/sdk
+# export ANDROID_SDK_ROOT=~/Android/sdk
+# export PATH="${PATH}":"${ANDROID_HOME}/cmdline-tools/latest/bin":"${ANDROID_HOME}/platform-tools":"${ANDROID_HOME}/emulator"
+
+# ls colors
+export LS_COLORS="di=38;5;37:fi=0:ln=38;5;51:pi=38;5;159:so=38;5;220:bd=48;5;33;38;5;27:cd=48;5;33;38;5;27:or=48;5;160:mi=01;38;5;231:ex=38;5;197:*.rpm=38;5;208:*.deb=38;5;208:*.zip=38;5;208:*.tar=38;5;208:*.gz=38;5;208:*.bz2=38;5;208:*.xz=38;5;208:*.tar.gz=38;5;208:*.tar.xz=38;5;208:*.tar.bz2=38;5;208:*.jpeg=38;5;135:*.jpg=38;5;135:*.png=38;5;135:*.gif=38;5;135:*.bmp=38;5;135:*.webp=38;5;160:*.mp3=38;5;160:*.mp4=38;5;160:*.webm=38;5;160:*.mkv=38;5;160:*.avi=38;5;160:*.ogg=38;5;160:*.wav=38;5;160:"
+
+# Nvim as default editor, visual and manpager
+export EDITOR="nvim"
+export VISUAL="nvim"
+# export MANPAGER="nvim +Man!"
+
+# make bat as pagers and batman the manpagers
+export PAGER="bat"
+export MANPAGER="batman"
+export BATMAN_IS_BEING_MANPAGER="yes"
+
+# Run application on walyand if available else on xwayland or xorg
+export QT_QPA_PLATFORM="wayland;xcb"
+
+# export the terminal
+export TERM="foot"
+export TERMINAL="foot"
+
+# Run Window Manager on tty1 #
+# [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ] && exec dwl
+# [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ] && exec startx
+# [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ] && exec Hyprland
+[ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ] && exec niri-session

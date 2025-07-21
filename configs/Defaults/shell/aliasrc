@@ -1,0 +1,157 @@
+#!/bin/bash
+
+# Aliases:
+
+# Change behaviours of command
+alias grep="grep --color=auto"
+alias diff="diff --color=auto"
+alias ls="ls --color=auto"
+alias ip="ip -color=auto"
+alias less="less -R"
+alias rm="rm -i"
+alias mv="mv -i"
+alias cp="cp -i"
+alias fzf="fzf --ansi"
+
+# Add new command
+alias sqlite="sqlite3"
+alias py="python"
+alias la="ls -a"
+alias ll="ls -lah"
+alias l="ls -CF"
+alias top="btop"
+alias htop="btop"
+alias nc="ncat"
+alias lf="yazi"
+alias vi="nvim --noplugin"
+alias vim="nvim --noplugin"
+alias neofetch="fastfetch"
+alias batt="cat /sys/class/power_supply/BAT0/{capacity,status}"
+alias fz="fzf --height=85% --layout=reverse"
+alias fzp="fz --preview 'bat --style=numbers --color=always {}'"
+alias fzfp="fzf --preview 'bat --style=numbers --color=always {}'"
+alias hisr="history | fz"
+alias his="history | fz --tac"
+alias yt-dlp-mp3="yt-dlp -x --audio-format mp3 "
+alias gitlog="git log --all --parents --graph --decorate"
+alias al_update="paru -Fy && paru -Syu && rustup update"
+alias al_clean="paru -Scc"
+alias al_keyrings_clean="sudo rm -rf /etc/pacman.d/gnupg/ && sudo pacman-key --init && sudo pacman-key --populate archlinux && sudo pacman -Syu archlinux-keyring"
+alias al_unlock_db="sudo rm /var/lib/pacman/db.lck"
+
+# Tmux
+alias tml="tmux ls"
+alias tmd="tmux detach-client"
+alias tmda="tmux kill-server"
+alias tmds="tmux kill-session -t"
+alias tmdo="tmux kill-session -a"
+
+# flutter on emulator
+alias futtu="tmux kill-session -t 'flutter'; tmux new-session -s 'flutter' -d 'emulator -avd my_avd' \; split-window -h 'sleep 7 && flutter run' \; attach"
+alias futturl="tmux send-keys -t 'flutter' r"
+alias futtukill="tmux kill-session -t 'flutter'"
+
+# Default Qemu command
+alias defqemu="qemu-system-x86_64 --enable-kvm -drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/x64/OVMF_CODE.4m.fd -cpu host -smp 4 -m 4G -display sdl,gl=on -vga virtio"
+
+# Ollama LLM
+alias ollama_start_service="sudo systemctl start ollama"
+alias ollama_run_default="ollama run deepseek-r1:1.5b"
+alias ollama_stop_service="sudo systemctl stop ollama"
+
+# Reduce img size by conversion using ffmpeg
+# for file in *.{jpg,jpeg,png};do ffmpeg -i $file -y "${file%.*}.jpg" ; done
+
+# Functions
+
+# Function to add ssh-agent and ssh-key for github
+github_ssh() {
+	eval "$(ssh-agent)" && ssh-add ~/.ssh/git/github
+}
+
+# Function to compile assembly code
+asm_compile() {
+	[ -z "$1" ] && echo "No file provided" && exit
+	local asm_file
+	local asm_object
+	local asm_bin
+	asm_file="$1"
+	asm_bin="${asm_file%.*}"
+	asm_object="${asm_bin}.o"
+	as "${asm_file}" -o "${asm_object}"
+	gcc "${asm_object}" -o "${asm_bin}" -nostdlib -static
+}
+
+# Function to activate vitural env of conda
+condaactivate() {
+	local conda_env
+	conda_env="base"
+	[ -z "$1" ] || conda_env=$1
+	source "${HOME}/miniconda3/etc/profile.d/conda.sh" && conda activate "${conda_env}"
+}
+
+# Function to attach tmux at given directory
+tma() {
+	[ -z "$1" ] || cd "$1" || exit
+	local tmux_id
+	tmux_id=$(pwd | sed 's/\./_/g')
+	if [ -n "$TMUX" ]; then
+		tmux switch-client -t "$tmux_id"
+	else
+		tmux new-session -s "$tmux_id" || tmux attach -t "$tmux_id"
+	fi
+}
+
+# Go to the location where tmux server is made
+tmc() {
+	cd "$(tmux display-message -p '#{session_name}')" || exit
+}
+
+# Go to the location with fzf
+fcd() {
+	folder_path="$(fd -t d | fz)"
+	if [ -n "$folder_path" ]; then
+		cd "$folder_path" || exit
+	fi
+}
+
+# Go to the location with fzf and run nvim
+ncd() {
+	folder_path="$(fd -t d | fz)"
+	if [ -n "$folder_path" ]; then
+		cd "$folder_path" && nvim . || exit
+	fi
+}
+
+# Record screen without audio
+scrrec() {
+	local Output_Video
+	Output_Video=Recording-$(date +%F_%T).mp4
+	[ -z "${1}" ] || Output_Video="${1}"
+	wf-recorder -g "$(slurp)" -f ~/Videos/Recordings/"${Output_Video}"
+}
+
+# Record screen microphone audio
+scrrecmicaudio() {
+	local Output_Video
+	Output_Video=Recording-$(date +%F_%T).mp4
+	[ -z "${1}" ] || Output_Video="${1}"
+	wf-recorder -g "$(slurp)" -a -f ~/Videos/Recordings/"${Output_Video}"
+}
+
+# Record screen output audio
+scrrecoutaudio() {
+	local Output_Video
+	Output_Video=Recording-$(date +%F_%T).mp4
+	[ -z "${1}" ] || Output_Video="${1}"
+	wf-recorder -g "$(slurp)" --audio=alsa_output.pci-0000_06_00.6.analog-stereo.monitor -f ~/Videos/Recordings/"${Output_Video}"
+}
+
+# Music player by mpv
+musicplayer_mpv() {
+	local Music_directory
+	Music_directory="${HOME}/Music/"
+	[ -z "${1}" ] || Music_directory="${Music_directory}${1}"
+	echo "mpv --shuffle ${Music_directory}"
+	mpv --shuffle "${Music_directory}"
+}

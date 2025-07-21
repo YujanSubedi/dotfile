@@ -1,0 +1,31 @@
+ set relativenumber
+ set number
+ set title
+ set showcmd
+ set wrap
+ set linebreak
+ set noswapfile
+ set autoindent
+ set smartindent
+ set shiftwidth=4
+ set softtabstop=4
+ set tabstop=4
+ set scrolloff=10
+ set expandtab
+ set smarttab
+ set showmatch
+ set smartcase
+ set hlsearch
+ set ruler
+ set wildmenu
+ set wildmode=full
+ set ignorecase
+ set incsearch
+ set lazyredraw
+ set magic
+ set encoding=utf8
+ map <C-d> :q<CR>
+ map <A-q> :Ex<CR>
+ syntax on
+ filetype on
+ filetype plugin on

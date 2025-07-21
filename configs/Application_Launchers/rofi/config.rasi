@@ -1,0 +1,119 @@
+/* Rofi configuration */
+configuration {
+    modi:                           "drun,window";
+    font:                           "JetBrains Mono 12";
+    show-icons:                     true;
+    icon-theme:                     "candy-icons";
+    display-drun:                   " ";
+    display-window:                 "󰍹 ";
+    drun-display-format:            "{name}";
+    disable-history:                false;
+    fullscreen:                     false;
+}
+
+* {
+    selected:                        #197177;
+    urgent:                          #E45E7C;
+    foreground:                      #FFFFFF;
+    text-color:                      #FFFFFF;
+    background:                      #192123;
+    background-alt:                  #252525;
+    alternate-active-background:     #192123;
+    alternate-normal-background:     #192123;
+    separatorcolor:                  #192123;
+    border-color:                    #192123;
+    border-radius:                   10px;
+}
+
+/* Window */
+window {
+    border:                          0px 0px 0px 0px;
+    width:                           420px;
+    height:                          620px;
+    border-radius:                   20px;
+    location:                        center;
+}
+
+mainbox {
+    children:                        [ inputbar, listbox ];
+    spacing:                         0px;
+    padding:                         0px;
+}
+
+listbox {
+    spacing:                         20px;
+    padding:                         20px;
+    orientation:                     vertical;
+    children:                        [ "message", "listview", "mode-switcher" ];
+}
+
+/* Input Bar */
+inputbar {
+    padding:                         48px;
+    // background-color:                transparent;
+    background-image:                url("~/Pictures/rofi.jpg", width);
+    children:                        [ textbox-prompt-colon, entry ];
+    text-color:                      #C4C7C5;
+    border:                          0px 0px 0px 0px;
+
+}
+
+textbox-prompt-colon {
+    enabled:                         true;
+    expand:                          false;
+    str:                             "";
+    padding:                         12px 15px;
+    background-color:                @background-alt;
+}
+
+entry {
+    expand:                          true;
+    padding:                         12px 15px;
+    placeholder:                     "Search...";
+    background-color:                @background-alt;
+
+}
+
+/* Mode Switcher */
+mode-switcher{
+    spacing:                         10px;
+}
+
+button {
+    padding:                         12px;
+    background-color:                @background-alt;
+}
+
+button selected {
+    background-color:                @selected;
+}
+
+/* Listview */
+listview {
+    scrollbar:                       false;
+    cycle:                           true;
+    dynamic:                         true;
+    scrollbar:                       false;
+    layout:                          vertical;
+    spacing:                         5px;
+}
+
+/* Elements */
+element {
+    spacing:                         5px;
+    padding:                         5px;
+}
+
+element-icon {
+    size:                            22px;
+}
+element-text {
+    vertical-align:                  0.5;
+    margin:                          0px 2.5px 0px 2.5px;
+}
+element selected.normal {
+    background-color:                @selected;
+}
+element selected.active {
+    background-color:                @urgent;
+}
