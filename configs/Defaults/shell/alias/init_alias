@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Change behaviours of command
+alias grep="grep --color=auto"
+alias diff="diff --color=auto"
+alias ls="ls --color=auto"
+alias ip="ip -color=auto"
+alias less="less -R"
+alias rm="rm -i"
+alias mv="mv -i"
+alias cp="cp -i"
+
+# Add new command
+alias sqlite="sqlite3"
+alias py="python"
+alias la="ls -a"
+alias ll="ls -lah"
+alias l="ls -CF"
+alias top="btop"
+alias htop="btop"
+alias nc="ncat"
+alias lf="yazi"
+alias vi="nvim --noplugin"
+alias vim="nvim --noplugin"
+alias neofetch="fastfetch"
+alias batt="cat /sys/class/power_supply/BAT0/{capacity,status}"
+alias gitlog="git log --all --parents --graph --decorate"
+
+# Soruces
+
+# Arch env
+source "${HOME}/.config/shell/alias/arch_env_alias"
+
+# Assembly
+source "${HOME}/.config/shell/alias/asm_alias"
+
+# Fzf
+source "${HOME}/.config/shell/alias/fzf_alias"
+
+# Multimedia utils
+source "${HOME}/.config/shell/alias/multimedia_alias"
+
+# Tmux
+# source "${HOME}/.config/shell/alias/tmux_alias"

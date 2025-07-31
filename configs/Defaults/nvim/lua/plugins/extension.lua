@@ -21,9 +21,6 @@ return {
 	-- Leetcode integration
 	{
 		"kawre/leetcode.nvim",
-		dependencies = {
-			-- { "nvim-telescope/telescope.nvim", event = "VeryLazy" },
-		},
 		cmd = "Leet",
 		keys = { { "<leader>tl", ":Leet ", desc = "Leetcode Commands" } },
 		opts = { lang = "rust" },

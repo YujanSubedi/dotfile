@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Assembly generation
+alias asm_generate="gcc -masm=intel -S "
+alias asm_generate_cpp="g++ -masm=intel -S "
+alias asm_generate_rust="rustc --emit asm -C 'llvm-args=-x86-asm-syntax=intel'  "
+alias asm_generate_cargo="cargo rustc -- --emit asm -C 'llvm-args=-x86-asm-syntax=intel'"
+
+# Function to compile assembly code
+function asm_compile() {
+	[ -z "$1" ] && echo "No file provided" && return
+	local asm_file
+	local asm_object
+	local asm_bin
+	asm_file="$1"
+	asm_bin="${asm_file%.*}"
+	asm_object="${asm_bin}.o"
+	as "${asm_file}" -o "${asm_object}"
+	gcc "${asm_object}" -o "${asm_bin}" -nostdlib -static
+}

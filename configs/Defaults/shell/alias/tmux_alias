@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Tmux
+alias tml="tmux ls"
+alias tmd="tmux detach-client"
+alias tmda="tmux kill-server"
+alias tmds="tmux kill-session -t"
+alias tmdo="tmux kill-session -a"
+
+# flutter on tmux
+# alias futtu="tmux kill-session -t 'flutter'; tmux new-session -s 'flutter' -d 'emulator -avd my_avd' \; split-window -h 'sleep 7 && flutter run' \; attach"
+# alias futturl="tmux send-keys -t 'flutter' r"
+# alias futtukill="tmux kill-session -t 'flutter'"
+
+# Function to attach tmux at given directory
+function tma() {
+	[ -z "$1" ] || cd "$1" || return
+	local tmux_id
+	tmux_id=$(pwd | sed 's/\./_/g')
+	if [ -n "$TMUX" ]; then
+		tmux switch-client -t "$tmux_id"
+	else
+		tmux new-session -s "$tmux_id" || tmux attach -t "$tmux_id"
+	fi
+}
+
+# Function to attach tmux at given directory
+function tmf() {
+	local folder_path
+	folder_path="$(fd -t d | fz)"
+	cd "${folder_path}" || return
+	local tmux_id
+	tmux_id=$(pwd | sed 's/\./_/g')
+	if [ -n "$TMUX" ]; then
+		tmux switch-client -t "$tmux_id"
+	else
+		tmux new-session -s "$tmux_id" || tmux attach -t "$tmux_id"
+	fi
+}
+
+# Go to the location where tmux server is made
+function tmc() {
+	cd "$(tmux display-message -p '#{session_name}')" || return
+}

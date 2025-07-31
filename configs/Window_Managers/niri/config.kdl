@@ -2,7 +2,7 @@
 
 input {
     touchpad { tap; }
-    focus-follows-mouse max-scroll-amount="10%";
+    focus-follows-mouse max-scroll-amount="30%";
 }
 
 layout {
@@ -11,9 +11,9 @@ layout {
     always-center-single-column
     center-focused-column "never"
     preset-column-widths {
+        proportion 0.25
         proportion 0.5
-        proportion 0.7
-        proportion 0.3
+        proportion 0.75
     }
     default-column-width { proportion 0.5; }
     focus-ring { off; }
@@ -22,8 +22,8 @@ layout {
         active-gradient from="#7a74a7" to="#981453"
     }
     struts {
-        left 10
-        right 10
+        left 15
+        right 15
         top 5
         bottom 5
     }
@@ -100,10 +100,14 @@ binds {
     XF86AudioRaiseVolume allow-when-locked=true { spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "+5%"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "-5%"; }
     XF86AudioMute allow-when-locked=true { spawn "pactl" "set-sink-mute" "@DEFAULT_SINK@" "toggle"; }
+
     XF86AudioPlay allow-when-locked=true { spawn "playerctl" "play-pause"; }
-    XF86AudioNext allow-when-locked=true { spawn "playerctl" "next"; }
     XF86AudioPrev allow-when-locked=true { spawn "playerctl" "previous"; }
+    XF86AudioNext allow-when-locked=true { spawn "playerctl" "next"; }
+
     Mod+P allow-when-locked=true { spawn "playerctl" "play-pause"; }
+    Mod+BracketLeft allow-when-locked=true { spawn "playerctl" "previous"; }
+    Mod+BracketRight allow-when-locked=true { spawn "playerctl" "next"; }
 
     // Brightness
     XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "set" "+5%" ; }
@@ -165,14 +169,15 @@ binds {
 
     Mod+Comma  { consume-window-into-column; }
     Mod+Period { expel-window-from-column; }
-    Mod+BracketLeft { consume-or-expel-window-left; }
-    Mod+BracketRight { consume-or-expel-window-right; }
+    Mod+Shift+Comma  { consume-or-expel-window-left; }
+    Mod+Shift+Period { consume-or-expel-window-right; }
 
     Mod+Minus { switch-preset-window-width; }
     Mod+Equal { reset-window-height; }
     Mod+W { maximize-column; }
     // Mod+F { toggle-windowed-fullscreen; }
     Mod+F { fullscreen-window; }
+    Mod+Shift+F { toggle-windowed-fullscreen; }
     Mod+Shift+W       { toggle-window-floating; }
 
 
@@ -195,7 +200,7 @@ binds {
     // The quit action will show a confirmation dialog to avoid accidental exits.
 
     Mod+Alt+Q { power-off-monitors; }
-    Mod+Shift+Q hotkey-overlay-title="Lock the Screen: swaylock" { spawn "sh" "-c" "systemctl suspend & swaylock"; }
-
+    Mod+Shift+Q hotkey-overlay-title="Lock the Screen: swaylock" { spawn "sh" "-c" "niri msg action power-off-monitors & swaylock"; }
+    // Mod+Shift+Q hotkey-overlay-title="Lock the Screen: swaylock" { spawn "sh" "-c" "systemctl suspend & swaylock"; }
     Mod+Ctrl+Q { quit; }
 }

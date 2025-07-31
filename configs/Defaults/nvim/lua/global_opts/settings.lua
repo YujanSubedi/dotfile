@@ -22,6 +22,7 @@ vim.opt.softtabstop = 2
 vim.opt.winminwidth = 10
 vim.opt.scrolloff = 10
 vim.opt.splitright = true
+vim.opt.virtualedit = "all"
 
 -- Window only Options
 vim.wo.number = true

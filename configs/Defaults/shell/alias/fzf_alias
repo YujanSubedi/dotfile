@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# Fzf
+alias fzf="fzf --ansi"
+alias fz="fzf --height=85% --layout=reverse"
+alias fzp="fz --preview 'bat --style=numbers --color=always {}'"
+alias fzfp="fzf --preview 'bat --style=numbers --color=always {}'"
+alias hisr="history | fz"
+alias his="history | fz --tac"
+
+# Function to add ssh-agent and ssh-key for github
+function fman() {
+	local section
+	local manpage
+	local fzf_output
+	fzf_output=$(man -k . | fz)
+	manpage=$(echo "${fzf_output}" | cut -d " " -f 1)
+	section=$(echo "${fzf_output}" | cut -d " " -f 2 | tr -d "()")
+	[ -n "$manpage" ] && [ -n "$section" ] && man "${section} ${manpage}"
+}
+
+# Function to add ssh-agent and ssh-key for github
+function nman() {
+	local section
+	local manpage
+	if [ -z "$1" ]; then
+		local fzf_output
+		fzf_output=$(man -k . | fz)
+		manpage=$(echo "${fzf_output}" | cut -d " " -f 1)
+		section=$(echo "${fzf_output}" | cut -d " " -f 2 | tr -d "()")
+	elif [ -z "$2" ]; then
+		manpage="${1}"
+	else
+		section="${1}"
+		manpage="${2}"
+	fi
+	[ -z "$manpage" ] && return
+	[ -z "$section" ] && nvim +"Man ${manpage}" +only && return
+	nvim +"Man ${section} ${manpage}" +only
+}
+
+# Go to the location with fzf
+function fcd() {
+	local folder_path
+	folder_path="$(fd -t d | fz)"
+	if [ -n "$folder_path" ]; then
+		cd "$folder_path" || return
+	fi
+}
+
+# Go to the location with fzf and run nvim
+function ncd() {
+	local folder_path
+	folder_path="$(fd -t d | fz)"
+	if [ -n "$folder_path" ]; then
+		cd "$folder_path" || return
+		nvim .
+	fi
+}

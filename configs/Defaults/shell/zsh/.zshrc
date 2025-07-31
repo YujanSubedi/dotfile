@@ -5,6 +5,8 @@
 # Main Prompt for Zsh
 # Function to get the Git branch
 function parse_git_branch() {
+  local git_branch
+  local git_status
   git_branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
   [[ -n $(git status --short 2>/dev/null) ]] && git_status="*" || git_status=""
   if [[ -n "$git_branch" ]]; then
@@ -17,7 +19,7 @@ PROMPT=' (%F{2}%nϮ%m%f):[%F{214}%~%f] $(parse_git_branch)
 
 # Aliases:
 alias history="history 0"
-source ~/.config/shell/aliasrc
+source ~/.config/shell/alias/init_alias
 
 # help command
 autoload -Uz run-help

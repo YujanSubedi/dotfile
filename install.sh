@@ -37,19 +37,19 @@ trap exit SIGINT
 
 # Default value
 if [[ "$default_flag" == true ]]; then
-	cpu_architecture=AMD                          # AMD Intel NONE
-	graphic_driver=NONE                           # Nvidia Nvidia_with_Cuda NONE
-	display_manager=NONE                          # NONE Ly Lightdm Sddm Gdm
-	display_protocol=Wayland                      # Wayland Xorg NONE
-	window_manager=Niri                           # Niri Hyprland Xmonad Qtile NONE
-	aur_helper=paru                               # paru yay
-	Virtualization=(Docker)                       # Qemu Docker Virt_Manager Waydroid
-	Network_tools=(Qbit_Torrent Yt_Dlp Wireshark) # Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark Burpsuite
-	Browsers=(Zen_Browser Tor_Browser)            # Zen_Browser Firefox Ungoogled_Chromium Tor_Browser QuteBrowser Vivaldi Brave_Browser Librewolf
-	Extra_applications=(Gimp)                     # Discord Gimp Openshot LibreOffice Texlive Spotify LocalSend
-	Copy_configs=No                               # Yes No
-	firewall=Yes                                  # Yes No
-	Restart_flag=No                               # Yes No
+	cpu_architecture=AMD                         # AMD Intel NONE
+	graphic_driver=NONE                          # Nvidia Nvidia_with_Cuda NONE
+	display_manager=NONE                         # NONE Ly Lightdm Sddm Gdm
+	display_protocol=Wayland                     # Wayland Xorg NONE
+	window_manager=Niri                          # Niri Hyprland Xmonad Qtile NONE
+	aur_helper=paru                              # paru yay
+	Virtualization=(Docker)                      # Qemu Docker Virt_Manager Waydroid
+	Network_tools=(Qbit_Torrent Yt_Dlp Sniffnet) # Tor_Proxy Qbit_Torrent Yt_Dlp Sniffnet Wireshark Burpsuite
+	Browsers=(Zen_Browser Tor_Browser)           # Zen_Browser Firefox Ungoogled_Chromium Tor_Browser QuteBrowser Vivaldi Brave_Browser Librewolf
+	Extra_applications=(Gimp)                    # Discord Gimp Openshot LibreOffice Texlive Spotify LocalSend
+	Copy_configs=No                              # Yes No
+	firewall=Yes                                 # Yes No
+	Restart_flag=No                              # Yes No
 
 else # Let user select
 	# Cpu MicroCode
@@ -174,7 +174,7 @@ else # Let user select
 	echo -e "${BLUE}Virtualization: ${YELLOW}${Virtualization[*]}${NONE}"
 
 	echo "Network Tools: Multiple options can be selected selperated by space."
-	options=(ALL Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark Burpsuite)
+	options=(ALL Tor_Proxy Qbit_Torrent Yt_Dlp Sniffnet Wireshark Burpsuite)
 	Network_tools=()
 	for i in "${!options[@]}"; do
 		echo "$i) ${options[$i]}"
@@ -184,10 +184,10 @@ else # Let user select
 	for choise in "${processed_choices[@]}"; do
 		case $choise in
 		0)
-			Network_tools=(Tor_Proxy Qbit_Torrent Yt_Dlp Wireshark Burpsuite)
+			Network_tools=(Tor_Proxy Qbit_Torrent Yt_Dlp Sniffnet Wireshark Burpsuite)
 			break
 			;;
-		1 | 2 | 3 | 4)
+		1 | 2 | 3 | 4 | 5)
 			Network_tools+=("${options[$choise]}")
 			;;
 		*) ;;
@@ -582,7 +582,7 @@ done
 
 # Networking Tools
 for nettool in "${Network_tools[@]}"; do
-	case $nettool in # Tor_Proxy Yt_Dlp Qbit_Torrent Wireshark Burpsuite
+	case $nettool in # Tor_Proxy Yt_Dlp Qbit_Torrent Sniffnet Wireshark Burpsuite
 	Tor_Proxy)
 		sudo pacman -S --noconfirm --needed tor proxychains-ng
 		sudo usermod -aG tor "$USER"
@@ -592,6 +592,9 @@ for nettool in "${Network_tools[@]}"; do
 		;;
 	Qbit_Torrent)
 		sudo pacman -S --noconfirm --needed qbittorrent
+		;;
+	Sniffnet)
+		sudo pacman -S --noconfirm --needed sniffnet
 		;;
 	Wireshark)
 		sudo pacman -S --noconfirm --needed wireshark-qt

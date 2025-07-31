@@ -14,14 +14,14 @@ return {
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		keys = {
 			{ "<leader>mtu", "<cmd>MasonToolsUpdate<CR>", desc = "[M]ason [T]ool [U]pdate" },
-			{ "<leader>mtc", "<cmd>MasonToolsClean<CR>",  desc = "[M]ason [T]ool [C]lean" },
+			{ "<leader>mtc", "<cmd>MasonToolsClean<CR>", desc = "[M]ason [T]ool [C]lean" },
 		},
 		config = function()
 			-- Language Server Protocols
 			local mason_packages = {
-				"clangd",    -- c/c++
+				"clangd", -- c/c++
 				"rust_analyzer", --rust
-				"lua_ls",    -- lua
+				"lua_ls", -- lua
 				-- "pyright", -- python
 				-- "ruff", -- python linter
 				-- "zls", -- zig
@@ -56,7 +56,7 @@ return {
 
 			-- formatter
 			vim.list_extend(mason_packages, {
-				-- "asmfmt", -- assembly
+				"asmfmt", -- assembly
 				"shfmt", -- bash
 				"beautysh", -- bash
 				"stylua", -- lua

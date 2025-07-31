@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# Download youtube video as mp3
+alias yt-dlp-mp3="yt-dlp -x --audio-format mp3 --audio-quality 0 "
+
+# Music player by mpv
+function musicplayer_mpv() {
+	local Music_directory
+	Music_directory="${HOME}/Music/"
+	[ -z "${1}" ] || Music_directory="${Music_directory}${1}"
+	echo "mpv --shuffle ${Music_directory}"
+	mpv --shuffle "${Music_directory}"
+}
+
+# ffmpeg_convert_jpg
+function ffmpeg_convert_to_jpg() {
+	local curr_value
+	local new_filename
+	local file
+
+	curr_value=0
+	for file in *.{jpeg,png,webp,JPG,JPEG,PNG,WEBP}; do
+		if [ -f "${file}" ]; then
+			curr_value=$((curr_value + 1))
+			new_filename=$(printf "%05d.jpg" "${curr_value}")
+			while [ -f "${new_filename}" ]; do
+				curr_value=$((curr_value + 1))
+				new_filename=$(printf "%05d.jpg" "${curr_value}")
+			done
+			ffmpeg -i "${file}" "${new_filename}"
+			# ffmpeg -i "${file}" "${new_filename}" && rm "${file}"
+		fi
+	done
+
+}
+
+# Record screen without audio
+function scrrec() {
+	local Output_Video
+	Output_Video=Recording-$(date +%F_%T).mp4
+	[ -z "${1}" ] || Output_Video="${1}"
+	wf-recorder -g "$(slurp)" -f ~/Videos/Recordings/"${Output_Video}"
+}
+
+# Record screen microphone audio
+function scrrecmicaudio() {
+	local Output_Video
+	Output_Video=Recording-$(date +%F_%T).mp4
+	[ -z "${1}" ] || Output_Video="${1}"
+	wf-recorder -g "$(slurp)" -a -f ~/Videos/Recordings/"${Output_Video}"
+}
+
+# Record screen output audio
+function scrrecoutaudio() {
+	local Output_Video
+	Output_Video=Recording-$(date +%F_%T).mp4
+	[ -z "${1}" ] || Output_Video="${1}"
+	wf-recorder -g "$(slurp)" --audio=alsa_output.pci-0000_06_00.6.analog-stereo.monitor -f ~/Videos/Recordings/"${Output_Video}"
+}

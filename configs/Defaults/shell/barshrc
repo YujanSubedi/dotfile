@@ -13,7 +13,7 @@ function parse_git_branch() {
 PS1=' (\[\e[38;5;2m\]\uϮ\h\[\e[m\]):[\[\e[38;5;214m\]\w\[\e[m\]]$(parse_git_branch)\n \[\e[38;5;1m\]✗ \[\e[m\]'
 
 # Alias:
-source ~/.config/shell/aliasrc
+source "${HOME}/.config/shell/alias/init_alias"
 
 # Keybindings:
 # make <C-l> behave as clear x
