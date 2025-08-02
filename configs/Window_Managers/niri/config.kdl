@@ -22,8 +22,8 @@ layout {
         active-gradient from="#7a74a7" to="#981453"
     }
     struts {
-        left 15
-        right 15
+        left 12
+        right 12
         top 5
         bottom 5
     }

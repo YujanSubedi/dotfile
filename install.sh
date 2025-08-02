@@ -340,7 +340,7 @@ sudo pacman -S --noconfirm --needed wget xh
 sudo pacman -S --noconfirm --needed tar zip unzip 7zip
 
 # Fonts
-sudo pacman -S --noconfirm --needed noto-fonts noto-fonts-emoji
+sudo pacman -S --noconfirm --needed noto-fonts noto-fonts-emoji noto-fonts-cjk
 sudo pacman -S --noconfirm --needed ttf-jetbrains-mono ttf-jetbrains-mono-nerd
 
 # To install Aur Packages
@@ -371,21 +371,12 @@ $aur_helper -Sy
 # Downgrade packages rollback for broken packages
 # $aur_helper -S --noconfirm --needed downgrade
 
-# C/CPP libraries
-sudo pacman -S --noconfirm --needed cmake
-sudo pacman -S --noconfirm --needed glew freeglut glu glfw
-# sudo pacman -S --noconfirm --needed opencv
-# sudo pacman -S --noconfirm --needed raylib
-
-# C/CPP Debuggers
-sudo pacman -S --noconfirm --needed gdb ltrace strace
-
 # Programming languages
-# sudo pacman -S --noconfirm --needed lua
+sudo pacman -S --noconfirm --needed lua
 # sudo pacman -S --noconfirm --needed go
-# sudo pacman -S --noconfirm --needed python
+sudo pacman -S --noconfirm --needed python
 # sudo pacman -S --noconfirm --needed zig
-# sudo pacman -S --noconfirm --needed npm
+sudo pacman -S --noconfirm --needed npm
 sudo pacman -S --noconfirm --needed deno
 # sudo pacman -S --noconfirm --needed yarn
 # sudo pacman -S --noconfirm --needed iverilog gtkwave
@@ -400,6 +391,15 @@ sudo pacman -S --noconfirm --needed deno
 # $aur_helper -S --noconfirm --needed bun
 # $aur_helper -S --noconfirm --needed mojo
 # $aur_helper -S --noconfirm --needed flutter
+
+# C/CPP libraries
+sudo pacman -S --noconfirm --needed cmake
+sudo pacman -S --noconfirm --needed glew freeglut glu glfw
+# sudo pacman -S --noconfirm --needed opencv
+# sudo pacman -S --noconfirm --needed raylib
+
+# C/CPP Debuggers
+sudo pacman -S --noconfirm --needed gdb ltrace strace
 
 # Terminals tools
 sudo pacman -S --noconfirm --needed ripgrep fd fzf
