@@ -1,0 +1,13 @@
+[Default Applications]
+application/pdf=org.pwmt.zathura.desktop
+image/png=vimiv.desktop
+image/jpeg=vimiv.desktop
+image/jpg=vimiv.desktop
+image/bmp=vimiv.desktop
+image/tiff=vimiv.desktop
+image/x-icon=vimiv.desktop
+image/x-ico=vimiv.desktop
+image/x-win-bitmap=vimiv.desktop
+image/svg+xml=vimiv.desktop
+image/gif=mpv.desktop
+application/vnd.openxmlformats-officedocument.presentationml.presentation=libreoffice-impress.desktop

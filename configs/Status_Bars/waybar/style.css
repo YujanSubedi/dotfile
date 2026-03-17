@@ -1,0 +1,181 @@
+/*:root {*/
+/*  --rosewater: #f4dbd6;*/
+/*  --flamingo: #f0c6c6;*/
+/*  --pink: #f5bde6;*/
+/*  --mauve: #c6a0f6;*/
+/*  --red: #ed8796;*/
+/*  --maroon: #ee99a0;*/
+/*  --peach: #f5a97f;*/
+/*  --yellow: #eed49f;*/
+/*  --green: #a6da95;*/
+/*  --teal: #8bd5ca;*/
+/*  --sky: #91d7e3;*/
+/*  --sapphire: #7dc4e4;*/
+/*  --blue: #8aadf4;*/
+/*  --lavender: #b7bdf8;*/
+/*  --text: #cad3f5;*/
+/*  --subtext1: #b8c0e0;*/
+/*  --subtext0: #a5adcb;*/
+/*  --overlay2: #939ab7;*/
+/*  --overlay1: #8087a2;*/
+/*  --overlay0: #6e738d;*/
+/*  --surface2: #5b6078;*/
+/*  --surface1: #494d64;*/
+/*  --surface0: #363a4f;*/
+/*  --base: #24273a;*/
+/*  --mantle: #1e2030;*/
+/*  --crust: #181926;*/
+/*}*/
+
+* {
+  font-family:
+    JetBrainsMono Nerd Font,
+    monospace;
+  font-size: 15px;
+}
+
+window#waybar {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.modules-right,
+.modules-left {
+  padding: 0px 7px;
+}
+
+#custom-arch,
+#workspaces,
+#cpu,
+#memory,
+#disk,
+#battery,
+#backlight,
+#mpris,
+#privacy,
+#tray,
+#bluetooth,
+#network,
+#pulseaudio,
+#clock {
+  padding-right: 10px;
+  background-color: #142127;
+}
+
+#mpris,
+#privacy,
+#tray {
+  margin-left: 3px;
+  border-radius: 7px;
+  padding: 0px 5px;
+}
+
+#custom-arch,
+#cpu,
+#bluetooth {
+  margin-left: 7px;
+  padding-left: 10px;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
+
+#workspaces,
+#battery,
+#clock.time {
+  border-top-right-radius: 7px;
+  border-bottom-right-radius: 7px;
+}
+
+#custom-arch {
+  color: #1793d1;
+  font-size: 18px;
+}
+
+#workspaces button {
+  color: #7a95c9;
+  padding: 0 5px;
+  color: #999999;
+}
+
+#workspaces button.empty {
+  color: #142127;
+}
+
+#workspaces button.active {
+  color: #00c1b9;
+}
+
+#workspaces button.urgent {
+  background-color: #eb4d4b;
+}
+
+#cpu {
+  color: #f5a97f;
+}
+
+#memory {
+  color: #5abdc4;
+}
+
+#disk {
+  color: #cc407a;
+}
+
+#backlight {
+  color: #adb6d4;
+}
+
+#bluetooth {
+  color: #31748f;
+}
+
+#bluetooth.off,
+#bluetooth.on,
+#bluetooth.connected,
+#bluetooth.discoverable,
+#bluetooth.discovering,
+#bluetooth.pairable {
+  color: #0db9d7;
+}
+
+#battery {
+  color: #a6da95;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: #7dc4e4;
+}
+
+#battery.critical:not(.charging) {
+  background-color: #f53c3c;
+  color: #ffffff;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#pulseaudio {
+  color: #ee99a0;
+}
+
+#pulseaudio.muted {
+  color: #7b5aa7;
+}
+
+#network {
+  color: #eed49f;
+}
+
+#network.disconnected {
+  color: #cd3320;
+}
+
+#clock {
+  color: #999999;
+}
+
+#clock.time {
+  color: #99a2b7;
+}

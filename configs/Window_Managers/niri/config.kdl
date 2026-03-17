@@ -1,0 +1,182 @@
+// Niri Configuration //
+input {
+	touchpad { tap; }
+	warp-mouse-to-focus
+	focus-follows-mouse max-scroll-amount="30%"
+}
+
+layout {
+	gaps 5
+	background-color "transparent"
+	always-center-single-column
+	center-focused-column "never"
+	preset-column-widths {
+		proportion 0.25
+		proportion 0.5
+		proportion 0.75
+	}
+	default-column-width { proportion 0.5; }
+	focus-ring { off; }
+	border {
+		width 2
+		active-gradient from="#7a74a7" to="#981453"
+	}
+	struts {
+		left 12
+		right 12
+	}
+}
+
+// environment { DISPLAY ":0"; }
+
+cursor { xcursor-theme "Bibata-Modern-Classic"; xcursor-size 20; hide-when-typing; }
+
+spawn-at-startup "foot" "--server"
+spawn-at-startup "waybar"
+spawn-at-startup "niri" "msg" "action" "focus-workspace" "2"
+spawn-at-startup "~/.config/niri/scripts/battery_monitor.sh"
+spawn-at-startup "sh" "-c" "swaybg -m fill -i ~/Pictures/Curr_Theme/wallpaper.jpg"
+spawn-at-startup "sh" "-c" "[ $XDG_VTNR -eq 1 ] && swaylock"
+spawn-at-startup "sh" "-c" "wlsunset -S 7:00 -s 19:00 -t 4800"
+// spawn-at-startup "xwayland-satellite"
+
+screenshot-path "~/Pictures/Screenshots/Screenshot-%F_%T.png"
+
+workspace "1"
+workspace "2"
+workspace "3"
+workspace "4"
+workspace "5"
+workspace "6"
+workspace "7"
+workspace "8"
+
+prefer-no-csd
+// overview { workspace-shadow { off; }; }
+hotkey-overlay {
+	skip-at-startup;
+	hide-not-bound;
+}
+
+window-rule {
+	geometry-corner-radius 7
+	clip-to-geometry true
+	open-maximized true
+}
+
+window-rule {
+	match app-id="footclient"
+	open-maximized false
+}
+
+layer-rule {
+	match namespace="wallpaper"
+	place-within-backdrop true
+}
+
+// Disable the hot corners.
+gestures { hot-corners { off; }; }
+recent-windows { off; }
+
+switch-events { lid-close { spawn "swaylock"; }; }
+
+binds {
+	// Spawn Terminal and Application Launcher
+	Mod+Shift+Return           repeat=false hotkey-overlay-title="Run foot server"               { spawn "foot" "--server"; }
+	Mod+Return                 repeat=false hotkey-overlay-title="Open a Terminal: footclient"   { spawn "footclient"; }
+	Mod+R                      repeat=false hotkey-overlay-title="Run an Application: rofi"      { spawn "rofi" "-show" "drun"; }
+	Mod+U                      repeat=false hotkey-overlay-title="Find Window: rofi"             { spawn "rofi" "-show" "window"; }
+
+	// Spawn Other Application
+	Mod+I                      repeat=false hotkey-overlay-title="Open Neovim"                    { spawn "footclient" "-e" "nvim"; }
+	Mod+Shift+I                repeat=false hotkey-overlay-title="Open Yazi"                      { spawn "footclient" "-e" "yazi"; }
+	Mod+Shift+P                repeat=false hotkey-overlay-title="Open Private Browser"           { spawn "zen-browser" "--private-window"; }
+	Mod+Space                  repeat=false hotkey-overlay-title="Toggle Waybar"                  { spawn "killall" "-SIGUSR1" "waybar"; }
+	Mod+Shift+Y                repeat=false hotkey-overlay-title="Change Wallpaper"               { spawn "~/.config/niri/scripts/change_wallpaper.sh"; }
+
+	// Close Window
+	Mod+D                      repeat=false                                                       { close-window; }
+
+	// Fullscrean and Floating
+	Mod+W                     repeat=false hotkey-overlay-title="Toggle maximize"                 { maximize-column; }
+	Mod+F                     repeat=false hotkey-overlay-title="Toggle fullscreen"               { fullscreen-window; }
+	Mod+Shift+W               repeat=false hotkey-overlay-title="Toggle floationg"                { toggle-window-floating; }
+	Mod+Shift+F               repeat=false hotkey-overlay-title="Toggle fullscreen windowed"       { toggle-windowed-fullscreen; }
+
+	// Screenshot
+	Print                     repeat=false hotkey-overlay-title="Screenshot Selection"            { screenshot; }
+	Alt+Print                 repeat=false hotkey-overlay-title="Screenshot Window"               { screenshot-window; }
+	Mod+Print                 repeat=false hotkey-overlay-title="Screenshot Screen"               { screenshot-screen; }
+
+	// Toggle Overview and Overlay
+	Mod+O                      repeat=false                                                       { toggle-overview; }
+	Mod+Shift+Slash            repeat=false                                                       { show-hotkey-overlay; }
+
+	// Brightness and Audio
+	XF86MonBrightnessUp        allow-when-locked=true                                             { spawn "brightnessctl" "set" "+5%" ; }
+	XF86MonBrightnessDown      allow-when-locked=true                                             { spawn "brightnessctl" "set" "5%-" ; }
+	XF86AudioRaiseVolume       allow-when-locked=true                                             { spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "+5%"; }
+	XF86AudioLowerVolume       allow-when-locked=true                                             { spawn "pactl" "set-sink-volume" "@DEFAULT_SINK@" "-5%"; }
+
+	// Mpris
+	XF86AudioMute              repeat=false allow-when-locked=true                                { spawn "pactl" "set-sink-mute" "@DEFAULT_SINK@" "toggle"; }
+	XF86AudioPlay              repeat=false allow-when-locked=true                                { spawn "playerctl" "play-pause"; }
+	XF86AudioPrev              repeat=false allow-when-locked=true                                { spawn "playerctl" "previous"; }
+	XF86AudioNext              repeat=false allow-when-locked=true                                { spawn "playerctl" "next"; }
+	Mod+P                      repeat=false allow-when-locked=true                                { spawn "playerctl" "play-pause"; }
+	Mod+BracketLeft            repeat=false allow-when-locked=true                                { spawn "playerctl" "previous"; }
+	Mod+BracketRight           repeat=false allow-when-locked=true                                { spawn "playerctl" "next"; }
+
+	// Resize Window
+	Mod+Left                  repeat=false                                                        { set-column-width "-10%"; }
+	Mod+Right                 repeat=false                                                        { set-column-width "+10%"; }
+	Mod+Up                    repeat=false                                                        { set-window-height "-10%"; }
+	Mod+Down                  repeat=false                                                        { set-window-height "+10%"; }
+	Mod+Minus                 repeat=false                                                        { switch-preset-window-width; }
+	Mod+Equal                 repeat=false                                                        { reset-window-height; }
+	Mod+Comma                                                                                     { consume-window-into-column; }
+	Mod+Period                                                                                    { expel-window-from-column; }
+	Mod+Shift+Comma                                                                               { consume-or-expel-window-left; }
+	Mod+Shift+Period                                                                              { consume-or-expel-window-right; }
+
+	// Focus and Move - Window, Workspace
+	Mod+H                                                                                         { focus-column-left; }
+	Mod+L                                                                                         { focus-column-right; }
+	Mod+J                                                                                         { focus-window-down; }
+	Mod+K                                                                                         { focus-window-up; }
+	Mod+Shift+H                                                                                   { move-column-left; }
+	Mod+Shift+L                                                                                   { move-column-right; }
+	Mod+Shift+J                                                                                   { move-window-down; }
+	Mod+Shift+K                                                                                   { move-window-up; }
+	Mod+N                                                                                         { focus-workspace-down; }
+	Mod+Shift+N                                                                                   { focus-workspace-up; }
+	Alt+Tab                    repeat=false                                                       { focus-column-right-or-first; }
+	Mod+Tab                    repeat=false                                                       { switch-focus-between-floating-and-tiling; }
+	Mod+0                      repeat=false                                                       { focus-monitor-next; }
+	Mod+Shift+0                repeat=false                                                       { move-workspace-to-monitor-next; }
+
+	// Focus and Move - Window, Workspace by index
+	Mod+1                     repeat=false                                                        { focus-workspace 1; }
+	Mod+2                     repeat=false                                                        { focus-workspace 2; }
+	Mod+3                     repeat=false                                                        { focus-workspace 3; }
+	Mod+4                     repeat=false                                                        { focus-workspace 4; }
+	Mod+5                     repeat=false                                                        { focus-workspace 5; }
+	Mod+6                     repeat=false                                                        { focus-workspace 6; }
+	Mod+7                     repeat=false                                                        { focus-workspace 7; }
+	Mod+8                     repeat=false                                                        { focus-workspace 8; }
+	Mod+9                     repeat=false                                                        { focus-workspace 9; }
+	Mod+Shift+1               repeat=false                                                        { move-column-to-workspace 1; }
+	Mod+Shift+2               repeat=false                                                        { move-column-to-workspace 2; }
+	Mod+Shift+3               repeat=false                                                        { move-column-to-workspace 3; }
+	Mod+Shift+4               repeat=false                                                        { move-column-to-workspace 4; }
+	Mod+Shift+5               repeat=false                                                        { move-column-to-workspace 5; }
+	Mod+Shift+6               repeat=false                                                        { move-column-to-workspace 6; }
+	Mod+Shift+7               repeat=false                                                        { move-column-to-workspace 7; }
+	Mod+Shift+8               repeat=false                                                        { move-column-to-workspace 8; }
+	Mod+Shift+9               repeat=false                                                        { move-column-to-workspace 9; }
+
+	// Lockscreen and Exit
+	Mod+Alt+Q                 repeat=false hotkey-overlay-title="Lock and Suspend: swaylock"      { spawn "sh" "-c" "systemctl suspend & swaylock"; }
+	Mod+Shift+Q               repeat=false hotkey-overlay-title="Lock the Screen: swaylock"       { spawn "sh" "-c" "niri msg action power-off-monitors && swaylock"; }
+	Mod+Ctrl+Q                repeat=false                                                        { quit; }
+}

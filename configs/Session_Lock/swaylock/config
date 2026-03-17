@@ -1,0 +1,14 @@
+image=~/Pictures/Lockscreen/lockscreen.jpg
+ignore-empty-password
+indicator-caps-lock
+indicator-radius=100
+indicator-thickness=5
+inside-color=2b2d31aa
+ring-color=7aa4a7ff
+text-color=d0d6e1ff
+line-color=00000000
+separator-color=00000000
+ring-ver-color=5f9ea0ff
+ring-wrong-color=c67272ff
+inside-wrong-color=2b2d31cc
+inside-ver-color=2b2d31cc

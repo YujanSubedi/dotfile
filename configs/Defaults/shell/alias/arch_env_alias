@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+# Packages management
+alias al_update="paru -Fy && paru -Syu && rustup update"
+alias al_clean="paru -Scc"
+alias al_keyrings_clean="sudo rm -rf /etc/pacman.d/gnupg/ && sudo pacman-key --init && sudo pacman-key --populate archlinux && sudo pacman -Syu archlinux-keyring"
+alias al_unlock_db="sudo rm /var/lib/pacman/db.lck"
+
+# Default Qemu command
+alias defqemu="qemu-system-x86_64 --enable-kvm -drive if=pflash,format=raw,readonly=on,file=/usr/share/OVMF/x64/OVMF_CODE.4m.fd -cpu host -smp 4 -m 4G -display sdl,gl=on -vga virtio"
+
+# Ollama LLM
+# alias ollama_start_service="sudo systemctl start ollama"
+# alias ollama_run_default="ollama run deepseek-r1:1.5b"
+# alias ollama_stop_service="sudo systemctl stop ollama"
+
+# Function to clean all the past commits on master
+function git_cleanup_master() {
+	git status &>/dev/null || return
+	git checkout --orphan cleanup_branch || return
+	git branch -D master || return
+	git checkout --orphan master || return
+	git add . || return
+	git commit -m "cleanup" || return
+	echo "Master Branch Cleanup Successful"
+}
+
+# Function to add ssh-agent and ssh-key for github
+function github_ssh() {
+	eval "$(ssh-agent)" && ssh-add ~/.ssh/git/github
+}

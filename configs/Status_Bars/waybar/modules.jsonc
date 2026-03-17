@@ -1,0 +1,152 @@
+{
+	"custom/arch": {
+		"format": "󰣇",
+		"tooltip": true,
+		"tooltip-format": "btw"
+	},
+	// "hyprland/workspaces": {
+	//   "disable-scroll": true,
+	//   "persistent-workspaces": {
+	//     "*": [
+	//       1,
+	//       2,
+	//       3,
+	//       4,
+	//       5,
+	//       6,
+	//       7,
+	//       8,
+	//       9
+	//     ]
+	//   }
+	// },
+	"niri/workspaces": {
+		"format": "{index}"
+	},
+	"tray": {
+		"spacing": 10
+	},
+	"cpu": {
+		"format": " {usage}%",
+		"tooltip": false
+	},
+	"memory": {
+		"format": " {percentage}%"
+	},
+	"disk": {
+		"format": " {percentage_used}%"
+	},
+	"backlight": {
+		"format": "{icon} {percent}%",
+		"format-icons": [
+			"󰃞",
+			"󰃝",
+			"󰃟",
+			"󰃠"
+		],
+		"on-scroll-up": "",
+		"on-scroll-down": "",
+		"tooltip": false
+	},
+	"battery": {
+		"states": {
+			"good": 95,
+			"warning": 30,
+			"critical": 20
+		},
+		"format": "{icon} {capacity}%",
+		"format-charging": "󰂄 {capacity}%",
+		"format-plugged": "󱐥 {capacity}%",
+		"format-icons": [
+			"󱃍",
+			"󱊡",
+			"󱊢",
+			"󱊢",
+			"󱊣"
+		],
+		"tooltip": false
+	},
+	"mpris": {
+		"format": "{player_icon}{title}  ",
+		"title-len": 15,
+		"format-paused": "{player_icon}{title}  ",
+		"player-icons": {
+			//"mpv": " ",
+			"firefox": " ",
+			"chromium": " ",
+			"spotify": " ",
+			"default": " "
+		}
+		// "ignored-players": ["firefox"]
+	},
+	"privacy": {
+		"icon-spacing": 4,
+		"icon-size": 18,
+		"transition-duration": 250,
+		"modules": [
+			{
+				"type": "screenshare",
+				"tooltip": true,
+				"tooltip-icon-size": 24
+			},
+			{
+				"type": "audio-in",
+				"tooltip": true,
+				"tooltip-icon-size": 24
+			}
+		]
+	},
+	"bluetooth": {
+		"format": "󰂲",
+		"format-off": "󰂲 {status}",
+		"format-on": "󰂯 {status}",
+		"format-connected": "󰂰 {device_alias}",
+		"format-connected-battery": "󰂰 {device_alias} 󰥉 {device_battery_percentage}%"
+	},
+	"pulseaudio": {
+		"format": "{icon} {volume}% {format_source}",
+		"format-bluetooth": "󰗾 {volume}% {format_source}",
+		"format-bluetooth-muted": "󰗿 {volume}% {format_source}",
+		"format-source": "󰍬 {volume}%",
+		"format-source-muted": "󰍭 {volume}%",
+		"format-icons": {
+			"headphone": "󰋋",
+			"headphone-muted": "󰟎",
+			"hands-free": "󰋋",
+			"hands-free-muted": "󰟎",
+			"headset": "󰋋",
+			"headset-muted": "󰟎",
+			"phone": "",
+			"phone-muted": "",
+			"portable": "",
+			"portable-muted": "",
+			"car": "󰄍",
+			"car-muted": "󰸜",
+			"default": [
+				"󰕿",
+				"󰖀",
+				"󰕾"
+			],
+			"default-muted": "󰸈"
+		},
+		"on-scroll-up": "",
+		"on-scroll-down": "",
+		"on-click": "pavucontrol",
+		"tooltip": false
+	},
+	"network": {
+		"format-disconnected": "󰯡 ",
+		"format-wifi": "  {signalStrength}%",
+		"format-alt": "󰀂 {essid}",
+		"format-ethernet": "󰈁 {gwaddr}/{cidr}",
+		"tooltip": false
+	},
+	"clock": {
+		"format": "󰸗 {:%a, %b %d, %Y}",
+		"tooltip": false
+	},
+	"clock#time": {
+		"format": "󰀠 {:%I:%M %p}",
+		"tooltip": false
+	}
+}
